@@ -1,5 +1,5 @@
 {
-  "name": "PharmacyClaims_Performer1",
+  "name": "PharmacyClaims-Performer-1",
   "description": "PharmacyClaims process is where we validate Extracted Data from ML model(Receipt) with Flexman Data to come to conclusion whether we Approve or Reject each line item.",
   "main": "Main.xaml",
   "dependencies": {
