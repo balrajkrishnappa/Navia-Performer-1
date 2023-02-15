@@ -334,7 +334,7 @@
                     </ui:InterruptibleWhile.Body>
                   </ui:InterruptibleWhile>
                   <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="532,92" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Info" Message="[Str_Output]" />
-                  <ui:WriteCsvFile AddHeaders="True" DataTable="[out_Dt_ExtractedData]" Delimitator="Comma" DisplayName="Write CSV" FilePath="[in_Str_BatchNumber+&quot;-Flexman.csv&quot;]" sap:VirtualizedContainerService.HintSize="532,154" sap2010:WorkflowViewState.IdRef="WriteCsvFile_2" ShouldQuote="True" />
+                  <ui:WriteCsvFile AddHeaders="True" DataTable="[out_Dt_ExtractedData]" Delimitator="Comma" DisplayName="Write CSV" FilePath="[&quot;ExtractedData\&quot;+in_Str_BatchNumber+&quot;-Flexman.csv&quot;]" sap:VirtualizedContainerService.HintSize="532,154" sap2010:WorkflowViewState.IdRef="WriteCsvFile_2" ShouldQuote="True" />
                   <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="532,92" sap2010:WorkflowViewState.IdRef="LogMessage_2" Level="Info" Message="[&quot;Succesfully extracted all Line Items for Batch: &quot;+in_Str_BatchNumber]" />
                 </Sequence>
               </ActivityAction>
