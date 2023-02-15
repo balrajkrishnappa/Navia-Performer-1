@@ -9,11 +9,12 @@
     <x:Property sap2010:Annotation.AnnotationText="This variable can be used in case transactions are stored in a DataTable (for example, after being retrieved from a spreadsheet)." Name="io_dt_TransactionData" Type="InOutArgument(sd:DataTable)" />
     <x:Property Name="io_UiElement" Type="InOutArgument(ui:UiElement)" />
     <x:Property Name="out_MLmodelValidatedData" Type="OutArgument(sd:DataTable)" />
+    <x:Property Name="out_Str_BatchNumber" Type="OutArgument(x:String)" />
   </x:Members>
   <VisualBasic.Settings>
     <x:Null />
   </VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>802,2609</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>1054,2609</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>GetTransactionData_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <scg:List x:TypeArguments="x:String" Capacity="32">
@@ -159,9 +160,6 @@
       </sap:WorkflowViewStateService.ViewState>
       <If.Then>
         <Sequence sap2010:Annotation.AnnotationText="Write data to the added log fields that identify the transaction." DisplayName="Add transaction information to log fields" sap:VirtualizedContainerService.HintSize="496,988" sap2010:WorkflowViewState.IdRef="Sequence_3">
-          <Sequence.Variables>
-            <Variable x:TypeArguments="x:String" Name="Str_BatchNumber" />
-          </Sequence.Variables>
           <sap:WorkflowViewStateService.ViewState>
             <scg:Dictionary x:TypeArguments="x:String, x:Object">
               <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -170,7 +168,7 @@
           </sap:WorkflowViewStateService.ViewState>
           <Assign DisplayName="BatchNumber_Initialisation" sap:VirtualizedContainerService.HintSize="434,82" sap2010:WorkflowViewState.IdRef="Assign_9">
             <Assign.To>
-              <OutArgument x:TypeArguments="x:String">[Str_BatchNumber]</OutArgument>
+              <OutArgument x:TypeArguments="x:String">[out_Str_BatchNumber]</OutArgument>
             </Assign.To>
             <Assign.Value>
               <InArgument x:TypeArguments="x:String">[(out_TransactionItem.SpecificContent("BatchID").ToString).Replace(".tiff","")]</InArgument>
@@ -185,14 +183,14 @@
                 <VisualBasicReference x:TypeArguments="sd:DataTable" ExpressionText="out_MLmodelValidatedData" />
               </OutArgument>
               <InArgument x:TypeArguments="x:String" x:Key="in_Str_BatchNumber">
-                <VisualBasicValue x:TypeArguments="x:String" ExpressionText="Str_BatchNumber" />
+                <VisualBasicValue x:TypeArguments="x:String" ExpressionText="out_Str_BatchNumber" />
               </InArgument>
             </ui:InvokeWorkflowFile.Arguments>
           </ui:InvokeWorkflowFile>
           <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Workflows\Flexman_DataExtraction.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="434,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_1" UnSafe="False" WorkflowFileName="Workflows\Flexman_DataExtraction.xaml">
             <ui:InvokeWorkflowFile.Arguments>
               <InArgument x:TypeArguments="x:String" x:Key="in_Str_BatchNumber">
-                <VisualBasicValue x:TypeArguments="x:String" ExpressionText="Str_BatchNumber" />
+                <VisualBasicValue x:TypeArguments="x:String" ExpressionText="out_Str_BatchNumber" />
               </InArgument>
               <OutArgument x:TypeArguments="sd:DataTable" x:Key="out_Dt_ExtractedData">
                 <VisualBasicReference x:TypeArguments="sd:DataTable" ExpressionText="io_dt_TransactionData" />
