@@ -9,7 +9,7 @@
   <VisualBasic.Settings>
     <x:Null />
   </VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>486,1558</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>610,1558</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>ReceiptValidation_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <scg:List x:TypeArguments="x:String" Capacity="40">
@@ -161,7 +161,7 @@
         <OutArgument x:TypeArguments="x:String">[filePath]</OutArgument>
       </Assign.To>
       <Assign.Value>
-        <InArgument x:TypeArguments="x:String">[in_TransactionItem.SpecificContent("BatchID").ToString+".pdf"]</InArgument>
+        <InArgument x:TypeArguments="x:String">[In_Config("NaviaClaimsFolder").ToString+"\"+ in_TransactionItem.SpecificContent("BatchID").ToString+".pdf"]</InArgument>
       </Assign.Value>
     </Assign>
     <Assign sap:VirtualizedContainerService.HintSize="434,82" sap2010:WorkflowViewState.IdRef="Assign_2">

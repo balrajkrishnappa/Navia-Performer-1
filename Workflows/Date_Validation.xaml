@@ -1,15 +1,15 @@
-<Activity mc:Ignorable="sap sap2010" x:Class="Date_Validation" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:s="clr-namespace:System;assembly=System.Private.CoreLib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=System.Private.CoreLib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data.Common" xmlns:uasc="clr-namespace:UiPath.Activities.System.Collections;assembly=UiPath.System.Activities" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<Activity mc:Ignorable="sap sap2010" x:Class="Date_Validation" this:Date_Validation.in_FlexmanIndex="0" this:Date_Validation.in_MLmodelIndex="0" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:s="clr-namespace:System;assembly=System.Private.CoreLib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=System.Private.CoreLib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data.Common" xmlns:this="clr-namespace:" xmlns:uasc="clr-namespace:UiPath.Activities.System.Collections;assembly=UiPath.System.Activities" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <x:Members>
     <x:Property Name="in_FlexmanIndex" Type="InArgument(x:Int32)" />
     <x:Property Name="in_MLmodelIndex" Type="InArgument(x:Int32)" />
     <x:Property Name="in_dt_FlexmanData" Type="InArgument(sd:DataTable)" />
     <x:Property Name="in_dt_MLReceiptData" Type="InArgument(sd:DataTable)" />
-    <x:Property Name="io_list_DenialReasons" Type="InOutArgument(scg:IList(x:String))" />
+    <x:Property Name="io_list_DenialReasons" Type="InOutArgument(scg:List(x:String))" />
   </x:Members>
   <VisualBasic.Settings>
     <x:Null />
   </VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>1240,3342</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>1048,3483</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>Date_Validation_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <sco:Collection x:TypeArguments="x:String">
@@ -48,7 +48,7 @@
     </sco:Collection>
   </TextExpression.NamespacesForImplementation>
   <TextExpression.ReferencesForImplementation>
-    <scg:List x:TypeArguments="AssemblyReference" Capacity="49">
+    <scg:List x:TypeArguments="AssemblyReference" Capacity="98">
       <AssemblyReference>System.Activities</AssemblyReference>
       <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
       <AssemblyReference>System.Private.CoreLib</AssemblyReference>
@@ -97,9 +97,10 @@
       <AssemblyReference>System.Runtime.Serialization.Formatters</AssemblyReference>
       <AssemblyReference>System.Private.DataContractSerialization</AssemblyReference>
       <AssemblyReference>System.Runtime.Serialization.Primitives</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities.Design</AssemblyReference>
     </scg:List>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="Date_Validation" sap:VirtualizedContainerService.HintSize="618,3277" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="Date_Validation" sap:VirtualizedContainerService.HintSize="618,3418" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="sd:DataRow" Name="datarow_Flexman" />
       <Variable x:TypeArguments="sd:DataRow" Name="datarow_MLReceipt" />
@@ -118,7 +119,7 @@
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <Assign sap:VirtualizedContainerService.HintSize="556,82" sap2010:WorkflowViewState.IdRef="Assign_1">
+    <Assign sap:VirtualizedContainerService.HintSize="556,81" sap2010:WorkflowViewState.IdRef="Assign_1">
       <Assign.To>
         <OutArgument x:TypeArguments="sd:DataRow">[datarow_Flexman]</OutArgument>
       </Assign.To>
@@ -126,7 +127,7 @@
         <InArgument x:TypeArguments="sd:DataRow">[in_dt_FlexmanData(in_FlexmanIndex)]</InArgument>
       </Assign.Value>
     </Assign>
-    <Assign sap:VirtualizedContainerService.HintSize="556,82" sap2010:WorkflowViewState.IdRef="Assign_2">
+    <Assign sap:VirtualizedContainerService.HintSize="556,81" sap2010:WorkflowViewState.IdRef="Assign_2">
       <Assign.To>
         <OutArgument x:TypeArguments="sd:DataRow">[datarow_MLReceipt]</OutArgument>
       </Assign.To>
@@ -188,7 +189,7 @@
     </ui:MultipleAssign>
     <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="556,52" sap2010:WorkflowViewState.IdRef="CommentOut_1">
       <ui:CommentOut.Body>
-        <Sequence DisplayName="Ignored Activities" sap:VirtualizedContainerService.HintSize="496,681" sap2010:WorkflowViewState.IdRef="Sequence_3">
+        <Sequence DisplayName="Ignored Activities" sap:VirtualizedContainerService.HintSize="496,676" sap2010:WorkflowViewState.IdRef="Sequence_3">
           <sap:WorkflowViewStateService.ViewState>
             <scg:Dictionary x:TypeArguments="x:String, x:Object">
               <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -287,7 +288,7 @@
         <InArgument x:TypeArguments="s:String[]">[{ "MM/dd/yyyy hh:mm:ss", "dd/yy","M/d/yyyy 00:00:00","MM/dd/yyyy","M/d/yyyy"}]</InArgument>
       </Assign.Value>
     </Assign>
-    <Assign sap:VirtualizedContainerService.HintSize="556,82" sap2010:WorkflowViewState.IdRef="Assign_12">
+    <Assign sap:VirtualizedContainerService.HintSize="556,81" sap2010:WorkflowViewState.IdRef="Assign_12">
       <Assign.To>
         <OutArgument x:TypeArguments="s:DateTime">[date_DateOfService]</OutArgument>
       </Assign.To>
@@ -295,7 +296,7 @@
         <InArgument x:TypeArguments="s:DateTime">[DateTime.ParseExact(Str_DateOfService.ToString, arr_DateFormats, System.Globalization.CultureInfo.InvariantCulture)]</InArgument>
       </Assign.Value>
     </Assign>
-    <Assign sap:VirtualizedContainerService.HintSize="556,82" sap2010:WorkflowViewState.IdRef="Assign_13">
+    <Assign sap:VirtualizedContainerService.HintSize="556,81" sap2010:WorkflowViewState.IdRef="Assign_13">
       <Assign.To>
         <OutArgument x:TypeArguments="s:DateTime">[date_PlanStartDate]</OutArgument>
       </Assign.To>
@@ -303,7 +304,7 @@
         <InArgument x:TypeArguments="s:DateTime">[DateTime.ParseExact(Str_PlanStartDate.ToString, arr_DateFormats, System.Globalization.CultureInfo.InvariantCulture)]</InArgument>
       </Assign.Value>
     </Assign>
-    <Assign sap:VirtualizedContainerService.HintSize="556,82" sap2010:WorkflowViewState.IdRef="Assign_14">
+    <Assign sap:VirtualizedContainerService.HintSize="556,81" sap2010:WorkflowViewState.IdRef="Assign_14">
       <Assign.To>
         <OutArgument x:TypeArguments="s:DateTime">[date_PlanEndDate]</OutArgument>
       </Assign.To>
@@ -312,36 +313,36 @@
       </Assign.Value>
     </Assign>
     <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="556,92" sap2010:WorkflowViewState.IdRef="LogMessage_2" Message="[date_DateOfService.ToString+&quot;Plan startDate :&quot;+date_PlanEndDate.ToString+&quot;Plan End Date:&quot;+date_PlanEndDate.ToString]" />
-    <If Condition="[date_DateOfService&lt;date_PlanStartDate]" sap:VirtualizedContainerService.HintSize="556,1113" sap2010:WorkflowViewState.IdRef="If_5">
+    <If Condition="[date_DateOfService&lt;date_PlanStartDate]" sap:VirtualizedContainerService.HintSize="556,1259" sap2010:WorkflowViewState.IdRef="If_5">
       <If.Then>
-        <Sequence sap:VirtualizedContainerService.HintSize="400,279" sap2010:WorkflowViewState.IdRef="Sequence_4">
+        <Sequence sap:VirtualizedContainerService.HintSize="400,352" sap2010:WorkflowViewState.IdRef="Sequence_4">
           <sap:WorkflowViewStateService.ViewState>
             <scg:Dictionary x:TypeArguments="x:String, x:Object">
               <x:Boolean x:Key="IsExpanded">True</x:Boolean>
             </scg:Dictionary>
           </sap:WorkflowViewStateService.ViewState>
-          <uasc:AppendItemToCollection x:TypeArguments="x:String" Collection="[io_list_DenialReasons]" DisplayName="Append item to collection" sap:VirtualizedContainerService.HintSize="338,168" sap2010:WorkflowViewState.IdRef="AppendItemToCollection`1_2">
+          <uasc:AppendItemToCollection x:TypeArguments="x:String" Collection="[io_list_DenialReasons]" DisplayName="Append item to collection" sap:VirtualizedContainerService.HintSize="338,241" sap2010:WorkflowViewState.IdRef="AppendItemToCollection`1_2" Result="[io_list_DenialReasons]">
             <uasc:AppendItemToCollection.Items>
               <scg:List x:TypeArguments="InArgument(x:String)" Capacity="4">
-                <InArgument x:TypeArguments="x:String">Date of service is before Plan Start Date</InArgument>
+                <InArgument x:TypeArguments="x:String">Service date before eligibility date</InArgument>
               </scg:List>
             </uasc:AppendItemToCollection.Items>
           </uasc:AppendItemToCollection>
         </Sequence>
       </If.Then>
       <If.Else>
-        <If Condition="[date_DateOfService&gt;date_PlanEndDate]" sap:VirtualizedContainerService.HintSize="478,658" sap2010:WorkflowViewState.IdRef="If_6">
+        <If Condition="[date_DateOfService&gt;date_PlanEndDate]" sap:VirtualizedContainerService.HintSize="478,731" sap2010:WorkflowViewState.IdRef="If_6">
           <If.Then>
-            <Sequence sap:VirtualizedContainerService.HintSize="400,279" sap2010:WorkflowViewState.IdRef="Sequence_5">
+            <Sequence sap:VirtualizedContainerService.HintSize="400,352" sap2010:WorkflowViewState.IdRef="Sequence_5">
               <sap:WorkflowViewStateService.ViewState>
                 <scg:Dictionary x:TypeArguments="x:String, x:Object">
                   <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                 </scg:Dictionary>
               </sap:WorkflowViewStateService.ViewState>
-              <uasc:AppendItemToCollection x:TypeArguments="x:String" Collection="[io_list_DenialReasons]" DisplayName="Append item to collection" sap:VirtualizedContainerService.HintSize="338,168" sap2010:WorkflowViewState.IdRef="AppendItemToCollection`1_3">
+              <uasc:AppendItemToCollection x:TypeArguments="x:String" Collection="[io_list_DenialReasons]" DisplayName="Append item to collection" sap:VirtualizedContainerService.HintSize="338,241" sap2010:WorkflowViewState.IdRef="AppendItemToCollection`1_3" Result="[io_list_DenialReasons]">
                 <uasc:AppendItemToCollection.Items>
                   <scg:List x:TypeArguments="InArgument(x:String)" Capacity="4">
-                    <InArgument x:TypeArguments="x:String">Date of service is after Plan End Date</InArgument>
+                    <InArgument x:TypeArguments="x:String">Service dates outside of plan year</InArgument>
                   </scg:List>
                 </uasc:AppendItemToCollection.Items>
               </uasc:AppendItemToCollection>
