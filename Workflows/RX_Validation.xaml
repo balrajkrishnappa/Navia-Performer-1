@@ -5,12 +5,12 @@
     <x:Property Name="in_dt_FlexmanData" Type="InArgument(sd:DataTable)" />
     <x:Property Name="in_dt_MLReceiptData" Type="InArgument(sd:DataTable)" />
     <x:Property Name="io_list_DenialReasons" Type="InOutArgument(scg:List(x:String))" />
-    <x:Property Name="in_list_RX_numbers" Type="InArgument(scg:List(x:String))" />
+    <x:Property Name="io_list_RX_numbers" Type="InOutArgument(scg:List(x:String))" />
   </x:Members>
   <VisualBasic.Settings>
     <x:Null />
   </VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>610,1418</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>1054,1418</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>RX_Validation_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <sco:Collection x:TypeArguments="x:String">
@@ -122,7 +122,7 @@
       </Assign.Value>
     </Assign>
     <ui:Comment sap:VirtualizedContainerService.HintSize="478,56" sap2010:WorkflowViewState.IdRef="Comment_1" Text="&quot;RX number should be unique&quot;" />
-    <If Condition="[(datarow_MLReceipt(&quot;RxNumber&quot;).ToString) IsNot &quot;&quot; And Not(in_list_RX_numbers.Contains(datarow_MLReceipt(&quot;RxNumber&quot;).ToString))]" sap:VirtualizedContainerService.HintSize="478,904" sap2010:WorkflowViewState.IdRef="If_1">
+    <If Condition="[(datarow_MLReceipt(&quot;RxNumber&quot;).ToString) IsNot &quot;&quot; And Not(io_list_RX_numbers.Contains(datarow_MLReceipt(&quot;RxNumber&quot;).ToString))]" sap:VirtualizedContainerService.HintSize="478,904" sap2010:WorkflowViewState.IdRef="If_1">
       <If.Then>
         <Sequence sap:VirtualizedContainerService.HintSize="400,484" sap2010:WorkflowViewState.IdRef="Sequence_2">
           <sap:WorkflowViewStateService.ViewState>
@@ -131,7 +131,7 @@
             </scg:Dictionary>
           </sap:WorkflowViewStateService.ViewState>
           <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="338,92" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Info" Message="[&quot;RX number Exists and is Unique among Line Items: &quot;+datarow_MLReceipt(&quot;RxNumber&quot;).ToString]" />
-          <uasc:AppendItemToCollection x:TypeArguments="x:String" Collection="[in_list_RX_numbers]" DisplayName="Append item to collection" sap:VirtualizedContainerService.HintSize="338,241" sap2010:WorkflowViewState.IdRef="AppendItemToCollection`1_2" Result="[in_list_RX_numbers]">
+          <uasc:AppendItemToCollection x:TypeArguments="x:String" Collection="[io_list_RX_numbers]" DisplayName="Append item to collection" sap:VirtualizedContainerService.HintSize="338,241" sap2010:WorkflowViewState.IdRef="AppendItemToCollection`1_2" Result="[io_list_RX_numbers]">
             <uasc:AppendItemToCollection.Items>
               <scg:List x:TypeArguments="InArgument(x:String)" Capacity="4">
                 <InArgument x:TypeArguments="x:String">[datarow_MLReceipt("RxNumber").ToString]</InArgument>
