@@ -167,7 +167,7 @@
               <OutArgument x:TypeArguments="x:String">[Str_EligibilityDate]</OutArgument>
             </ui:AssignOperation.To>
             <ui:AssignOperation.Value>
-              <InArgument x:TypeArguments="x:String">[datarow_Flexman("Eligibility Date").ToString]</InArgument>
+              <InArgument x:TypeArguments="x:String">[datarow_Flexman("EligibilityDate").ToString]</InArgument>
             </ui:AssignOperation.Value>
           </ui:AssignOperation>
           <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_5">
@@ -175,7 +175,7 @@
               <OutArgument x:TypeArguments="x:String">[Str_TerminationDate]</OutArgument>
             </ui:AssignOperation.To>
             <ui:AssignOperation.Value>
-              <InArgument x:TypeArguments="x:String">[datarow_Flexman("Termination Date").ToString]</InArgument>
+              <InArgument x:TypeArguments="x:String">[datarow_Flexman("TerminationDate").ToString]</InArgument>
             </ui:AssignOperation.Value>
           </ui:AssignOperation>
         </scg:List>
@@ -312,7 +312,7 @@
         <InArgument x:TypeArguments="s:DateTime">[DateTime.ParseExact(Str_PlanEndDate.ToString, arr_DateFormats, System.Globalization.CultureInfo.InvariantCulture)]</InArgument>
       </Assign.Value>
     </Assign>
-    <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="556,92" sap2010:WorkflowViewState.IdRef="LogMessage_2" Message="[date_DateOfService.ToString+&quot;Plan startDate :&quot;+date_PlanEndDate.ToString+&quot;Plan End Date:&quot;+date_PlanEndDate.ToString]" />
+    <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="556,92" sap2010:WorkflowViewState.IdRef="LogMessage_2" Message="[date_DateOfService.ToString+Environment.NewLine+&quot;Plan startDate: &quot;+date_PlanStartDate.ToString+Environment.NewLine+&quot;Plan End Date:&quot;+date_PlanEndDate.ToString]" />
     <If Condition="[date_DateOfService&lt;date_PlanStartDate]" sap:VirtualizedContainerService.HintSize="556,1259" sap2010:WorkflowViewState.IdRef="If_5">
       <If.Then>
         <Sequence sap:VirtualizedContainerService.HintSize="400,352" sap2010:WorkflowViewState.IdRef="Sequence_4">
