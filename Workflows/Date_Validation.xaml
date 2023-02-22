@@ -9,7 +9,7 @@
   <VisualBasic.Settings>
     <x:Null />
   </VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>1054,3486</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>956,3486</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>Date_Validation_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <sco:Collection x:TypeArguments="x:String">
@@ -151,7 +151,7 @@
               <OutArgument x:TypeArguments="x:String">[Str_PlanStartDate]</OutArgument>
             </ui:AssignOperation.To>
             <ui:AssignOperation.Value>
-              <InArgument x:TypeArguments="x:String">[Regex.Matches(datarow_Flexman("Plan Dates").ToString,".*\d(?= -)")(0).ToString]</InArgument>
+              <InArgument x:TypeArguments="x:String">[Regex.Matches(datarow_Flexman("PlanDates").ToString,".*\d(?= -)")(0).ToString]</InArgument>
             </ui:AssignOperation.Value>
           </ui:AssignOperation>
           <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_3">
@@ -159,7 +159,7 @@
               <OutArgument x:TypeArguments="x:String">[Str_PlanEndDate]</OutArgument>
             </ui:AssignOperation.To>
             <ui:AssignOperation.Value>
-              <InArgument x:TypeArguments="x:String">[Regex.Matches(datarow_Flexman("Plan Dates").ToString,"(?&lt;=-.).*\d")(0).ToString]</InArgument>
+              <InArgument x:TypeArguments="x:String">[Regex.Matches(datarow_Flexman("PlanDates").ToString,"(?&lt;=-.).*\d")(0).ToString]</InArgument>
             </ui:AssignOperation.Value>
           </ui:AssignOperation>
           <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_4">
