@@ -1,115 +1,30 @@
 {
-  "table": [
+  "mainTable": [
     {
-      "DateOfService": "",
+      "DateOfService": "2023-02-12T00:00:00Z",
       "TotalAmount": "",
       "Tax Amount": "",
       "RxNumber": 12334,
-      "Amount": 15
-    },
-    {
-      "DateOfService": "",
-      "TotalAmount": "",
-      "Tax Amount": "",
-      "RxNumber": 4331,
-      "Amount": 12
-    },
-    {
-      "DateOfService": "",
-      "TotalAmount": "",
-      "Tax Amount": "",
-      "RxNumber": 3421,
-      "Amount": 16
+      "Amount": 30
     }
   ],
-  "flexmanTable": [
+  "FlexmanTable": [
     {
       "LineItem": 1,
-      "Date": "",
-      "ClaimType": "RX",
-      "ApprovedAmount": "0.00",
-      "DenialAmount": 12,
+      "Date": "2023-02-12T00:00:00Z",
+      "Amount": 30,
       "PlanDates": "7/1/2022 - 6/30/2023",
       "EligibilityDate": "2022-01-07T00:00:00Z",
-      "Termination Date": "",
-      "RXDenial": "",
-      "DOSDenial": "Missing Date of Service",
-      "AmountDenial": "",
-      "DuplicateDenial": "",
-      "Result": "Deny",
-      "TerminationDate": ""
-    },
-    {
-      "LineItem": "",
-      "Date": "",
-      "ClaimType": "RX",
-      "ApprovedAmount": "0.00",
-      "DenialAmount": 15,
-      "PlanDates": "",
-      "EligibilityDate": "",
-      "Termination Date": "",
-      "RXDenial": "",
-      "DOSDenial": "Missing Date of Service",
-      "AmountDenial": "",
-      "DuplicateDenial": "",
-      "Result": "Deny",
-      "TerminationDate": ""
-    },
-    {
-      "LineItem": "",
-      "Date": "",
-      "ClaimType": "RX",
-      "ApprovedAmount": "0.00",
-      "DenialAmount": 16,
-      "PlanDates": "",
-      "EligibilityDate": "",
-      "Termination Date": "",
-      "RXDenial": "",
-      "DOSDenial": "Missing Date of Service",
-      "AmountDenial": "",
-      "DuplicateDenial": "",
-      "Result": "Deny",
-      "TerminationDate": ""
-    },
-    {
-      "LineItem": "",
-      "Date": "",
-      "ClaimType": "RX",
-      "ApprovedAmount": 12,
-      "DenialAmount": "",
-      "PlanDates": "",
-      "EligibilityDate": "",
-      "Termination Date": "",
-      "RXDenial": "",
-      "DOSDenial": "",
-      "AmountDenial": "",
-      "DuplicateDenial": "",
-      "Result": "",
-      "TerminationDate": ""
-    }
-  ],
-  "UserTable": [
-    {
-      "LineItem": "1",
-      "Date": "12/19/2023",
-      "ClaimType": "RX",
-      "ApprovedAmount": "117.65",
-      "DenialAmount": "",
-      "PlanDates": "",
-      "EligibilityDate": "",
-      "Termination Date": "",
-      "RXDenial": "",
-      "DOSDenial": "",
-      "AmountDenial": "",
-      "DuplicateDenial": "",
-      "Result": "",
       "TerminationDate": "",
-      "RxDenial": "",
-      "DateOfServiceDenial": "",
-      "ApproveDeny": "Approve"
+      "ReasonsOfDenial": [
+        "Missing Type of Service",
+        "Service dates outside of plan year",
+        "Service date before eligibility date"
+      ],
+      "Result": "Deny"
     }
   ],
-  "batchSubmit": true,
+  "submit": true,
   "pdf_storage": "29988893.tif.pdf",
   "__BUCKET_NAME": "PharmacyClaimsStorageBucket"
 }
