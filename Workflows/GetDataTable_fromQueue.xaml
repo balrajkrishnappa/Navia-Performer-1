@@ -115,7 +115,7 @@
     <ui:FolderExistsX DisplayName="Folder Exists" Exists="[bool_FolderExist]" sap:VirtualizedContainerService.HintSize="434,133" sap2010:WorkflowViewState.IdRef="FolderExistsX_1" Path="[Environment.CurrentDirectory+&quot;ExtractedData&quot;]" />
     <If Condition="[Not bool_FolderExist]" sap:VirtualizedContainerService.HintSize="434,376" sap2010:WorkflowViewState.IdRef="If_1">
       <If.Then>
-        <ui:CreateDirectory ContinueOnError="{x:Null}" Output="{x:Null}" DisplayName="Create Folder" sap:VirtualizedContainerService.HintSize="334,80" sap2010:WorkflowViewState.IdRef="CreateDirectory_1" Path="[Environment.CurrentDirectory+&quot;ExtractedData&quot;]" />
+        <ui:CreateDirectory ContinueOnError="{x:Null}" Output="{x:Null}" DisplayName="Create Folder" sap:VirtualizedContainerService.HintSize="334,80" sap2010:WorkflowViewState.IdRef="CreateDirectory_1" Path="[Environment.CurrentDirectory+&quot;\ExtractedData&quot;]" />
       </If.Then>
     </If>
     <ui:WriteCsvFile AddHeaders="False" DataTable="[out_dt_MLmodelValidatedData]" Delimitator="Comma" DisplayName="Write CSV" FilePath="[&quot;ExtractedData-&quot;+in_Str_BatchNumber+&quot;-MLmodel Receipt Data.csv&quot;]" sap:VirtualizedContainerService.HintSize="434,154" sap2010:WorkflowViewState.IdRef="WriteCsvFile_1" ShouldQuote="True" />
