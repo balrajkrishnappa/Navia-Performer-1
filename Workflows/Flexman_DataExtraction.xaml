@@ -7,7 +7,7 @@
   <VisualBasic.Settings>
     <x:Null />
   </VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>713,702</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>1054,702</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>Flexman_DataExtraction_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <scg:List x:TypeArguments="x:String" Capacity="44">
@@ -137,25 +137,41 @@
           <av:PointCollection x:Key="ConnectorLocation">300,186 300,234</av:PointCollection>
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
-      <uix:NApplicationCard AttachMode="ByInstance" DisplayName="Use Application: Claim Entry" sap:VirtualizedContainerService.HintSize="200,52" sap2010:WorkflowViewState.IdRef="NApplicationCard_1" InUiElement="[io_UiElement]" OpenMode="Never" OutUiElement="[io_UiElement]" ScopeGuid="7f3056f9-8359-401d-87af-4c2d825c1d8a" Version="V2">
+      <uix:NApplicationCard AttachMode="ByInstance" DisplayName="Use Application: Claim Entry" sap:VirtualizedContainerService.HintSize="530,1043" sap2010:WorkflowViewState.IdRef="NApplicationCard_1" InUiElement="[io_UiElement]" OpenMode="Never" OutUiElement="[io_UiElement]" ScopeGuid="7f3056f9-8359-401d-87af-4c2d825c1d8a" Version="V2">
         <uix:NApplicationCard.Body>
           <ActivityAction x:TypeArguments="x:Object">
             <ActivityAction.Argument>
               <DelegateInArgument x:TypeArguments="x:Object" Name="WSSessionData" />
             </ActivityAction.Argument>
-            <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="400,662" sap2010:WorkflowViewState.IdRef="Sequence_3">
+            <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="496,906" sap2010:WorkflowViewState.IdRef="Sequence_3">
               <sap:WorkflowViewStateService.ViewState>
                 <scg:Dictionary x:TypeArguments="x:String, x:Object">
                   <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                 </scg:Dictionary>
               </sap:WorkflowViewStateService.ViewState>
-              <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="338,92" sap2010:WorkflowViewState.IdRef="LogMessage_6" Level="Info" Message="[&quot;Entering Batch Number&quot;]" />
-              <uix:NTypeInto ActivateBefore="True" ClickBeforeMode="Single" DisplayName="Type_BatchNumber" EmptyFieldMode="SingleLine" sap:VirtualizedContainerService.HintSize="338,218" sap2010:WorkflowViewState.IdRef="NTypeInto_2" ScopeIdentifier="7f3056f9-8359-401d-87af-4c2d825c1d8a" Text="[in_Str_BatchNumber]" Version="V3">
+              <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="434,92" sap2010:WorkflowViewState.IdRef="LogMessage_6" Level="Info" Message="[&quot;Entering Batch Number&quot;]" />
+              <Assign sap:VirtualizedContainerService.HintSize="434,82" sap2010:WorkflowViewState.IdRef="Assign_3">
+                <Assign.To>
+                  <OutArgument x:TypeArguments="x:String">[in_Str_BatchNumber]</OutArgument>
+                </Assign.To>
+                <Assign.Value>
+                  <InArgument x:TypeArguments="x:String">29668404.tif</InArgument>
+                </Assign.Value>
+              </Assign>
+              <Assign sap:VirtualizedContainerService.HintSize="434,82" sap2010:WorkflowViewState.IdRef="Assign_4">
+                <Assign.To>
+                  <OutArgument x:TypeArguments="x:String">[in_Str_BatchNumber]</OutArgument>
+                </Assign.To>
+                <Assign.Value>
+                  <InArgument x:TypeArguments="x:String">[in_Str_BatchNumber.Replace(".tif","")]</InArgument>
+                </Assign.Value>
+              </Assign>
+              <uix:NTypeInto ActivateBefore="True" ClickBeforeMode="Single" DisplayName="Type_BatchNumber" EmptyFieldMode="SingleLine" sap:VirtualizedContainerService.HintSize="434,218" sap2010:WorkflowViewState.IdRef="NTypeInto_2" ScopeIdentifier="7f3056f9-8359-401d-87af-4c2d825c1d8a" Text="[in_Str_BatchNumber]" Version="V3">
                 <uix:NTypeInto.Target>
                   <uix:TargetAnchorable DesignTimeRectangle="854, 182, 68, 21" DesignTimeScaleFactor="1" ElementType="InputBox" FriendlyName="'Provider'" FullSelectorArgument="&lt;wnd aaname='Batch #' /&gt;&lt;wnd ctrlname='txtOpenBatchId' /&gt;" FuzzySelectorArgument="&lt;wnd aaname='Batch #' /&gt;&lt;wnd ctrlname='txtOpenBatchId' /&gt;" Guid="7555fd3e-c475-478c-8ec3-6cd996651280" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAAEgAAAAZCAYAAACSP2gVAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAABdSURBVFhH7dBLCYBQAABB+1cRTxZ7DfQgqOBnC8zCFphpjLH5e0DxCTQvq2+/AukIUAQoAhQBigBFgCJAEaAIUAQoAhQBigBFgCJAEaAIUAQo+gTy9QPI7wP6fWw75/sflvk0CAkAAAAASUVORK5CYII=" InformativeScreenshot="5d7ef3cdf0e554b784b0a896921d3092.png" ScopeSelectorArgument="&lt;wnd app='flexwin.exe' ctrlname='FrmClaimEntry' /&gt;" SearchSteps="Selector, FuzzySelector, Image" Version="V1" Visibility="Interactive" />
                 </uix:NTypeInto.Target>
               </uix:NTypeInto>
-              <uix:NClick ClickType="Single" DisplayName="Click 'Open'" sap:VirtualizedContainerService.HintSize="338,157" sap2010:WorkflowViewState.IdRef="NClick_2" KeyModifiers="None" MouseButton="Left" ScopeIdentifier="7f3056f9-8359-401d-87af-4c2d825c1d8a" Version="V3">
+              <uix:NClick ClickType="Single" DisplayName="Click 'Open'" sap:VirtualizedContainerService.HintSize="434,157" sap2010:WorkflowViewState.IdRef="NClick_2" KeyModifiers="None" MouseButton="Left" ScopeIdentifier="7f3056f9-8359-401d-87af-4c2d825c1d8a" Version="V3">
                 <uix:NClick.Target>
                   <uix:TargetAnchorable DesignTimeRectangle="927, 180, 44, 24" DesignTimeScaleFactor="1" ElementType="Button" FriendlyName="'Open'" FullSelectorArgument="&lt;wnd ctrlname='btnOpenBatch' aaname='Open' /&gt;" FuzzySelectorArgument="&lt;wnd ctrlname='btnOpenBatch' aaname='Open' check:text='Open' /&gt;" Guid="f58fe6e3-68f4-4e3a-bcd0-30dfe9670de6" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAADAAAAAcCAYAAAAnbDzKAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAD3SURBVFhH7ZXRDYQgDEC7Gdt0F0bhgzEYxA3YoAcccsChXKKAXPh4iSnF9NGioLWmmVkCo0kEpJRTENf8JbBt26NZAqNZAqO5QUAQAhBEMK4KeW24KKCIMyAUtVg7rgkoToxxUnlcIEEp3oBLAoqzg3GxY4Uk7LOTMXn7iEVidn8YvT3u8pHQdDHPL9FHABhx9V4T6O+IjaMIe8K7Cvln49ipA9Ep+sJtYeH0d6xQlt9U4Kc7cCJQlO8q4L84aSHZV6hQ0GdUfJcM7j5074Cj8h9whUbr2dyH+EHHOghUyAq6myUwmiUwmv8XmIG45kRgRpbAWDS9AGaYW+6MorNdAAAAAElFTkSuQmCC" InformativeScreenshot="5b330a84574c63e360025c60520c0ff3.png" ScopeSelectorArgument="&lt;wnd app='flexwin.exe' ctrlname='FrmClaimEntry' /&gt;" SearchSteps="Selector, FuzzySelector, Image" Version="V1" Visibility="Interactive" />
                 </uix:NClick.Target>
@@ -175,7 +191,7 @@
               <av:Size x:Key="ShapeSize">200,52</av:Size>
             </scg:Dictionary>
           </sap:WorkflowViewStateService.ViewState>
-          <uix:NApplicationCard AttachMode="ByInstance" DisplayName="Use Application: Claim Detail - Posted Batch 29971889 - User: Jeric Fidel" sap:VirtualizedContainerService.HintSize="628,3835" sap2010:WorkflowViewState.IdRef="NApplicationCard_2" InUiElement="[io_UiElement]" OpenMode="Never" OutUiElement="[io_UiElement]" ScopeGuid="2f53cb84-51ff-4547-86c5-5b84837a0397" Version="V2">
+          <uix:NApplicationCard AttachMode="ByInstance" DisplayName="Use Application: Claim Detail - Posted Batch 29971889 - User: Jeric Fidel" sap:VirtualizedContainerService.HintSize="200,52" sap2010:WorkflowViewState.IdRef="NApplicationCard_2" InUiElement="[io_UiElement]" OpenMode="Never" OutUiElement="[io_UiElement]" ScopeGuid="2f53cb84-51ff-4547-86c5-5b84837a0397" Version="V2">
             <uix:NApplicationCard.Body>
               <ActivityAction x:TypeArguments="x:Object">
                 <ActivityAction.Argument>
