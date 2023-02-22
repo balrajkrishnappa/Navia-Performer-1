@@ -9,7 +9,7 @@
   <VisualBasic.Settings>
     <x:Null />
   </VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>1054,7468</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>1054,5114</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>ProcessTransaction_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <scg:List x:TypeArguments="x:String" Capacity="42">
@@ -123,7 +123,7 @@
       <AssemblyReference>System.Linq.Queryable</AssemblyReference>
     </scg:List>
   </TextExpression.ReferencesForImplementation>
-  <Sequence sap2010:Annotation.AnnotationText="Invoke major steps of the business process, which are usually implemented by multiple subworkflows.&#xA;&#xA;If a BusinessRuleException is thrown, the transaction is skipped. &#xA;If another kind of exception occurs, the current transaction can be retried. " DisplayName="Process" sap:VirtualizedContainerService.HintSize="770,7403" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence sap2010:Annotation.AnnotationText="Invoke major steps of the business process, which are usually implemented by multiple subworkflows.&#xA;&#xA;If a BusinessRuleException is thrown, the transaction is skipped. &#xA;If another kind of exception occurs, the current transaction can be retried. " DisplayName="Process" sap:VirtualizedContainerService.HintSize="770,5049" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="x:Int32" Name="FlexmanIndex" />
       <Variable x:TypeArguments="x:Int32" Name="MLIndex" />
@@ -145,7 +145,7 @@
     </sap:WorkflowViewStateService.ViewState>
     <ui:Comment sap:VirtualizedContainerService.HintSize="708,94" sap2010:WorkflowViewState.IdRef="Comment_2" Text="&quot;Processing file in Navia Claims STAGING environment - NewClaims folder for file based on Queue Item&quot;" />
     <ui:LogMessage DisplayName="Log Message Process Start" sap:VirtualizedContainerService.HintSize="708,92" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Info" Message="[&quot;Started Processing Performer 1 for fle with batch number:  &quot;+in_Str_BatchNumber]" />
-    <ui:MultipleAssign DisplayName="Multiple Initialization Of Lists" sap:VirtualizedContainerService.HintSize="708,225" sap2010:WorkflowViewState.IdRef="MultipleAssign_1">
+    <ui:MultipleAssign sap2010:Annotation.AnnotationText="Initializing all the lists in the flow&#xD;&#xA;" DisplayName="Multiple Initialization Of Lists" sap:VirtualizedContainerService.HintSize="708,94" sap2010:WorkflowViewState.IdRef="MultipleAssign_1">
       <ui:MultipleAssign.AssignOperations>
         <scg:List x:TypeArguments="ui:AssignOperation" Capacity="8">
           <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_3">
@@ -192,12 +192,13 @@
       </ui:MultipleAssign.AssignOperations>
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
-          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
           <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
     </ui:MultipleAssign>
-    <Sequence DisplayName="Date Validation for Entire Batch" sap:VirtualizedContainerService.HintSize="708,844" sap2010:WorkflowViewState.IdRef="Sequence_7">
+    <Sequence DisplayName="Date Validation for Entire Batch" sap:VirtualizedContainerService.HintSize="708,81" sap2010:WorkflowViewState.IdRef="Sequence_7">
       <Sequence.Variables>
         <Variable x:TypeArguments="x:String" Name="Str_DateOfService" />
         <Variable x:TypeArguments="s:String[]" Name="arr_DateFormats" />
@@ -205,84 +206,113 @@
       </Sequence.Variables>
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
-          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
           <x:Boolean x:Key="IsPinned">False</x:Boolean>
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
-      <ui:MultipleAssign DisplayName="Multiple Assign" sap:VirtualizedContainerService.HintSize="431,163" sap2010:WorkflowViewState.IdRef="MultipleAssign_2">
-        <ui:MultipleAssign.AssignOperations>
-          <scg:List x:TypeArguments="ui:AssignOperation" Capacity="8">
-            <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_6">
-              <ui:AssignOperation.To>
-                <OutArgument x:TypeArguments="x:String">[Str_DateOfService]</OutArgument>
-              </ui:AssignOperation.To>
-              <ui:AssignOperation.Value>
-                <InArgument x:TypeArguments="x:String">[io_dt_FlexmanData(0)("Date").ToString.Trim]</InArgument>
-              </ui:AssignOperation.Value>
-            </ui:AssignOperation>
-            <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_7">
-              <ui:AssignOperation.To>
-                <OutArgument x:TypeArguments="s:String[]">[arr_DateFormats]</OutArgument>
-              </ui:AssignOperation.To>
-              <ui:AssignOperation.Value>
-                <InArgument x:TypeArguments="s:String[]">[{ "MM/dd/yyyy hh:mm:ss", "dd/yy","M/d/yyyy 00:00:00","MM/dd/yyyy","M/d/yyyy"}]</InArgument>
-              </ui:AssignOperation.Value>
-            </ui:AssignOperation>
-            <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_8">
-              <ui:AssignOperation.To>
-                <OutArgument x:TypeArguments="s:DateTime">[date_DateOfService]</OutArgument>
-              </ui:AssignOperation.To>
-              <ui:AssignOperation.Value>
-                <InArgument x:TypeArguments="s:DateTime">[DateTime.ParseExact(Str_DateOfService.ToString, arr_DateFormats, System.Globalization.CultureInfo.InvariantCulture)]</InArgument>
-              </ui:AssignOperation.Value>
-            </ui:AssignOperation>
-          </scg:List>
-        </ui:MultipleAssign.AssignOperations>
-        <sap:WorkflowViewStateService.ViewState>
-          <scg:Dictionary x:TypeArguments="x:String, x:Object">
-            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-            <x:Boolean x:Key="IsPinned">False</x:Boolean>
-          </scg:Dictionary>
-        </sap:WorkflowViewStateService.ViewState>
-      </ui:MultipleAssign>
-      <If Condition="[in_dt_MLmodelValidatedData(0)(&quot;DateOfService&quot;).ToString.Trim=&quot;&quot; Or Not(CDate(in_dt_MLmodelValidatedData(0)(&quot;DateOfService&quot;).ToString.Trim)=date_DateOfService)]" sap:VirtualizedContainerService.HintSize="431,530" sap2010:WorkflowViewState.IdRef="If_4">
-        <sap:WorkflowViewStateService.ViewState>
-          <scg:Dictionary x:TypeArguments="x:String, x:Object">
-            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-            <x:Boolean x:Key="IsPinned">False</x:Boolean>
-          </scg:Dictionary>
-        </sap:WorkflowViewStateService.ViewState>
+      <If Condition="[io_dt_FlexmanData(0)(&quot;Date&quot;).ToString=&quot;&quot; or  in_dt_MLmodelValidatedData(0)(&quot;DateOfService&quot;).ToString=&quot;&quot;]" sap:VirtualizedContainerService.HintSize="557,1077" sap2010:WorkflowViewState.IdRef="If_13">
         <If.Then>
-          <uasc:AppendItemToCollection x:TypeArguments="x:String" Collection="[list_DenialReason]" DisplayName="Append item to collection" sap:VirtualizedContainerService.HintSize="334,241" sap2010:WorkflowViewState.IdRef="AppendItemToCollection`1_5" Result="[list_DenialReason]">
+          <uasc:AppendItemToCollection x:TypeArguments="x:String" Collection="[list_DenialReason]" DisplayName="Append item to collection" sap:VirtualizedContainerService.HintSize="334,168" sap2010:WorkflowViewState.IdRef="AppendItemToCollection`1_13" Result="[list_DenialReason]">
             <uasc:AppendItemToCollection.Items>
               <scg:List x:TypeArguments="InArgument(x:String)" Capacity="4">
                 <InArgument x:TypeArguments="x:String">Missing Date of Service</InArgument>
               </scg:List>
             </uasc:AppendItemToCollection.Items>
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                <x:Boolean x:Key="IsPinned">False</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
           </uasc:AppendItemToCollection>
         </If.Then>
         <If.Else>
-          <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Workflows\Date_Validation.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="334,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_9" UnSafe="False" WorkflowFileName="Workflows\Date_Validation.xaml">
-            <ui:InvokeWorkflowFile.Arguments>
-              <InArgument x:TypeArguments="x:Int32" x:Key="in_FlexmanIndex">0</InArgument>
-              <InArgument x:TypeArguments="x:Int32" x:Key="in_MLmodelIndex">0</InArgument>
-              <InArgument x:TypeArguments="sd:DataTable" x:Key="in_dt_FlexmanData">[io_dt_FlexmanData]</InArgument>
-              <InArgument x:TypeArguments="sd:DataTable" x:Key="in_dt_MLReceiptData">[in_dt_MLmodelValidatedData]</InArgument>
-              <InOutArgument x:TypeArguments="scg:List(x:String)" x:Key="io_list_DenialReasons">[list_DenialReason]</InOutArgument>
-            </ui:InvokeWorkflowFile.Arguments>
-          </ui:InvokeWorkflowFile>
+          <Sequence sap2010:Annotation.AnnotationText="If both dates Match we wiill do the Validation for the Date with Eligibility , termination and Plan Dates" DisplayName="Compare Flexman and Receipt Date" sap:VirtualizedContainerService.HintSize="479,733" sap2010:WorkflowViewState.IdRef="Sequence_11">
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+            <ui:MultipleAssign sap2010:Annotation.AnnotationText="Initializing Date Of Service" DisplayName="Multiple Assign" sap:VirtualizedContainerService.HintSize="417,83" sap2010:WorkflowViewState.IdRef="MultipleAssign_2">
+              <ui:MultipleAssign.AssignOperations>
+                <scg:List x:TypeArguments="ui:AssignOperation" Capacity="8">
+                  <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_6">
+                    <ui:AssignOperation.To>
+                      <OutArgument x:TypeArguments="x:String">[Str_DateOfService]</OutArgument>
+                    </ui:AssignOperation.To>
+                    <ui:AssignOperation.Value>
+                      <InArgument x:TypeArguments="x:String">[io_dt_FlexmanData(0)("Date").ToString.Trim]</InArgument>
+                    </ui:AssignOperation.Value>
+                  </ui:AssignOperation>
+                  <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_7">
+                    <ui:AssignOperation.To>
+                      <OutArgument x:TypeArguments="s:String[]">[arr_DateFormats]</OutArgument>
+                    </ui:AssignOperation.To>
+                    <ui:AssignOperation.Value>
+                      <InArgument x:TypeArguments="s:String[]">[{ "MM/dd/yyyy hh:mm:ss", "dd/yy","M/d/yyyy 00:00:00","MM/dd/yyyy","M/d/yyyy"}]</InArgument>
+                    </ui:AssignOperation.Value>
+                  </ui:AssignOperation>
+                  <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_8">
+                    <ui:AssignOperation.To>
+                      <OutArgument x:TypeArguments="s:DateTime">[date_DateOfService]</OutArgument>
+                    </ui:AssignOperation.To>
+                    <ui:AssignOperation.Value>
+                      <InArgument x:TypeArguments="s:DateTime">[DateTime.ParseExact(Str_DateOfService.ToString, arr_DateFormats, System.Globalization.CultureInfo.InvariantCulture)]</InArgument>
+                    </ui:AssignOperation.Value>
+                  </ui:AssignOperation>
+                </scg:List>
+              </ui:MultipleAssign.AssignOperations>
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                  <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+            </ui:MultipleAssign>
+            <If Condition="[CDate(in_dt_MLmodelValidatedData(0)(&quot;DateOfService&quot;).ToString.Trim)=date_DateOfService]" sap:VirtualizedContainerService.HintSize="417,457" sap2010:WorkflowViewState.IdRef="If_4">
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+              <If.Then>
+                <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Workflows\Date_Validation.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="339,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_10" UnSafe="False" WorkflowFileName="Workflows\Date_Validation.xaml">
+                  <ui:InvokeWorkflowFile.Arguments>
+                    <InArgument x:TypeArguments="x:Int32" x:Key="in_FlexmanIndex">0</InArgument>
+                    <InArgument x:TypeArguments="x:Int32" x:Key="in_MLmodelIndex">0</InArgument>
+                    <InArgument x:TypeArguments="sd:DataTable" x:Key="in_dt_FlexmanData">[io_dt_FlexmanData]</InArgument>
+                    <InArgument x:TypeArguments="sd:DataTable" x:Key="in_dt_MLReceiptData">[in_dt_MLmodelValidatedData]</InArgument>
+                    <InOutArgument x:TypeArguments="scg:List(x:String)" x:Key="io_list_DenialReasons">[list_DenialReason]</InOutArgument>
+                  </ui:InvokeWorkflowFile.Arguments>
+                </ui:InvokeWorkflowFile>
+              </If.Then>
+              <If.Else>
+                <uasc:AppendItemToCollection x:TypeArguments="x:String" Collection="[list_DenialReason]" DisplayName="Append item to collection" sap:VirtualizedContainerService.HintSize="334,168" sap2010:WorkflowViewState.IdRef="AppendItemToCollection`1_5" Result="[list_DenialReason]">
+                  <uasc:AppendItemToCollection.Items>
+                    <scg:List x:TypeArguments="InArgument(x:String)" Capacity="4">
+                      <InArgument x:TypeArguments="x:String">Missing Date of Service</InArgument>
+                    </scg:List>
+                  </uasc:AppendItemToCollection.Items>
+                </uasc:AppendItemToCollection>
+              </If.Else>
+            </If>
+          </Sequence>
         </If.Else>
       </If>
     </Sequence>
     <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="708,92" sap2010:WorkflowViewState.IdRef="LogMessage_7" Message="[&quot;Creating new list of exactly matching rows and mapping them in Dictionary&quot;]" />
-    <Sequence DisplayName="Mapping Line Item" sap:VirtualizedContainerService.HintSize="708,2349" sap2010:WorkflowViewState.IdRef="Sequence_5">
+    <Sequence sap2010:Annotation.AnnotationText="Creating Dictionary of exactly Matching Row indexes and Cost which is lesser than in ReceiptData, of both Receipt and Flexman Table" DisplayName="Mapping Line Item" sap:VirtualizedContainerService.HintSize="708,384" sap2010:WorkflowViewState.IdRef="Sequence_5">
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
           <x:Boolean x:Key="IsExpanded">True</x:Boolean>
           <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
-      <ui:ForEachRow ColumnNames="{x:Null}" CurrentIndex="[FlexmanIndex]" DataTable="[io_dt_FlexmanData]" DisplayName="For Each Row in Data Table" sap:VirtualizedContainerService.HintSize="642,1083" sap2010:WorkflowViewState.IdRef="ForEachRow_1">
+      <ui:ForEachRow ColumnNames="{x:Null}" CurrentIndex="[FlexmanIndex]" DataTable="[io_dt_FlexmanData]" DisplayName="For Each Row in Data Table" sap:VirtualizedContainerService.HintSize="338,52" sap2010:WorkflowViewState.IdRef="ForEachRow_1">
         <ui:ForEachRow.Body>
           <ActivityAction x:TypeArguments="sd:DataRow">
             <ActivityAction.Argument>
@@ -360,24 +390,24 @@
         </ui:ForEachRow.Body>
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
-            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsExpanded">False</x:Boolean>
             <x:Boolean x:Key="IsPinned">False</x:Boolean>
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </ui:ForEachRow>
-      <ui:ForEachRow ColumnNames="{x:Null}" sap2010:Annotation.AnnotationText="Mapping the flexman rows with Receipts even if they have cost less than that in extracted Data from Receipt.." CurrentIndex="[FlexmanIndex]" DataTable="[io_dt_FlexmanData]" DisplayName="For Each Row in Data Table" sap:VirtualizedContainerService.HintSize="642,1115" sap2010:WorkflowViewState.IdRef="ForEachRow_4">
+      <ui:ForEachRow ColumnNames="{x:Null}" sap2010:Annotation.AnnotationText="Mapping the flexman rows with Receipts even if they have cost less than that in extracted Data from Receipt.." CurrentIndex="[FlexmanIndex]" DataTable="[io_dt_FlexmanData]" DisplayName="For Each Row in Data Table" sap:VirtualizedContainerService.HintSize="338,124" sap2010:WorkflowViewState.IdRef="ForEachRow_4">
         <ui:ForEachRow.Body>
           <ActivityAction x:TypeArguments="sd:DataRow">
             <ActivityAction.Argument>
               <DelegateInArgument x:TypeArguments="sd:DataRow" Name="Frow" />
             </ActivityAction.Argument>
-            <ui:ForEachRow ColumnNames="{x:Null}" CurrentIndex="[MLIndex]" DataTable="[in_dt_MLmodelValidatedData]" DisplayName="For Each Row in Data Table" sap:VirtualizedContainerService.HintSize="608,967" sap2010:WorkflowViewState.IdRef="ForEachRow_3">
+            <ui:ForEachRow ColumnNames="{x:Null}" CurrentIndex="[MLIndex]" DataTable="[in_dt_MLmodelValidatedData]" DisplayName="For Each Row in Data Table" sap:VirtualizedContainerService.HintSize="608,966" sap2010:WorkflowViewState.IdRef="ForEachRow_3">
               <ui:ForEachRow.Body>
                 <ActivityAction x:TypeArguments="sd:DataRow">
                   <ActivityAction.Argument>
                     <DelegateInArgument x:TypeArguments="sd:DataRow" Name="Rrow" />
                   </ActivityAction.Argument>
-                  <If Condition="[CDbl(Rrow(&quot;Amount&quot;).ToString)&gt;=CDbl(Frow(&quot;ApprovedAmount&quot;).ToString) And Frow(&quot;ClaimType&quot;).ToString=&quot;RX&quot; And Not(list_ProcessedMLRows.Contains(MLIndex)) And Not(list_ProcessedFlexmanRows.Contains(FlexmanIndex))]" sap:VirtualizedContainerService.HintSize="574,850" sap2010:WorkflowViewState.IdRef="If_3">
+                  <If Condition="[CDbl(Rrow(&quot;Amount&quot;).ToString)&gt;=CDbl(Frow(&quot;ApprovedAmount&quot;).ToString) And Frow(&quot;ClaimType&quot;).ToString=&quot;RX&quot; And Not(list_ProcessedMLRows.Contains(MLIndex)) And Not(list_ProcessedFlexmanRows.Contains(FlexmanIndex))]" sap:VirtualizedContainerService.HintSize="574,849" sap2010:WorkflowViewState.IdRef="If_3">
                     <sap:WorkflowViewStateService.ViewState>
                       <scg:Dictionary x:TypeArguments="x:String, x:Object">
                         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -385,14 +415,14 @@
                       </scg:Dictionary>
                     </sap:WorkflowViewStateService.ViewState>
                     <If.Then>
-                      <Sequence DisplayName="Mapping_FlexManRows" sap:VirtualizedContainerService.HintSize="496,574" sap2010:WorkflowViewState.IdRef="Sequence_4">
+                      <Sequence DisplayName="Mapping_FlexManRows" sap:VirtualizedContainerService.HintSize="496,573" sap2010:WorkflowViewState.IdRef="Sequence_4">
                         <sap:WorkflowViewStateService.ViewState>
                           <scg:Dictionary x:TypeArguments="x:String, x:Object">
                             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                             <x:Boolean x:Key="IsPinned">False</x:Boolean>
                           </scg:Dictionary>
                         </sap:WorkflowViewStateService.ViewState>
-                        <Assign sap:VirtualizedContainerService.HintSize="434,82" sap2010:WorkflowViewState.IdRef="Assign_4">
+                        <Assign sap:VirtualizedContainerService.HintSize="434,81" sap2010:WorkflowViewState.IdRef="Assign_4">
                           <Assign.To>
                             <OutArgument x:TypeArguments="x:Int32">[Dict_Matchrows(FlexmanIndex)]</OutArgument>
                           </Assign.To>
@@ -438,7 +468,7 @@
         </ui:ForEachRow.Body>
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
-            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsExpanded">False</x:Boolean>
             <x:Boolean x:Key="IsPinned">False</x:Boolean>
             <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
           </scg:Dictionary>
@@ -446,13 +476,13 @@
       </ui:ForEachRow>
     </Sequence>
     <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="708,92" sap2010:WorkflowViewState.IdRef="LogMessage_3" Level="Info" Message="[(Dict_Matchrows.Count).ToString+&quot; rows of Flexman mapped successfully with Receipt Data&quot;]" />
-    <ui:ForEach x:TypeArguments="scg:KeyValuePair(x:Int32, x:Int32)" CurrentIndex="{x:Null}" DisplayName="For Each" sap:VirtualizedContainerService.HintSize="708,3060" sap2010:WorkflowViewState.IdRef="ForEach`1_1" Values="[Dict_Matchrows]">
+    <ui:ForEach x:TypeArguments="scg:KeyValuePair(x:Int32, x:Int32)" CurrentIndex="{x:Null}" sap2010:Annotation.AnnotationText="Looping through all the Matched" DisplayName="For Each" sap:VirtualizedContainerService.HintSize="708,3565" sap2010:WorkflowViewState.IdRef="ForEach`1_1" Values="[Dict_Matchrows]">
       <ui:ForEach.Body>
         <ActivityAction x:TypeArguments="scg:KeyValuePair(x:Int32, x:Int32)">
           <ActivityAction.Argument>
             <DelegateInArgument x:TypeArguments="scg:KeyValuePair(x:Int32, x:Int32)" Name="item" />
           </ActivityAction.Argument>
-          <Sequence DisplayName="Validating Matched Rows" sap:VirtualizedContainerService.HintSize="672,2935" sap2010:WorkflowViewState.IdRef="Sequence_3">
+          <Sequence DisplayName="Validating Matched Rows" sap:VirtualizedContainerService.HintSize="672,3409" sap2010:WorkflowViewState.IdRef="Sequence_3">
             <Sequence.Variables>
               <Variable x:TypeArguments="x:Int32" Name="int_MatchingFlexManIndex" />
               <Variable x:TypeArguments="x:Int32" Name="int_MatchingReceiptIndex" />
@@ -480,24 +510,12 @@
             </Assign>
             <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Workflows\RX_Validation.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="610,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_1" UnSafe="False" WorkflowFileName="Workflows\RX_Validation.xaml">
               <ui:InvokeWorkflowFile.Arguments>
-                <InArgument x:TypeArguments="x:Int32" x:Key="in_FlexmanIndex">
-                  <VisualBasicValue x:TypeArguments="x:Int32" ExpressionText="int_MatchingFlexManIndex" />
-                </InArgument>
-                <InArgument x:TypeArguments="x:Int32" x:Key="in_MLmodelIndex">
-                  <VisualBasicValue x:TypeArguments="x:Int32" ExpressionText="int_MatchingReceiptIndex" />
-                </InArgument>
-                <InArgument x:TypeArguments="sd:DataTable" x:Key="in_dt_FlexmanData">
-                  <VisualBasicValue x:TypeArguments="sd:DataTable" ExpressionText="io_dt_FlexmanData" />
-                </InArgument>
-                <InArgument x:TypeArguments="sd:DataTable" x:Key="in_dt_MLReceiptData">
-                  <VisualBasicValue x:TypeArguments="sd:DataTable" ExpressionText="in_dt_MLmodelValidatedData" />
-                </InArgument>
-                <InOutArgument x:TypeArguments="scg:List(x:String)" x:Key="io_list_DenialReasons">
-                  <VisualBasicReference x:TypeArguments="scg:List(x:String)" ExpressionText="list_DenialReason" />
-                </InOutArgument>
-                <InOutArgument x:TypeArguments="scg:List(x:String)" x:Key="io_list_RX_numbers">
-                  <VisualBasicReference x:TypeArguments="scg:List(x:String)" ExpressionText="list_RX_numbers" />
-                </InOutArgument>
+                <InArgument x:TypeArguments="x:Int32" x:Key="in_FlexmanIndex">[int_MatchingFlexManIndex]</InArgument>
+                <InArgument x:TypeArguments="x:Int32" x:Key="in_MLmodelIndex">[int_MatchingReceiptIndex]</InArgument>
+                <InArgument x:TypeArguments="sd:DataTable" x:Key="in_dt_FlexmanData">[io_dt_FlexmanData]</InArgument>
+                <InArgument x:TypeArguments="sd:DataTable" x:Key="in_dt_MLReceiptData">[in_dt_MLmodelValidatedData]</InArgument>
+                <InOutArgument x:TypeArguments="scg:List(x:String)" x:Key="io_list_DenialReasons">[list_DenialReason]</InOutArgument>
+                <InOutArgument x:TypeArguments="scg:List(x:String)" x:Key="io_list_RX_numbers">[list_RX_numbers]</InOutArgument>
               </ui:InvokeWorkflowFile.Arguments>
               <sap:WorkflowViewStateService.ViewState>
                 <scg:Dictionary x:TypeArguments="x:String, x:Object">
@@ -543,7 +561,7 @@
                         </scg:Dictionary>
                       </sap:WorkflowViewStateService.ViewState>
                       <If.Then>
-                        <Assign sap:VirtualizedContainerService.HintSize="434,81" sap2010:WorkflowViewState.IdRef="Assign_5">
+                        <Assign sap:VirtualizedContainerService.HintSize="434,82" sap2010:WorkflowViewState.IdRef="Assign_5">
                           <Assign.To>
                             <OutArgument x:TypeArguments="x:Object">[io_dt_FlexmanData(int_MatchingFlexManIndex)("RXDenial")]</OutArgument>
                           </Assign.To>
@@ -628,17 +646,38 @@
                   </Assign.Value>
                 </Assign>
               </If.Then>
-              <If.Else>
-                <Assign sap:VirtualizedContainerService.HintSize="434,81" sap2010:WorkflowViewState.IdRef="Assign_11">
-                  <Assign.To>
-                    <OutArgument x:TypeArguments="x:Object">[io_dt_FlexmanData(int_MatchingFlexManIndex)("Result")]</OutArgument>
-                  </Assign.To>
-                  <Assign.Value>
-                    <InArgument x:TypeArguments="x:Object">["Deny"]</InArgument>
-                  </Assign.Value>
-                </Assign>
-              </If.Else>
             </If>
+            <Sequence sap:VirtualizedContainerService.HintSize="610,434" sap2010:WorkflowViewState.IdRef="Sequence_12">
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+              <Assign sap:VirtualizedContainerService.HintSize="434,81" sap2010:WorkflowViewState.IdRef="Assign_13">
+                <Assign.To>
+                  <OutArgument x:TypeArguments="x:Object">[io_dt_FlexmanData(int_MatchingFlexManIndex)("DenialAmount")]</OutArgument>
+                </Assign.To>
+                <Assign.Value>
+                  <InArgument x:TypeArguments="x:Object">[io_dt_FlexmanData(int_MatchingFlexManIndex)("ApprovedAmount")]</InArgument>
+                </Assign.Value>
+              </Assign>
+              <Assign sap:VirtualizedContainerService.HintSize="434,81" sap2010:WorkflowViewState.IdRef="Assign_14">
+                <Assign.To>
+                  <OutArgument x:TypeArguments="x:Object">[io_dt_FlexmanData(int_MatchingFlexManIndex)("ApprovedAmount")]</OutArgument>
+                </Assign.To>
+                <Assign.Value>
+                  <InArgument x:TypeArguments="x:Object">["0.00"]</InArgument>
+                </Assign.Value>
+              </Assign>
+              <Assign sap:VirtualizedContainerService.HintSize="434,81" sap2010:WorkflowViewState.IdRef="Assign_11">
+                <Assign.To>
+                  <OutArgument x:TypeArguments="x:Object">[io_dt_FlexmanData(int_MatchingFlexManIndex)("Result")]</OutArgument>
+                </Assign.To>
+                <Assign.Value>
+                  <InArgument x:TypeArguments="x:Object">["Deny"]</InArgument>
+                </Assign.Value>
+              </Assign>
+            </Sequence>
           </Sequence>
         </ActivityAction>
       </ui:ForEach.Body>
@@ -646,6 +685,7 @@
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
           <x:Boolean x:Key="IsExpanded">True</x:Boolean>
           <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
     </ui:ForEach>
