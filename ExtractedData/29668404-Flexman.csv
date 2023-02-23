@@ -1,2 +1,2 @@
 ﻿LineItem,Date,Amount,PlanDates,EligibilityDate,TerminationDate,ReasonsOfDenial,Result
-1,02/16/2022,10.00,1/1/2022 - 12/31/2022,1/1/2022,Termination Date :,,Deny
+1,02/16/2022,10.00,Plan Dates :,Eligibility Date :,Termination Date :,,Deny
