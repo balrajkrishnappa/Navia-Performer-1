@@ -5,11 +5,12 @@
     <x:Property Name="In_Config" Type="InArgument(scg:Dictionary(x:String, x:Object))" />
     <x:Property Name="in_TransactionItem" Type="InArgument(ui:QueueItem)" />
     <x:Property Name="out_newDatatable" Type="OutArgument(sd:DataTable)" />
+    <x:Property Name="storageBucket" Type="OutArgument(x:String)" />
   </x:Members>
   <VisualBasic.Settings>
     <x:Null />
   </VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>1054,1209</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>1054,1720</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>ReceiptValidation_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <scg:List x:TypeArguments="x:String" Capacity="40">
@@ -114,11 +115,10 @@
       <AssemblyReference>System.Collections</AssemblyReference>
     </scg:List>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="ReceiptValidation" sap:VirtualizedContainerService.HintSize="496,1144" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="ReceiptValidation" sap:VirtualizedContainerService.HintSize="544,1655" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="x:String" Name="filePath" />
       <Variable x:TypeArguments="x:String" Name="filename" />
-      <Variable x:TypeArguments="x:String" Name="storageBucket" />
       <Variable x:TypeArguments="sd:DataTable" Name="flexman" />
       <Variable x:TypeArguments="x:String" Name="taskAction" />
       <Variable x:TypeArguments="njl:JObject" Name="taskData" />
@@ -130,7 +130,7 @@
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <Assign sap:VirtualizedContainerService.HintSize="434,82" sap2010:WorkflowViewState.IdRef="Assign_10">
+    <Assign sap:VirtualizedContainerService.HintSize="482,82" sap2010:WorkflowViewState.IdRef="Assign_10">
       <Assign.To>
         <OutArgument x:TypeArguments="sd:DataTable">[out_newDatatable]</OutArgument>
       </Assign.To>
@@ -138,7 +138,7 @@
         <InArgument x:TypeArguments="sd:DataTable">[In_MLDatatable]</InArgument>
       </Assign.Value>
     </Assign>
-    <Assign sap:VirtualizedContainerService.HintSize="434,82" sap2010:WorkflowViewState.IdRef="Assign_11">
+    <Assign sap:VirtualizedContainerService.HintSize="482,82" sap2010:WorkflowViewState.IdRef="Assign_11">
       <Assign.To>
         <OutArgument x:TypeArguments="sd:DataTable">[flexman]</OutArgument>
       </Assign.To>
@@ -146,7 +146,7 @@
         <InArgument x:TypeArguments="sd:DataTable">[In_FlexmanDatatable]</InArgument>
       </Assign.Value>
     </Assign>
-    <Assign sap:VirtualizedContainerService.HintSize="434,82" sap2010:WorkflowViewState.IdRef="Assign_3">
+    <Assign sap:VirtualizedContainerService.HintSize="482,82" sap2010:WorkflowViewState.IdRef="Assign_3">
       <Assign.To>
         <OutArgument x:TypeArguments="x:String">[storageBucket]</OutArgument>
       </Assign.To>
@@ -154,7 +154,7 @@
         <InArgument x:TypeArguments="x:String">[In_Config("StorageBucketName").ToString]</InArgument>
       </Assign.Value>
     </Assign>
-    <Assign sap:VirtualizedContainerService.HintSize="434,82" sap2010:WorkflowViewState.IdRef="Assign_1">
+    <Assign sap:VirtualizedContainerService.HintSize="482,82" sap2010:WorkflowViewState.IdRef="Assign_1">
       <Assign.To>
         <OutArgument x:TypeArguments="x:String">[filePath]</OutArgument>
       </Assign.To>
@@ -162,7 +162,7 @@
         <InArgument x:TypeArguments="x:String">[In_Config("NaviaClaimsFolder").ToString.Replace("Date",DateTime.Now.ToString("MMddyyyy"))+"\"+ in_TransactionItem.SpecificContent("BatchID").ToString+".pdf"]</InArgument>
       </Assign.Value>
     </Assign>
-    <Assign sap:VirtualizedContainerService.HintSize="434,82" sap2010:WorkflowViewState.IdRef="Assign_2">
+    <Assign sap:VirtualizedContainerService.HintSize="482,82" sap2010:WorkflowViewState.IdRef="Assign_2">
       <Assign.To>
         <OutArgument x:TypeArguments="x:String">[filename]</OutArgument>
       </Assign.To>
@@ -170,7 +170,7 @@
         <InArgument x:TypeArguments="x:String">[path.GetFileName(filePath)]</InArgument>
       </Assign.Value>
     </Assign>
-    <ucas:UploadStorageFile FileResource="{x:Null}" TimeoutMS="{x:Null}" ContinueOnError="False" Destination="[filename]" DisplayName="Upload Storage File" sap:VirtualizedContainerService.HintSize="434,239" sap2010:WorkflowViewState.IdRef="UploadStorageFile_1" Path="[filePath]" StorageBucketName="[storageBucket]">
+    <ucas:UploadStorageFile FileResource="{x:Null}" TimeoutMS="{x:Null}" ContinueOnError="False" Destination="[filename]" DisplayName="Upload Storage File" sap:VirtualizedContainerService.HintSize="482,239" sap2010:WorkflowViewState.IdRef="UploadStorageFile_1" Path="[filePath]" StorageBucketName="[storageBucket]">
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
           <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -178,7 +178,7 @@
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
     </ucas:UploadStorageFile>
-    <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="434,52" sap2010:WorkflowViewState.IdRef="CommentOut_2">
+    <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="482,563" sap2010:WorkflowViewState.IdRef="CommentOut_2">
       <ui:CommentOut.Body>
         <Sequence DisplayName="Ignored Activities" sap:VirtualizedContainerService.HintSize="446,484" sap2010:WorkflowViewState.IdRef="Sequence_3">
           <sap:WorkflowViewStateService.ViewState>
@@ -188,27 +188,21 @@
           </sap:WorkflowViewStateService.ViewState>
           <upaf:CreateFormTask BucketFolderPath="{x:Null}" BulkFormLayout="{x:Null}" DynamicFormPath="{x:Null}" ExternalTag="{x:Null}" Labels="{x:Null}" TimeoutMs="{x:Null}" BucketName="[storageBucket]" BulkFormLayoutGuid="c28f0577-6f92-42af-a082-85af2916f1dc" DisplayName="Create Form Task" EnableBulkEdit="False" EnableDynamicForms="False" FormLayout="%[{&quot;components&quot;:[{&quot;label&quot;:&quot;Data Comparison&quot;,&quot;key&quot;:&quot;dataComparison&quot;,&quot;components&quot;:[{&quot;label&quot;:&quot;Extracted Data from Receipt&quot;,&quot;disableAddingRemovingRows&quot;:true,&quot;reorder&quot;:false,&quot;addAnotherPosition&quot;:&quot;bottom&quot;,&quot;layoutFixed&quot;:true,&quot;enableRowGroups&quot;:false,&quot;initEmpty&quot;:false,&quot;disabled&quot;:true,&quot;key&quot;:&quot;mainTable&quot;,&quot;type&quot;:&quot;datagrid&quot;,&quot;input&quot;:true,&quot;tableView&quot;:false,&quot;components&quot;:[{&quot;label&quot;:&quot;RxNumber&quot;,&quot;tableView&quot;:true,&quot;key&quot;:&quot;RxNumber&quot;,&quot;type&quot;:&quot;textfield&quot;,&quot;input&quot;:true},{&quot;label&quot;:&quot;Date Of Service&quot;,&quot;tableView&quot;:true,&quot;key&quot;:&quot;DateOfService&quot;,&quot;type&quot;:&quot;textfield&quot;,&quot;input&quot;:true},{&quot;label&quot;:&quot;Amount&quot;,&quot;tableView&quot;:true,&quot;key&quot;:&quot;Amount&quot;,&quot;type&quot;:&quot;textfield&quot;,&quot;input&quot;:true}]},{&quot;label&quot;:&quot;Data from Flexman&quot;,&quot;disableAddingRemovingRows&quot;:true,&quot;reorder&quot;:false,&quot;addAnotherPosition&quot;:&quot;bottom&quot;,&quot;layoutFixed&quot;:false,&quot;enableRowGroups&quot;:false,&quot;initEmpty&quot;:false,&quot;key&quot;:&quot;FlexmanTable&quot;,&quot;type&quot;:&quot;datagrid&quot;,&quot;input&quot;:true,&quot;tableView&quot;:false,&quot;components&quot;:[{&quot;label&quot;:&quot;line Item&quot;,&quot;disabled&quot;:true,&quot;tableView&quot;:true,&quot;key&quot;:&quot;LineItem&quot;,&quot;type&quot;:&quot;textfield&quot;,&quot;input&quot;:true},{&quot;label&quot;:&quot;Amount&quot;,&quot;disabled&quot;:true,&quot;tableView&quot;:true,&quot;key&quot;:&quot;Amount&quot;,&quot;type&quot;:&quot;textfield&quot;,&quot;input&quot;:true},{&quot;label&quot;:&quot;Date Of Service&quot;,&quot;disabled&quot;:true,&quot;tableView&quot;:true,&quot;key&quot;:&quot;Date&quot;,&quot;type&quot;:&quot;textfield&quot;,&quot;input&quot;:true},{&quot;label&quot;:&quot;Plan Dates&quot;,&quot;disabled&quot;:true,&quot;tableView&quot;:true,&quot;key&quot;:&quot;PlanDates&quot;,&quot;type&quot;:&quot;textfield&quot;,&quot;input&quot;:true},{&quot;label&quot;:&quot;Eligibility Date&quot;,&quot;disabled&quot;:true,&quot;tableView&quot;:true,&quot;key&quot;:&quot;EligibilityDate&quot;,&quot;type&quot;:&quot;textfield&quot;,&quot;input&quot;:true},{&quot;label&quot;:&quot;Termination Date&quot;,&quot;disabled&quot;:true,&quot;tableView&quot;:true,&quot;key&quot;:&quot;TerminationDate&quot;,&quot;type&quot;:&quot;textfield&quot;,&quot;input&quot;:true},{&quot;label&quot;:&quot;Reason Of Denial&quot;,&quot;tableView&quot;:true,&quot;multiple&quot;:true,&quot;data&quot;:{&quot;values&quot;:[{&quot;label&quot;:&quot;Missing Type of Service&quot;,&quot;value&quot;:&quot;Missing Type of Service&quot;},{&quot;label&quot;:&quot;Missing Date of Service&quot;,&quot;value&quot;:&quot;Missing Date of Service&quot;},{&quot;label&quot;:&quot;Service dates outside of plan year&quot;,&quot;value&quot;:&quot;Service dates outside of plan year&quot;},{&quot;label&quot;:&quot;Service date before eligibility date&quot;,&quot;value&quot;:&quot;Service date before eligibility date&quot;},{&quot;label&quot;:&quot;Missing Cost Incurred&quot;,&quot;value&quot;:&quot;Missing Cost Incurred&quot;},{&quot;label&quot;:&quot;Duplicate claim&quot;,&quot;value&quot;:&quot;Duplicate claim&quot;}]},&quot;validate&quot;:{&quot;onlyAvailableItems&quot;:false},&quot;key&quot;:&quot;ReasonsOfDenial&quot;,&quot;type&quot;:&quot;select&quot;,&quot;indexeddb&quot;:{&quot;filter&quot;:{}},&quot;input&quot;:true,&quot;clearOnRefresh&quot;:true},{&quot;label&quot;:&quot;Approve/Deny&quot;,&quot;uniqueOptions&quot;:true,&quot;tableView&quot;:true,&quot;data&quot;:{&quot;values&quot;:[{&quot;label&quot;:&quot;Approve&quot;,&quot;value&quot;:&quot;Approve&quot;},{&quot;label&quot;:&quot;Deny&quot;,&quot;value&quot;:&quot;Deny&quot;}]},&quot;validate&quot;:{&quot;required&quot;:true,&quot;onlyAvailableItems&quot;:false},&quot;key&quot;:&quot;Result&quot;,&quot;type&quot;:&quot;select&quot;,&quot;indexeddb&quot;:{&quot;filter&quot;:{}},&quot;input&quot;:true}]},{&quot;label&quot;:&quot;Submit&quot;,&quot;disableOnInvalid&quot;:true,&quot;tableView&quot;:false,&quot;key&quot;:&quot;submit&quot;,&quot;custom&quot;:&quot;instance.emit('executeDoBlock', instance.component);&quot;,&quot;type&quot;:&quot;button&quot;,&quot;input&quot;:true,&quot;isResetData&quot;:false}]},{&quot;label&quot;:&quot;PDF Image&quot;,&quot;key&quot;:&quot;pdfImage&quot;,&quot;components&quot;:[{&quot;label&quot;:&quot;Receipt Image&quot;,&quot;hidden&quot;:true,&quot;disabled&quot;:true,&quot;tableView&quot;:true,&quot;key&quot;:&quot;receiptImage&quot;,&quot;type&quot;:&quot;textfield&quot;,&quot;input&quot;:true},{&quot;label&quot;:&quot;HTML&quot;,&quot;attrs&quot;:[{&quot;attr&quot;:&quot;&quot;,&quot;value&quot;:&quot;&quot;}],&quot;content&quot;:&quot;&lt;embed src={{data.pdf_storage}} width=\&quot;1000px\&quot; height=\&quot;600px\&quot;&gt; &lt;/embed&gt;&quot;,&quot;refreshOnChange&quot;:true,&quot;key&quot;:&quot;html&quot;,&quot;type&quot;:&quot;htmlelement&quot;,&quot;input&quot;:false,&quot;tableView&quot;:false}]}],&quot;key&quot;:&quot;tabs&quot;,&quot;type&quot;:&quot;tabs&quot;,&quot;input&quot;:false,&quot;tableView&quot;:false,&quot;label&quot;:&quot;Tabs&quot;}]" FormLayoutGuid="46e319ff-6690-4233-9142-97e76f36a9cb" GenerateInputFields="False" sap:VirtualizedContainerService.HintSize="384,373" sap2010:WorkflowViewState.IdRef="CreateFormTask_6" TaskCatalog="[In_Config(&quot;DataValidationActionCatalog&quot;).ToString]" TaskOutput="[task]" TaskPriority="[TaskPriority.Medium]" TaskTitle="[&quot;Pharmacy Claims for Batch ID &quot;+filename]">
             <upaf:CreateFormTask.FormData>
-              <InArgument x:TypeArguments="x:String" x:Key="pdf_storage">
-                <VisualBasicValue x:TypeArguments="x:String" ExpressionText="filename" />
-              </InArgument>
-              <InArgument x:TypeArguments="sd:DataTable" x:Key="mainTable">
-                <VisualBasicValue x:TypeArguments="sd:DataTable" ExpressionText="out_newDatatable" />
-              </InArgument>
-              <InOutArgument x:TypeArguments="sd:DataTable" x:Key="FlexmanTable">
-                <VisualBasicReference x:TypeArguments="sd:DataTable" ExpressionText="flexman" />
-              </InOutArgument>
+              <InArgument x:TypeArguments="x:String" x:Key="pdf_storage">[filename]</InArgument>
+              <InArgument x:TypeArguments="sd:DataTable" x:Key="mainTable">[out_newDatatable]</InArgument>
+              <InOutArgument x:TypeArguments="sd:DataTable" x:Key="FlexmanTable">[flexman]</InOutArgument>
             </upaf:CreateFormTask.FormData>
           </upaf:CreateFormTask>
         </Sequence>
       </ui:CommentOut.Body>
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
-          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
           <x:Boolean x:Key="IsPinned">False</x:Boolean>
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
     </ui:CommentOut>
-    <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="434,52" sap2010:WorkflowViewState.IdRef="CommentOut_1">
+    <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="482,52" sap2010:WorkflowViewState.IdRef="CommentOut_1">
       <ui:CommentOut.Body>
         <Sequence DisplayName="Ignored Activities" sap:VirtualizedContainerService.HintSize="400,163" sap2010:WorkflowViewState.IdRef="Sequence_2">
           <sap:WorkflowViewStateService.ViewState>
