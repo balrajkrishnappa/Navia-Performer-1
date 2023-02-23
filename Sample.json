@@ -1,25 +1,23 @@
 {
   "mainTable": [
     {
-      "DateOfService": "2023-02-12T00:00:00Z",
-      "TotalAmount": "",
+      "DateOfService": "12/19/2022",
+      "TotalAmount": "117.65",
       "Tax Amount": "",
-      "RxNumber": 12334,
-      "Amount": 30
+      "RxNumber": "129435",
+      "Amount": "117.65"
     }
   ],
   "FlexmanTable": [
     {
-      "LineItem": 1,
-      "Date": "2023-02-12T00:00:00Z",
-      "Amount": 30,
-      "PlanDates": "7/1/2022 - 6/30/2023",
-      "EligibilityDate": "2022-01-07T00:00:00Z",
-      "TerminationDate": "",
+      "LineItem": "1",
+      "Date": "02/16/2022",
+      "Amount": "10.00",
+      "PlanDates": "1/1/2022 - 12/31/2022",
+      "EligibilityDate": "1/1/2022",
+      "TerminationDate": "Termination Date :",
       "ReasonsOfDenial": [
-        "Missing Type of Service",
-        "Service dates outside of plan year",
-        "Service date before eligibility date"
+        "Missing Date of Service"
       ],
       "Result": "Deny"
     }
