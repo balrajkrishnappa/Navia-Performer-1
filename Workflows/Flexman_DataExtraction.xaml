@@ -2,12 +2,11 @@
   <x:Members>
     <x:Property Name="in_Str_BatchNumber" Type="InArgument(x:String)" />
     <x:Property Name="out_Dt_ExtractedData" Type="OutArgument(sd:DataTable)" />
-    <x:Property Name="io_UiElement" Type="InOutArgument(ui:UiElement)" />
   </x:Members>
   <VisualBasic.Settings>
     <x:Null />
   </VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>1178,702</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>624,702</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>Flexman_DataExtraction_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <scg:List x:TypeArguments="x:String" Capacity="44">
@@ -117,48 +116,43 @@
     </scg:List>
   </TextExpression.ReferencesForImplementation>
   <Flowchart DisplayName="Flexman_DataExtraction" sap:VirtualizedContainerService.HintSize="634,637" sap2010:WorkflowViewState.IdRef="Flowchart_1">
+    <Flowchart.Variables>
+      <Variable x:TypeArguments="x:Boolean" Name="bool_WaitforLoad" />
+    </Flowchart.Variables>
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
         <av:Point x:Key="ShapeLocation">270,2.5</av:Point>
         <av:Size x:Key="ShapeSize">60,75</av:Size>
         <x:Boolean x:Key="IsPinned">False</x:Boolean>
-        <av:PointCollection x:Key="ConnectorLocation">300,77.5 300,134</av:PointCollection>
+        <av:PointCollection x:Key="ConnectorLocation">300,77.5 300,154</av:PointCollection>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
     <Flowchart.StartNode>
-      <x:Reference>__ReferenceID2</x:Reference>
+      <x:Reference>__ReferenceID3</x:Reference>
     </Flowchart.StartNode>
     <FlowStep x:Name="__ReferenceID2">
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
-          <av:Point x:Key="ShapeLocation">200,134</av:Point>
+          <av:Point x:Key="ShapeLocation">200,254.00000000000003</av:Point>
           <av:Size x:Key="ShapeSize">200,52</av:Size>
-          <av:PointCollection x:Key="ConnectorLocation">300,186 300,234</av:PointCollection>
+          <av:PointCollection x:Key="ConnectorLocation">300,306 300,344</av:PointCollection>
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
-      <uix:NApplicationCard AttachMode="ByInstance" DisplayName="Use Application: Claim Entry" sap:VirtualizedContainerService.HintSize="200,52" sap2010:WorkflowViewState.IdRef="NApplicationCard_1" InUiElement="[io_UiElement]" OpenMode="Never" OutUiElement="[io_UiElement]" ScopeGuid="7f3056f9-8359-401d-87af-4c2d825c1d8a" Version="V2">
+      <uix:NApplicationCard AttachMode="ByInstance" DisplayName="Use Application: Claim Entry" sap:VirtualizedContainerService.HintSize="200,52" sap2010:WorkflowViewState.IdRef="NApplicationCard_1" OpenMode="Never" ScopeGuid="7f3056f9-8359-401d-87af-4c2d825c1d8a" Version="V2">
         <uix:NApplicationCard.Body>
           <ActivityAction x:TypeArguments="x:Object">
             <ActivityAction.Argument>
               <DelegateInArgument x:TypeArguments="x:Object" Name="WSSessionData" />
             </ActivityAction.Argument>
-            <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="496,906" sap2010:WorkflowViewState.IdRef="Sequence_3">
+            <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="400,764" sap2010:WorkflowViewState.IdRef="Sequence_3">
               <sap:WorkflowViewStateService.ViewState>
                 <scg:Dictionary x:TypeArguments="x:String, x:Object">
                   <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                 </scg:Dictionary>
               </sap:WorkflowViewStateService.ViewState>
-              <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="434,92" sap2010:WorkflowViewState.IdRef="LogMessage_6" Level="Info" Message="[&quot;Entering Batch Number&quot;]" />
-              <Assign sap:VirtualizedContainerService.HintSize="434,82" sap2010:WorkflowViewState.IdRef="Assign_3">
-                <Assign.To>
-                  <OutArgument x:TypeArguments="x:String">[in_Str_BatchNumber]</OutArgument>
-                </Assign.To>
-                <Assign.Value>
-                  <InArgument x:TypeArguments="x:String">29668404.tif</InArgument>
-                </Assign.Value>
-              </Assign>
-              <Assign sap:VirtualizedContainerService.HintSize="434,82" sap2010:WorkflowViewState.IdRef="Assign_4">
+              <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="338,92" sap2010:WorkflowViewState.IdRef="LogMessage_6" Level="Info" Message="[&quot;Entering Batch Number&quot;]" />
+              <Assign sap:VirtualizedContainerService.HintSize="338,62" sap2010:WorkflowViewState.IdRef="Assign_4">
                 <Assign.To>
                   <OutArgument x:TypeArguments="x:String">[in_Str_BatchNumber]</OutArgument>
                 </Assign.To>
@@ -166,12 +160,12 @@
                   <InArgument x:TypeArguments="x:String">[in_Str_BatchNumber.Replace(".tif","")]</InArgument>
                 </Assign.Value>
               </Assign>
-              <uix:NTypeInto ActivateBefore="True" ClickBeforeMode="Single" DisplayName="Type_BatchNumber" EmptyFieldMode="SingleLine" sap:VirtualizedContainerService.HintSize="434,218" sap2010:WorkflowViewState.IdRef="NTypeInto_2" ScopeIdentifier="7f3056f9-8359-401d-87af-4c2d825c1d8a" Text="[in_Str_BatchNumber]" Version="V3">
+              <uix:NTypeInto ActivateBefore="True" ClickBeforeMode="Single" DisplayName="Type_BatchNumber" EmptyFieldMode="SingleLine" sap:VirtualizedContainerService.HintSize="338,218" sap2010:WorkflowViewState.IdRef="NTypeInto_2" ScopeIdentifier="7f3056f9-8359-401d-87af-4c2d825c1d8a" Text="[in_Str_BatchNumber]" Version="V3">
                 <uix:NTypeInto.Target>
                   <uix:TargetAnchorable DesignTimeRectangle="854, 182, 68, 21" DesignTimeScaleFactor="1" ElementType="InputBox" FriendlyName="'Provider'" FullSelectorArgument="&lt;wnd aaname='Batch #' /&gt;&lt;wnd ctrlname='txtOpenBatchId' /&gt;" FuzzySelectorArgument="&lt;wnd aaname='Batch #' /&gt;&lt;wnd ctrlname='txtOpenBatchId' /&gt;" Guid="7555fd3e-c475-478c-8ec3-6cd996651280" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAAEgAAAAZCAYAAACSP2gVAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAABdSURBVFhH7dBLCYBQAABB+1cRTxZ7DfQgqOBnC8zCFphpjLH5e0DxCTQvq2+/AukIUAQoAhQBigBFgCJAEaAIUAQoAhQBigBFgCJAEaAIUAQo+gTy9QPI7wP6fWw75/sflvk0CAkAAAAASUVORK5CYII=" InformativeScreenshot="5d7ef3cdf0e554b784b0a896921d3092.png" ScopeSelectorArgument="&lt;wnd app='flexwin.exe' ctrlname='FrmClaimEntry' /&gt;" SearchSteps="Selector, FuzzySelector, Image" Version="V1" Visibility="Interactive" />
                 </uix:NTypeInto.Target>
               </uix:NTypeInto>
-              <uix:NClick ClickType="Single" DisplayName="Click 'Open'" sap:VirtualizedContainerService.HintSize="434,157" sap2010:WorkflowViewState.IdRef="NClick_2" KeyModifiers="None" MouseButton="Left" ScopeIdentifier="7f3056f9-8359-401d-87af-4c2d825c1d8a" Version="V3">
+              <uix:NClick ClickType="Single" DisplayName="Click 'Open'" sap:VirtualizedContainerService.HintSize="338,157" sap2010:WorkflowViewState.IdRef="NClick_2" KeyModifiers="None" MouseButton="Left" ScopeIdentifier="7f3056f9-8359-401d-87af-4c2d825c1d8a" Version="V3">
                 <uix:NClick.Target>
                   <uix:TargetAnchorable DesignTimeRectangle="927, 180, 44, 24" DesignTimeScaleFactor="1" ElementType="Button" FriendlyName="'Open'" FullSelectorArgument="&lt;wnd ctrlname='btnOpenBatch' aaname='Open' /&gt;" FuzzySelectorArgument="&lt;wnd ctrlname='btnOpenBatch' aaname='Open' check:text='Open' /&gt;" Guid="f58fe6e3-68f4-4e3a-bcd0-30dfe9670de6" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAADAAAAAcCAYAAAAnbDzKAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAD3SURBVFhH7ZXRDYQgDEC7Gdt0F0bhgzEYxA3YoAcccsChXKKAXPh4iSnF9NGioLWmmVkCo0kEpJRTENf8JbBt26NZAqNZAqO5QUAQAhBEMK4KeW24KKCIMyAUtVg7rgkoToxxUnlcIEEp3oBLAoqzg3GxY4Uk7LOTMXn7iEVidn8YvT3u8pHQdDHPL9FHABhx9V4T6O+IjaMIe8K7Cvln49ipA9Ep+sJtYeH0d6xQlt9U4Kc7cCJQlO8q4L84aSHZV6hQ0GdUfJcM7j5074Cj8h9whUbr2dyH+EHHOghUyAq6myUwmiUwmv8XmIG45kRgRpbAWDS9AGaYW+6MorNdAAAAAElFTkSuQmCC" InformativeScreenshot="5b330a84574c63e360025c60520c0ff3.png" ScopeSelectorArgument="&lt;wnd app='flexwin.exe' ctrlname='FrmClaimEntry' /&gt;" SearchSteps="Selector, FuzzySelector, Image" Version="V1" Visibility="Interactive" />
                 </uix:NClick.Target>
@@ -187,18 +181,18 @@
         <FlowStep x:Name="__ReferenceID0">
           <sap:WorkflowViewStateService.ViewState>
             <scg:Dictionary x:TypeArguments="x:String, x:Object">
-              <av:Point x:Key="ShapeLocation">200,234</av:Point>
+              <av:Point x:Key="ShapeLocation">200,344</av:Point>
               <av:Size x:Key="ShapeSize">200,52</av:Size>
-              <av:PointCollection x:Key="ConnectorLocation">300,286 300,336</av:PointCollection>
+              <av:PointCollection x:Key="ConnectorLocation">300,396 300,424</av:PointCollection>
             </scg:Dictionary>
           </sap:WorkflowViewStateService.ViewState>
-          <uix:NApplicationCard AttachMode="ByInstance" DisplayName="Use Application: Claim Detail - Posted Batch 29971889 - User: Jeric Fidel" sap:VirtualizedContainerService.HintSize="200,52" sap2010:WorkflowViewState.IdRef="NApplicationCard_2" InUiElement="[io_UiElement]" OpenMode="Never" OutUiElement="[io_UiElement]" ScopeGuid="2f53cb84-51ff-4547-86c5-5b84837a0397" Version="V2">
+          <uix:NApplicationCard AttachMode="ByInstance" DisplayName="Use Application: Claim Detail - Posted Batch 29971889 - User: Jeric Fidel" sap:VirtualizedContainerService.HintSize="200,52" sap2010:WorkflowViewState.IdRef="NApplicationCard_2" OpenMode="Never" ScopeGuid="2f53cb84-51ff-4547-86c5-5b84837a0397" Version="V2">
             <uix:NApplicationCard.Body>
               <ActivityAction x:TypeArguments="x:Object">
                 <ActivityAction.Argument>
                   <DelegateInArgument x:TypeArguments="x:Object" Name="WSSessionData" />
                 </ActivityAction.Argument>
-                <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="594,3931" sap2010:WorkflowViewState.IdRef="Sequence_4">
+                <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="594,4591" sap2010:WorkflowViewState.IdRef="Sequence_4">
                   <Sequence.Variables>
                     <Variable x:TypeArguments="x:String" Name="Str_PlanDates" />
                     <Variable x:TypeArguments="x:String" Name="Str_EligibilityDate" />
@@ -214,45 +208,76 @@
                     </scg:Dictionary>
                   </sap:WorkflowViewStateService.ViewState>
                   <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="532,92" sap2010:WorkflowViewState.IdRef="LogMessage_7" Level="Info" Message="[&quot;Extracting Total Line Items&quot;]" />
-                  <ui:WindowScope ApplicationWindow="{x:Null}" SearchScope="{x:Null}" TimeoutMS="{x:Null}" Window="{x:Null}" DisplayName="Attach Window 'flexwin.exe Claim'" sap:VirtualizedContainerService.HintSize="532,430" sap2010:WorkflowViewState.IdRef="WindowScope_1" InformativeScreenshot="43b22caeaa3b402eec6bafb85e9512c3" Selector="&lt;wnd app='flexwin.exe' ctrlname='FrmClaimEntry' /&gt;">
-                    <ui:WindowScope.Body>
-                      <ActivityAction x:TypeArguments="x:Object">
-                        <ActivityAction.Argument>
-                          <DelegateInArgument x:TypeArguments="x:Object" Name="ContextTarget" />
-                        </ActivityAction.Argument>
-                        <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="400,283" sap2010:WorkflowViewState.IdRef="Sequence_8">
+                  <ui:RetryScope DisplayName="Retry Scope" sap:VirtualizedContainerService.HintSize="532,1006" sap2010:WorkflowViewState.IdRef="RetryScope_1">
+                    <ui:RetryScope.ActivityBody>
+                      <ActivityAction>
+                        <ui:WindowScope ApplicationWindow="{x:Null}" SearchScope="{x:Null}" TimeoutMS="{x:Null}" Window="{x:Null}" DisplayName="Attach Window 'flexwin.exe Claim'" sap:VirtualizedContainerService.HintSize="434,678" sap2010:WorkflowViewState.IdRef="WindowScope_1" InformativeScreenshot="43b22caeaa3b402eec6bafb85e9512c3" Selector="&lt;wnd app='flexwin.exe' ctrlname='FrmClaimEntry' /&gt;">
+                          <ui:WindowScope.Body>
+                            <ActivityAction x:TypeArguments="x:Object">
+                              <ActivityAction.Argument>
+                                <DelegateInArgument x:TypeArguments="x:Object" Name="ContextTarget" />
+                              </ActivityAction.Argument>
+                              <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="400,531" sap2010:WorkflowViewState.IdRef="Sequence_8">
+                                <sap:WorkflowViewStateService.ViewState>
+                                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                  </scg:Dictionary>
+                                </sap:WorkflowViewStateService.ViewState>
+                                <ui:UiElementExists DisplayName="Element Exists 'cell  Claim Type'" Exists="[bool_WaitforLoad]" sap:VirtualizedContainerService.HintSize="338,107" sap2010:WorkflowViewState.IdRef="UiElementExists_2">
+                                  <ui:UiElementExists.Target>
+                                    <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="eae8218d-75f6-47ec-93d0-7df876f118b9" InformativeScreenshot="0c120e71d84dde5515717dc96a48f0cc" Selector="&lt;wnd ctrlname='gbBatchDetail' /&gt;&lt;wnd ctrlname='flexGridBatchDetail' /&gt;&lt;ctrl name='flexUltraGrid2' role='table' /&gt;&lt;ctrl name='List`1 row 1' role='row' /&gt;&lt;ctrl name='List`1 row 1' role='row' /&gt;&lt;ctrl name='Claim Type' role='cell' /&gt;" TimeoutMS="60000">
+                                      <ui:Target.WaitForReady>
+                                        <InArgument x:TypeArguments="ui:WaitForReady" />
+                                      </ui:Target.WaitForReady>
+                                    </ui:Target>
+                                  </ui:UiElementExists.Target>
+                                </ui:UiElementExists>
+                                <ui:GetOCRText WordsInfo="{x:Null}" DisplayName="Get OCR Text 'WindowsForms10.Window.8...'" sap:VirtualizedContainerService.HintSize="338,172" sap2010:WorkflowViewState.IdRef="GetOCRText_2">
+                                  <ui:GetOCRText.OCREngine>
+                                    <ActivityFunc x:TypeArguments="sd1:Image, scg:IEnumerable(scg:KeyValuePair(sd2:Rectangle, x:String))">
+                                      <ActivityFunc.Argument>
+                                        <DelegateInArgument x:TypeArguments="sd1:Image" Name="Image" />
+                                      </ActivityFunc.Argument>
+                                      <p:UiPathScreenOCR ApiKey="{x:Null}" Endpoint="{x:Null}" Output="{x:Null}" PredictionId="{x:Null}" Text="{x:Null}" UseLocalServer="{x:Null}" ComputeSkewAngle="False" DisplayName="UiPath Screen OCR" ExtractWords="True" sap:VirtualizedContainerService.HintSize="200,25" sap2010:WorkflowViewState.IdRef="UiPathScreenOCR_2" Image="[Image]" Language="auto" Profile="Screen" Scale="1" Timeout="100000" />
+                                    </ActivityFunc>
+                                  </ui:GetOCRText.OCREngine>
+                                  <ui:GetOCRText.Target>
+                                    <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="e73160f3-19dc-4a3a-9d8f-5fa226d1ac05" InformativeScreenshot="3ce8230718aae2a24475d8c0fcbad8e4" Selector="&lt;wnd ctrlname='gbBatchDetail' /&gt;&lt;wnd ctrlname='flexGridBatchDetail' /&gt;" WaitForReady="COMPLETE">
+                                      <ui:Target.TimeoutMS>
+                                        <InArgument x:TypeArguments="x:Int32" />
+                                      </ui:Target.TimeoutMS>
+                                    </ui:Target>
+                                  </ui:GetOCRText.Target>
+                                  <ui:GetOCRText.Text>
+                                    <OutArgument x:TypeArguments="x:String">[Str_Output]</OutArgument>
+                                  </ui:GetOCRText.Text>
+                                </ui:GetOCRText>
+                                <Assign sap:VirtualizedContainerService.HintSize="338,61" sap2010:WorkflowViewState.IdRef="Assign_1">
+                                  <Assign.To>
+                                    <OutArgument x:TypeArguments="x:Int32">[int_TotalLineItems]</OutArgument>
+                                  </Assign.To>
+                                  <Assign.Value>
+                                    <InArgument x:TypeArguments="x:Int32">[CInt(Regex.Match(Str_Output,"(?&lt;=Total: )\d+").ToString)]</InArgument>
+                                  </Assign.Value>
+                                </Assign>
+                              </Sequence>
+                            </ActivityAction>
+                          </ui:WindowScope.Body>
                           <sap:WorkflowViewStateService.ViewState>
                             <scg:Dictionary x:TypeArguments="x:String, x:Object">
                               <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                              <x:Boolean x:Key="IsPinned">False</x:Boolean>
                             </scg:Dictionary>
                           </sap:WorkflowViewStateService.ViewState>
-                          <ui:GetOCRText WordsInfo="{x:Null}" DisplayName="Get OCR Text 'WindowsForms10.Window.8...'" sap:VirtualizedContainerService.HintSize="338,172" sap2010:WorkflowViewState.IdRef="GetOCRText_2">
-                            <ui:GetOCRText.OCREngine>
-                              <ActivityFunc x:TypeArguments="sd1:Image, scg:IEnumerable(scg:KeyValuePair(sd2:Rectangle, x:String))">
-                                <ActivityFunc.Argument>
-                                  <DelegateInArgument x:TypeArguments="sd1:Image" Name="Image" />
-                                </ActivityFunc.Argument>
-                                <p:UiPathScreenOCR ApiKey="{x:Null}" Endpoint="{x:Null}" Output="{x:Null}" PredictionId="{x:Null}" Text="{x:Null}" UseLocalServer="{x:Null}" ComputeSkewAngle="False" DisplayName="UiPath Screen OCR" ExtractWords="True" sap:VirtualizedContainerService.HintSize="200,25" sap2010:WorkflowViewState.IdRef="UiPathScreenOCR_2" Image="[Image]" Language="auto" Profile="Screen" Scale="1" Timeout="100000" />
-                              </ActivityFunc>
-                            </ui:GetOCRText.OCREngine>
-                            <ui:GetOCRText.Target>
-                              <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="e73160f3-19dc-4a3a-9d8f-5fa226d1ac05" InformativeScreenshot="3ce8230718aae2a24475d8c0fcbad8e4" Selector="&lt;wnd ctrlname='gbBatchDetail' /&gt;&lt;wnd ctrlname='flexGridBatchDetail' /&gt;">
-                                <ui:Target.TimeoutMS>
-                                  <InArgument x:TypeArguments="x:Int32" />
-                                </ui:Target.TimeoutMS>
-                                <ui:Target.WaitForReady>
-                                  <InArgument x:TypeArguments="ui:WaitForReady" />
-                                </ui:Target.WaitForReady>
-                              </ui:Target>
-                            </ui:GetOCRText.Target>
-                            <ui:GetOCRText.Text>
-                              <OutArgument x:TypeArguments="x:String">[Str_Output]</OutArgument>
-                            </ui:GetOCRText.Text>
-                          </ui:GetOCRText>
-                        </Sequence>
+                        </ui:WindowScope>
                       </ActivityAction>
-                    </ui:WindowScope.Body>
-                  </ui:WindowScope>
+                    </ui:RetryScope.ActivityBody>
+                    <ui:RetryScope.Condition>
+                      <ActivityFunc x:TypeArguments="x:Boolean">
+                        <ui:CheckTrue ErrorMessage="{x:Null}" DisplayName="Check True" Expression="[bool_WaitforLoad]" sap:VirtualizedContainerService.HintSize="334,88" sap2010:WorkflowViewState.IdRef="CheckTrue_1" />
+                      </ActivityFunc>
+                    </ui:RetryScope.Condition>
+                  </ui:RetryScope>
                   <ui:BuildDataTable DataTable="[out_Dt_ExtractedData]" DisplayName="Build Data Table" sap:VirtualizedContainerService.HintSize="532,60" sap2010:WorkflowViewState.IdRef="BuildDataTable_2" TableInfo="&lt;NewDataSet&gt;&#xA;  &lt;xs:schema id=&quot;NewDataSet&quot; xmlns=&quot;&quot; xmlns:xs=&quot;http://www.w3.org/2001/XMLSchema&quot; xmlns:msdata=&quot;urn:schemas-microsoft-com:xml-msdata&quot;&gt;&#xA;    &lt;xs:element name=&quot;NewDataSet&quot; msdata:IsDataSet=&quot;true&quot; msdata:MainDataTable=&quot;TableName&quot; msdata:UseCurrentLocale=&quot;true&quot;&gt;&#xA;      &lt;xs:complexType&gt;&#xA;        &lt;xs:choice minOccurs=&quot;0&quot; maxOccurs=&quot;unbounded&quot;&gt;&#xA;          &lt;xs:element name=&quot;TableName&quot;&gt;&#xA;            &lt;xs:complexType&gt;&#xA;              &lt;xs:sequence&gt;&#xA;                &lt;xs:element name=&quot;LineItem&quot; msdata:Caption=&quot;&quot; minOccurs=&quot;0&quot;&gt;&#xA;                  &lt;xs:simpleType&gt;&#xA;                    &lt;xs:restriction base=&quot;xs:string&quot;&gt;&#xA;                      &lt;xs:maxLength value=&quot;100&quot; /&gt;&#xA;                    &lt;/xs:restriction&gt;&#xA;                  &lt;/xs:simpleType&gt;&#xA;                &lt;/xs:element&gt;&#xA;                &lt;xs:element name=&quot;Date&quot; msdata:Caption=&quot;&quot; minOccurs=&quot;0&quot;&gt;&#xA;                  &lt;xs:simpleType&gt;&#xA;                    &lt;xs:restriction base=&quot;xs:string&quot;&gt;&#xA;                      &lt;xs:maxLength value=&quot;100&quot; /&gt;&#xA;                    &lt;/xs:restriction&gt;&#xA;                  &lt;/xs:simpleType&gt;&#xA;                &lt;/xs:element&gt;&#xA;                &lt;xs:element name=&quot;Amount&quot; msdata:Caption=&quot;&quot; minOccurs=&quot;0&quot;&gt;&#xA;                  &lt;xs:simpleType&gt;&#xA;                    &lt;xs:restriction base=&quot;xs:string&quot;&gt;&#xA;                      &lt;xs:maxLength value=&quot;100&quot; /&gt;&#xA;                    &lt;/xs:restriction&gt;&#xA;                  &lt;/xs:simpleType&gt;&#xA;                &lt;/xs:element&gt;&#xA;                &lt;xs:element name=&quot;PlanDates&quot; msdata:Caption=&quot;&quot; minOccurs=&quot;0&quot;&gt;&#xA;                  &lt;xs:simpleType&gt;&#xA;                    &lt;xs:restriction base=&quot;xs:string&quot;&gt;&#xA;                      &lt;xs:maxLength value=&quot;100&quot; /&gt;&#xA;                    &lt;/xs:restriction&gt;&#xA;                  &lt;/xs:simpleType&gt;&#xA;                &lt;/xs:element&gt;&#xA;                &lt;xs:element name=&quot;EligibilityDate&quot; msdata:Caption=&quot;&quot; minOccurs=&quot;0&quot;&gt;&#xA;                  &lt;xs:simpleType&gt;&#xA;                    &lt;xs:restriction base=&quot;xs:string&quot;&gt;&#xA;                      &lt;xs:maxLength value=&quot;100&quot; /&gt;&#xA;                    &lt;/xs:restriction&gt;&#xA;                  &lt;/xs:simpleType&gt;&#xA;                &lt;/xs:element&gt;&#xA;                &lt;xs:element name=&quot;TerminationDate&quot; msdata:Caption=&quot;&quot; minOccurs=&quot;0&quot;&gt;&#xA;                  &lt;xs:simpleType&gt;&#xA;                    &lt;xs:restriction base=&quot;xs:string&quot;&gt;&#xA;                      &lt;xs:maxLength value=&quot;100&quot; /&gt;&#xA;                    &lt;/xs:restriction&gt;&#xA;                  &lt;/xs:simpleType&gt;&#xA;                &lt;/xs:element&gt;&#xA;                &lt;xs:element name=&quot;ReasonsOfDenial&quot; msdata:DataType=&quot;System.Collections.Generic.List`1[[System.String, System.Private.CoreLib, Version=6.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]], System.Private.CoreLib, Version=6.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e&quot; msdata:Caption=&quot;&quot; type=&quot;xs:anyType&quot; minOccurs=&quot;0&quot; /&gt;&#xA;                &lt;xs:element name=&quot;Result&quot; msdata:Caption=&quot;&quot; type=&quot;xs:string&quot; default=&quot;Deny&quot; minOccurs=&quot;0&quot; /&gt;&#xA;              &lt;/xs:sequence&gt;&#xA;            &lt;/xs:complexType&gt;&#xA;          &lt;/xs:element&gt;&#xA;        &lt;/xs:choice&gt;&#xA;      &lt;/xs:complexType&gt;&#xA;    &lt;/xs:element&gt;&#xA;  &lt;/xs:schema&gt;&#xA;&lt;/NewDataSet&gt;" />
                   <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="532,52" sap2010:WorkflowViewState.IdRef="CommentOut_1">
                     <ui:CommentOut.Body>
@@ -272,18 +297,10 @@
                       </scg:Dictionary>
                     </sap:WorkflowViewStateService.ViewState>
                   </ui:CommentOut>
-                  <Assign sap:VirtualizedContainerService.HintSize="532,61" sap2010:WorkflowViewState.IdRef="Assign_1">
-                    <Assign.To>
-                      <OutArgument x:TypeArguments="x:Int32">[int_TotalLineItems]</OutArgument>
-                    </Assign.To>
-                    <Assign.Value>
-                      <InArgument x:TypeArguments="x:Int32">[CInt(Regex.Match(Str_Output,"(?&lt;=Total: )\d+").ToString)]</InArgument>
-                    </Assign.Value>
-                  </Assign>
                   <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="532,92" sap2010:WorkflowViewState.IdRef="LogMessage_5" Level="Info" Message="[&quot;Total Line items : &quot;+int_TotalLineItems.ToString]" />
-                  <ui:InterruptibleWhile Condition="[index&lt;int_TotalLineItems]" CurrentIndex="[index]" DisplayName="While" sap:VirtualizedContainerService.HintSize="532,2335" sap2010:WorkflowViewState.IdRef="InterruptibleWhile_1">
+                  <ui:InterruptibleWhile Condition="[index&lt;int_TotalLineItems]" CurrentIndex="[index]" DisplayName="While" sap:VirtualizedContainerService.HintSize="532,2516" sap2010:WorkflowViewState.IdRef="InterruptibleWhile_1">
                     <ui:InterruptibleWhile.Body>
-                      <Sequence DisplayName="ExtractingEachLineItem" sap:VirtualizedContainerService.HintSize="496,2169" sap2010:WorkflowViewState.IdRef="Sequence_5">
+                      <Sequence DisplayName="ExtractingEachLineItem" sap:VirtualizedContainerService.HintSize="400,2350" sap2010:WorkflowViewState.IdRef="Sequence_5">
                         <Sequence.Variables>
                           <Variable x:TypeArguments="x:Int32" Default="1" Name="int_RowIndex" />
                           <Variable x:TypeArguments="x:String" Name="Str_Date" />
@@ -296,7 +313,7 @@
                             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                           </scg:Dictionary>
                         </sap:WorkflowViewStateService.ViewState>
-                        <Assign sap:VirtualizedContainerService.HintSize="434,82" sap2010:WorkflowViewState.IdRef="Assign_2">
+                        <Assign sap:VirtualizedContainerService.HintSize="338,61" sap2010:WorkflowViewState.IdRef="Assign_2">
                           <Assign.To>
                             <OutArgument x:TypeArguments="x:Int32">[int_RowIndex]</OutArgument>
                           </Assign.To>
@@ -304,8 +321,8 @@
                             <InArgument x:TypeArguments="x:Int32">[index+1]</InArgument>
                           </Assign.Value>
                         </Assign>
-                        <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="434,92" sap2010:WorkflowViewState.IdRef="LogMessage_8" Level="Info" Message="[&quot;Selecting line item &quot;+index.ToString+&quot; and extracting Data, from Batch :&quot;+in_Str_BatchNumber]" />
-                        <ui:Click AlterIfDisabled="{x:Null}" DelayBefore="{x:Null}" DelayMS="{x:Null}" SendWindowMessages="{x:Null}" SimulateClick="{x:Null}" ClickType="CLICK_DOUBLE" DisplayName="Click 'cell  Needs Approval'" sap:VirtualizedContainerService.HintSize="434,107" sap2010:WorkflowViewState.IdRef="Click_1" KeyModifiers="None" MouseButton="BTN_LEFT">
+                        <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="338,92" sap2010:WorkflowViewState.IdRef="LogMessage_8" Level="Info" Message="[&quot;Selecting line item &quot;+index.ToString+&quot; and extracting Data, from Batch :&quot;+in_Str_BatchNumber]" />
+                        <ui:Click AlterIfDisabled="{x:Null}" DelayBefore="{x:Null}" DelayMS="{x:Null}" SendWindowMessages="{x:Null}" SimulateClick="{x:Null}" ClickType="CLICK_DOUBLE" DisplayName="Click 'cell  Needs Approval'" sap:VirtualizedContainerService.HintSize="338,107" sap2010:WorkflowViewState.IdRef="Click_1" KeyModifiers="None" MouseButton="BTN_LEFT">
                           <ui:Click.CursorPosition>
                             <ui:CursorPosition Position="Center">
                               <ui:CursorPosition.OffsetX>
@@ -327,27 +344,27 @@
                             </ui:Target>
                           </ui:Click.Target>
                         </ui:Click>
-                        <uix:NGetText DisplayName="Get Text DateOfService" sap:VirtualizedContainerService.HintSize="434,157" sap2010:WorkflowViewState.IdRef="NGetText_4" ScopeIdentifier="2f53cb84-51ff-4547-86c5-5b84837a0397" TextString="[Str_Date]" Version="V3">
+                        <uix:NGetText DisplayName="Get Text DateOfService" sap:VirtualizedContainerService.HintSize="338,157" sap2010:WorkflowViewState.IdRef="NGetText_4" ScopeIdentifier="2f53cb84-51ff-4547-86c5-5b84837a0397" TextString="[Str_Date]" Version="V3">
                           <uix:NGetText.Target>
                             <uix:TargetAnchorable DesignTimeRectangle="78, 119, 64, 18" DesignTimeScaleFactor="1" ElementType="Cell" FriendlyName="'09/19/2022'" FullSelectorArgument="[string.Format(&quot;&lt;ctrl name='List`1 row {0}' role='row' /&gt;&lt;ctrl name='Date' role='cell' /&gt;&quot;, int_RowIndex)]" FuzzySelectorArgument="[string.Format(&quot;&lt;wnd ctrlname='gbBatchDetail' /&gt;&lt;wnd ctrlname='flexGridBatchDetail' /&gt;&lt;ctrl name='flexUltraGrid2' role='table' /&gt;&lt;ctrl name='List`1 row 1' role='row' /&gt;&lt;ctrl name='List`1 row {0}' role='row' /&gt;&lt;ctrl name='Date' role='cell' automationid='' /&gt;&quot;, int_RowIndex)]" Guid="83ca06da-f1bd-4584-9af9-d8b74bc1aea6" ImageBase64="" InformativeScreenshot="b8bb970007c3020a10d3b467e7b3e0f7.png" ScopeSelectorArgument="&lt;wnd app='flexwin.exe' ctrlname='FrmClaimEntry' /&gt;" SearchSteps="Selector" Version="V1" Visibility="Interactive" />
                           </uix:NGetText.Target>
                         </uix:NGetText>
-                        <uix:NGetText DisplayName="Get Text ClaimType" sap:VirtualizedContainerService.HintSize="434,157" sap2010:WorkflowViewState.IdRef="NGetText_5" ScopeIdentifier="2f53cb84-51ff-4547-86c5-5b84837a0397" TextString="[Str_ClaimType]" Version="V3">
+                        <uix:NGetText DisplayName="Get Text ClaimType" sap:VirtualizedContainerService.HintSize="338,157" sap2010:WorkflowViewState.IdRef="NGetText_5" ScopeIdentifier="2f53cb84-51ff-4547-86c5-5b84837a0397" TextString="[Str_ClaimType]" Version="V3">
                           <uix:NGetText.Target>
                             <uix:TargetAnchorable DesignTimeRectangle="141, 119, 70, 18" DesignTimeScaleFactor="1" ElementType="Cell" FriendlyName="'VISION'" FullSelectorArgument="[string.Format(&quot;&lt;ctrl name='List`1 row {0}' role='row' /&gt;&lt;ctrl name='Claim Type' role='cell' /&gt;&quot;, int_RowIndex)]" FuzzySelectorArgument="[string.Format(&quot;&lt;wnd ctrlname='gbBatchDetail' /&gt;&lt;wnd ctrlname='flexGridBatchDetail' /&gt;&lt;ctrl name='flexUltraGrid2' role='table' /&gt;&lt;ctrl name='List`1 row 1' role='row' /&gt;&lt;ctrl name='List`1 row {0}' role='row' /&gt;&lt;ctrl name='Claim Type' role='cell' automationid='' /&gt;&quot;, int_RowIndex)]" Guid="2a21339e-44dc-4c31-9889-47cd7a56b813" ImageBase64="" InformativeScreenshot="f180d14127ba658032efff0eec56f928.png" ScopeSelectorArgument="&lt;wnd app='flexwin.exe' ctrlname='FrmClaimEntry' /&gt;" SearchSteps="Selector" Version="V1" Visibility="Interactive" />
                           </uix:NGetText.Target>
                         </uix:NGetText>
-                        <uix:NGetText DisplayName="Get Text ApprovedAmount" sap:VirtualizedContainerService.HintSize="434,157" sap2010:WorkflowViewState.IdRef="NGetText_6" ScopeIdentifier="2f53cb84-51ff-4547-86c5-5b84837a0397" TextString="[Str_ApprovedAmount]" Version="V3">
+                        <uix:NGetText DisplayName="Get Text ApprovedAmount" sap:VirtualizedContainerService.HintSize="338,157" sap2010:WorkflowViewState.IdRef="NGetText_6" ScopeIdentifier="2f53cb84-51ff-4547-86c5-5b84837a0397" TextString="[Str_ApprovedAmount]" Version="V3">
                           <uix:NGetText.Target>
                             <uix:TargetAnchorable DesignTimeRectangle="210, 119, 67, 18" DesignTimeScaleFactor="1" ElementType="Cell" FriendlyName="'83.99'" FullSelectorArgument="[string.Format(&quot;&lt;ctrl name='List`1 row {0}' role='row' /&gt;&lt;ctrl name='Approved Amount' role='cell' /&gt;&quot;, int_RowIndex)]" FuzzySelectorArgument="[string.Format(&quot;&lt;wnd ctrlname='gbBatchDetail' /&gt;&lt;wnd ctrlname='flexGridBatchDetail' /&gt;&lt;ctrl name='flexUltraGrid2' role='table' /&gt;&lt;ctrl name='List`1 row 1' role='row' /&gt;&lt;ctrl name='List`1 row {0}' role='row' /&gt;&lt;ctrl name='Approved Amount' role='cell' automationid='' /&gt;&quot;, int_RowIndex)]" Guid="e699a403-d653-48b6-9977-a2c40c30a679" ImageBase64="" InformativeScreenshot="25b59b736d3416c273df5d8bec0d579c.png" ScopeSelectorArgument="&lt;wnd app='flexwin.exe' ctrlname='FrmClaimEntry' /&gt;" SearchSteps="Selector" Version="V1" Visibility="Interactive" />
                           </uix:NGetText.Target>
                         </uix:NGetText>
-                        <uix:NGetText DisplayName="Get Text DeniedAmount" sap:VirtualizedContainerService.HintSize="434,157" sap2010:WorkflowViewState.IdRef="NGetText_7" ScopeIdentifier="2f53cb84-51ff-4547-86c5-5b84837a0397" TextString="[Str_DeniedAmount]" Version="V3">
+                        <uix:NGetText DisplayName="Get Text DeniedAmount" sap:VirtualizedContainerService.HintSize="338,157" sap2010:WorkflowViewState.IdRef="NGetText_7" ScopeIdentifier="2f53cb84-51ff-4547-86c5-5b84837a0397" TextString="[Str_DeniedAmount]" Version="V3">
                           <uix:NGetText.Target>
                             <uix:TargetAnchorable DesignTimeRectangle="276, 138, 67, 18" DesignTimeScaleFactor="1" ElementType="Cell" FriendlyName="'0.00'" FullSelectorArgument="[string.Format(&quot;&lt;ctrl name='List`1 row {0}' role='row' /&gt;&lt;ctrl name='Denied Amount' role='cell' /&gt;&quot;, int_RowIndex)]" FuzzySelectorArgument="[string.Format(&quot;&lt;ctrl name='List`1 row {0}' role='row' /&gt;&lt;ctrl name='Denied Amount' role='cell' automationid='' /&gt;&quot;, int_RowIndex)]" Guid="f7845cc0-bf9b-4922-908c-cf1360101472" ImageBase64="" InformativeScreenshot="5fe9d3b3e176296088517188484268d1.png" ScopeSelectorArgument="&lt;wnd app='flexwin.exe' ctrlname='FrmClaimEntry' /&gt;" SearchSteps="Selector" Version="V1" Visibility="Interactive" />
                           </uix:NGetText.Target>
                         </uix:NGetText>
-                        <uix:NGetText DisplayName="Get Text 'Plan Dates'" sap:VirtualizedContainerService.HintSize="434,157" sap2010:WorkflowViewState.IdRef="NGetText_1" ScopeIdentifier="2f53cb84-51ff-4547-86c5-5b84837a0397" TextString="[Str_PlanDates]" Version="V3">
+                        <uix:NGetText DisplayName="Get Text 'Plan Dates'" sap:VirtualizedContainerService.HintSize="338,157" sap2010:WorkflowViewState.IdRef="NGetText_1" ScopeIdentifier="2f53cb84-51ff-4547-86c5-5b84837a0397" TextString="[Str_PlanDates]" Version="V3">
                           <uix:NGetText.Target>
                             <uix:TargetAnchorable DesignTimeRectangle="846, 71, 138, 21" DesignTimeScaleFactor="1" ElementType="InputBox" FriendlyName="'1/1/2022 - 12/31/2022'" FullSelectorArgument="&lt;wnd ctrlname='gbEmployee' /&gt;&lt;wnd ctrlname='txtPlanDates' /&gt;&lt;ctrl role='editable text' text='*-*' /&gt;" FuzzySelectorArgument="&lt;wnd ctrlname='gbEmployee' /&gt;&lt;wnd ctrlname='txtPlanDates' /&gt;&lt;ctrl role='editable text' automationid='' /&gt;" Guid="720b01d2-3f63-4826-b392-adbff97d39cf" InformativeScreenshot="680d1af54b04653e903c82905af8c499.png" IsResponsive="True" ScopeSelectorArgument="&lt;wnd app='flexwin.exe' ctrlname='FrmClaimEntry' /&gt;" SearchSteps="Selector, FuzzySelector" Version="V1" Visibility="Interactive">
                               <uix:TargetAnchorable.Anchors>
@@ -358,7 +375,7 @@
                             </uix:TargetAnchorable>
                           </uix:NGetText.Target>
                         </uix:NGetText>
-                        <uix:NGetText DisplayName="Get Text 'Eligibility Date'" sap:VirtualizedContainerService.HintSize="434,157" sap2010:WorkflowViewState.IdRef="NGetText_2" ScopeIdentifier="2f53cb84-51ff-4547-86c5-5b84837a0397" TextString="[Str_EligibilityDate]" Version="V3">
+                        <uix:NGetText DisplayName="Get Text 'Eligibility Date'" sap:VirtualizedContainerService.HintSize="338,157" sap2010:WorkflowViewState.IdRef="NGetText_2" ScopeIdentifier="2f53cb84-51ff-4547-86c5-5b84837a0397" TextString="[Str_EligibilityDate]" Version="V3">
                           <uix:NGetText.Target>
                             <uix:TargetAnchorable DesignTimeRectangle="881, 99, 103, 21" DesignTimeScaleFactor="1" ElementType="InputBox" FriendlyName="'Eligibility Date'" FullSelectorArgument="&lt;wnd ctrlname='gbEmployee' /&gt;&lt;wnd ctrlname='txtEligDate' /&gt;" FuzzySelectorArgument="&lt;wnd ctrlname='txtEligDate' /&gt;&lt;ctrl role='editable text' automationid='' /&gt;" Guid="0a443784-e52a-452f-979f-cf1c144ffb57" ImageBase64="" InformativeScreenshot="99db2a2b8c562f4a5e9e192df7e40ce8.png" IsResponsive="True" ScopeSelectorArgument="&lt;wnd app='flexwin.exe' ctrlname='FrmClaimEntry' /&gt;" SearchSteps="Selector" Version="V1" Visibility="Interactive">
                               <uix:TargetAnchorable.Anchors>
@@ -369,7 +386,15 @@
                             </uix:TargetAnchorable>
                           </uix:NGetText.Target>
                         </uix:NGetText>
-                        <uix:NGetText DisplayName="Get Text 'Termination Date'" sap:VirtualizedContainerService.HintSize="434,157" sap2010:WorkflowViewState.IdRef="NGetText_3" ScopeIdentifier="2f53cb84-51ff-4547-86c5-5b84837a0397" TextString="[Str_TerminationDate]" Version="V3">
+                        <Assign sap:VirtualizedContainerService.HintSize="338,61" sap2010:WorkflowViewState.IdRef="Assign_5">
+                          <Assign.To>
+                            <OutArgument x:TypeArguments="x:String">[Str_EligibilityDate]</OutArgument>
+                          </Assign.To>
+                          <Assign.Value>
+                            <InArgument x:TypeArguments="x:String">[Str_EligibilityDate.Replace("Eligibility Date :","")]</InArgument>
+                          </Assign.Value>
+                        </Assign>
+                        <uix:NGetText DisplayName="Get Text 'Termination Date'" sap:VirtualizedContainerService.HintSize="338,157" sap2010:WorkflowViewState.IdRef="NGetText_3" ScopeIdentifier="2f53cb84-51ff-4547-86c5-5b84837a0397" TextString="[Str_TerminationDate]" Version="V3">
                           <uix:NGetText.Target>
                             <uix:TargetAnchorable DesignTimeRectangle="881, 125, 103, 21" DesignTimeScaleFactor="1" ElementType="InputBox" FriendlyName="'Termination Date'" FullSelectorArgument="&lt;wnd ctrlname='txtTermDate' aaname='Termination Date :*' /&gt;&lt;ctrl name='Termination Date :*' /&gt;" FuzzySelectorArgument="&lt;wnd ctrlname='txtTermDate' aaname='Termination Date :*' /&gt;&lt;ctrl role='editable text' automationid='' /&gt;" Guid="9ec1d63a-268f-4e7f-b8d2-5a582e18f14c" InformativeScreenshot="28615cc80d137630bd9612b1390ee227.png" IsResponsive="True" ScopeSelectorArgument="&lt;wnd app='flexwin.exe' ctrlname='FrmClaimEntry' /&gt;" SearchSteps="Selector" Version="V1" Visibility="Interactive">
                               <uix:TargetAnchorable.Anchors>
@@ -380,7 +405,15 @@
                             </uix:TargetAnchorable>
                           </uix:NGetText.Target>
                         </uix:NGetText>
-                        <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="434,52" sap2010:WorkflowViewState.IdRef="CommentOut_2">
+                        <Assign sap:VirtualizedContainerService.HintSize="338,61" sap2010:WorkflowViewState.IdRef="Assign_6">
+                          <Assign.To>
+                            <OutArgument x:TypeArguments="x:String">[Str_TerminationDate]</OutArgument>
+                          </Assign.To>
+                          <Assign.Value>
+                            <InArgument x:TypeArguments="x:String">[Str_TerminationDate.Replace("Termination Date :","")]</InArgument>
+                          </Assign.Value>
+                        </Assign>
+                        <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="338,52" sap2010:WorkflowViewState.IdRef="CommentOut_2">
                           <ui:CommentOut.Body>
                             <Sequence DisplayName="Ignored Activities" sap:VirtualizedContainerService.HintSize="400,297" sap2010:WorkflowViewState.IdRef="Sequence_7">
                               <sap:WorkflowViewStateService.ViewState>
@@ -398,7 +431,7 @@
                             </scg:Dictionary>
                           </sap:WorkflowViewStateService.ViewState>
                         </ui:CommentOut>
-                        <ui:AddDataRow DataRow="{x:Null}" ArrayRow="[{int_RowIndex.ToString,Str_Date,Str_ApprovedAmount,Str_PlanDates,Str_EligibilityDate,Str_TerminationDate,Nothing,nothing}]" DataTable="[out_Dt_ExtractedData]" DisplayName="Add Data Row" sap:VirtualizedContainerService.HintSize="434,186" sap2010:WorkflowViewState.IdRef="AddDataRow_2" />
+                        <ui:AddDataRow DataRow="{x:Null}" ArrayRow="[{int_RowIndex.ToString,Str_Date,Str_ApprovedAmount,Str_PlanDates,Str_EligibilityDate,Str_TerminationDate,Nothing,nothing}]" DataTable="[out_Dt_ExtractedData]" DisplayName="Add Data Row" sap:VirtualizedContainerService.HintSize="338,186" sap2010:WorkflowViewState.IdRef="AddDataRow_2" />
                       </Sequence>
                     </ui:InterruptibleWhile.Body>
                   </ui:InterruptibleWhile>
@@ -422,20 +455,90 @@
             <FlowStep x:Name="__ReferenceID1">
               <sap:WorkflowViewStateService.ViewState>
                 <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                  <av:Point x:Key="ShapeLocation">200,336</av:Point>
+                  <av:Point x:Key="ShapeLocation">200,424</av:Point>
                   <av:Size x:Key="ShapeSize">200,52</av:Size>
                 </scg:Dictionary>
               </sap:WorkflowViewStateService.ViewState>
-              <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Framework\CloseAllApplications.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="200,52" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_1" UnSafe="False" WorkflowFileName="Framework\CloseAllApplications.xaml">
-                <ui:InvokeWorkflowFile.Arguments>
-                  <scg:Dictionary x:TypeArguments="x:String, Argument" />
-                </ui:InvokeWorkflowFile.Arguments>
+              <ui:WindowScope ApplicationWindow="{x:Null}" SearchScope="{x:Null}" TimeoutMS="{x:Null}" Window="{x:Null}" DisplayName="Attach Window 'flexwin.exe Claim'" sap:VirtualizedContainerService.HintSize="200,52" sap2010:WorkflowViewState.IdRef="WindowScope_2" InformativeScreenshot="5793fb0fcf98fbe37419b4cad434ed98" Selector="&lt;wnd app='flexwin.exe' ctrlname='FrmClaimEntry' /&gt;">
+                <ui:WindowScope.Body>
+                  <ActivityAction x:TypeArguments="x:Object">
+                    <ActivityAction.Argument>
+                      <DelegateInArgument x:TypeArguments="x:Object" Name="ContextTarget" />
+                    </ActivityAction.Argument>
+                    <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="540,902" sap2010:WorkflowViewState.IdRef="Sequence_11">
+                      <Sequence.Variables>
+                        <Variable x:TypeArguments="x:Boolean" Name="bool_ClaimWindowPopUp" />
+                      </Sequence.Variables>
+                      <sap:WorkflowViewStateService.ViewState>
+                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                        </scg:Dictionary>
+                      </sap:WorkflowViewStateService.ViewState>
+                      <ui:CloseWindow Selector="{x:Null}" TimeoutMS="{x:Null}" UseWindow="{x:Null}" DisplayName="Close Window 'flexwin.exe Claim'" sap:VirtualizedContainerService.HintSize="478,107" sap2010:WorkflowViewState.IdRef="CloseWindow_1" InformativeScreenshot="5793fb0fcf98fbe37419b4cad434ed98" WaitForReady="INTERACTIVE" />
+                      <ui:UiElementExists DisplayName="Element Exists 'Static'" Exists="[bool_ClaimWindowPopUp]" sap:VirtualizedContainerService.HintSize="478,107" sap2010:WorkflowViewState.IdRef="UiElementExists_1">
+                        <ui:UiElementExists.Target>
+                          <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="be8f2eea-49d6-45c0-b81f-e4f2474c0824" InformativeScreenshot="81d809af1fcc4bede39590d8c62f2a81" Selector="&lt;wnd app='flexwin.exe' cls='#32770' title='Claim Entry*' /&gt;&lt;wnd ctrlid='*' title='This batch has not been processed.*' /&gt;">
+                            <ui:Target.TimeoutMS>
+                              <InArgument x:TypeArguments="x:Int32" />
+                            </ui:Target.TimeoutMS>
+                            <ui:Target.WaitForReady>
+                              <InArgument x:TypeArguments="ui:WaitForReady" />
+                            </ui:Target.WaitForReady>
+                          </ui:Target>
+                        </ui:UiElementExists.Target>
+                      </ui:UiElementExists>
+                      <If Condition="[bool_ClaimWindowPopUp]" sap:VirtualizedContainerService.HintSize="478,497" sap2010:WorkflowViewState.IdRef="If_1">
+                        <If.Then>
+                          <Sequence sap:VirtualizedContainerService.HintSize="400,218" sap2010:WorkflowViewState.IdRef="Sequence_9">
+                            <sap:WorkflowViewStateService.ViewState>
+                              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                              </scg:Dictionary>
+                            </sap:WorkflowViewStateService.ViewState>
+                            <ui:Click AlterIfDisabled="{x:Null}" DelayBefore="{x:Null}" DelayMS="{x:Null}" SendWindowMessages="{x:Null}" SimulateClick="{x:Null}" ClickType="CLICK_SINGLE" DisplayName="Click 'Button'" sap:VirtualizedContainerService.HintSize="338,107" sap2010:WorkflowViewState.IdRef="Click_2" KeyModifiers="None" MouseButton="BTN_LEFT">
+                              <ui:Click.CursorPosition>
+                                <ui:CursorPosition Position="Center">
+                                  <ui:CursorPosition.OffsetX>
+                                    <InArgument x:TypeArguments="x:Int32" />
+                                  </ui:CursorPosition.OffsetX>
+                                  <ui:CursorPosition.OffsetY>
+                                    <InArgument x:TypeArguments="x:Int32" />
+                                  </ui:CursorPosition.OffsetY>
+                                </ui:CursorPosition>
+                              </ui:Click.CursorPosition>
+                              <ui:Click.Target>
+                                <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="c8113aeb-4cbf-40c5-80d1-45cc0a371b11" InformativeScreenshot="f2eed5618fbfff2e9822ac20507017b4" Selector="&lt;wnd app='flexwin.exe' cls='#32770' title='Claim Entry*' /&gt;&lt;wnd ctrlid='*' title='*Yes' /&gt;">
+                                  <ui:Target.TimeoutMS>
+                                    <InArgument x:TypeArguments="x:Int32" />
+                                  </ui:Target.TimeoutMS>
+                                  <ui:Target.WaitForReady>
+                                    <InArgument x:TypeArguments="ui:WaitForReady" />
+                                  </ui:Target.WaitForReady>
+                                </ui:Target>
+                              </ui:Click.Target>
+                            </ui:Click>
+                          </Sequence>
+                        </If.Then>
+                        <If.Else>
+                          <Sequence sap:VirtualizedContainerService.HintSize="400,103" sap2010:WorkflowViewState.IdRef="Sequence_10">
+                            <sap:WorkflowViewStateService.ViewState>
+                              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                              </scg:Dictionary>
+                            </sap:WorkflowViewStateService.ViewState>
+                          </Sequence>
+                        </If.Else>
+                      </If>
+                    </Sequence>
+                  </ActivityAction>
+                </ui:WindowScope.Body>
                 <sap:WorkflowViewStateService.ViewState>
                   <scg:Dictionary x:TypeArguments="x:String, x:Object">
                     <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                    <x:Boolean x:Key="IsPinned">False</x:Boolean>
                   </scg:Dictionary>
                 </sap:WorkflowViewStateService.ViewState>
-              </ui:InvokeWorkflowFile>
+              </ui:WindowScope>
             </FlowStep>
           </FlowStep.Next>
         </FlowStep>
@@ -443,5 +546,44 @@
     </FlowStep>
     <x:Reference>__ReferenceID0</x:Reference>
     <x:Reference>__ReferenceID1</x:Reference>
+    <FlowStep x:Name="__ReferenceID3">
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <av:Point x:Key="ShapeLocation">200,154</av:Point>
+          <av:Size x:Key="ShapeSize">200,52</av:Size>
+          <av:PointCollection x:Key="ConnectorLocation">300,206 300,254.00000000000003</av:PointCollection>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+      <ui:Click AlterIfDisabled="{x:Null}" DelayBefore="{x:Null}" DelayMS="{x:Null}" SendWindowMessages="{x:Null}" SimulateClick="{x:Null}" ClickType="CLICK_SINGLE" DisplayName="Click 'push button  Claim Entry'" sap:VirtualizedContainerService.HintSize="200,52" sap2010:WorkflowViewState.IdRef="Click_3" KeyModifiers="None" MouseButton="BTN_LEFT">
+        <ui:Click.CursorPosition>
+          <ui:CursorPosition Position="Center">
+            <ui:CursorPosition.OffsetX>
+              <InArgument x:TypeArguments="x:Int32" />
+            </ui:CursorPosition.OffsetX>
+            <ui:CursorPosition.OffsetY>
+              <InArgument x:TypeArguments="x:Int32" />
+            </ui:CursorPosition.OffsetY>
+          </ui:CursorPosition>
+        </ui:Click.CursorPosition>
+        <ui:Click.Target>
+          <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="3cbfecff-b494-4b62-83be-11839dd07e56" InformativeScreenshot="eb1b71c42abdae9c58f20c4b59a849a1" Selector="&lt;wnd app='flexwin.exe' ctrlname='frmMain' /&gt;&lt;ctrl idx='2' name='Toolbar' role='tool bar' /&gt;&lt;ctrl name='Claim Entry' role='push button' /&gt;">
+            <ui:Target.TimeoutMS>
+              <InArgument x:TypeArguments="x:Int32" />
+            </ui:Target.TimeoutMS>
+            <ui:Target.WaitForReady>
+              <InArgument x:TypeArguments="ui:WaitForReady" />
+            </ui:Target.WaitForReady>
+          </ui:Target>
+        </ui:Click.Target>
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </ui:Click>
+      <FlowStep.Next>
+        <x:Reference>__ReferenceID2</x:Reference>
+      </FlowStep.Next>
+    </FlowStep>
   </Flowchart>
 </Activity>

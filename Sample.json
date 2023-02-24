@@ -1,28 +1,33 @@
 {
   "mainTable": [
     {
-      "DateOfService": "12/19/2022",
-      "TotalAmount": "117.65",
+      "DateOfService": "10/31/22",
+      "TotalAmount": "",
       "Tax Amount": "",
-      "RxNumber": "129435",
-      "Amount": "117.65"
+      "RxNumber": "279100402598",
+      "Amount": "250.00"
     }
   ],
   "FlexmanTable": [
     {
       "LineItem": "1",
-      "Date": "02/16/2022",
-      "Amount": "10.00",
+      "Date": "10/31/2022",
+      "Amount": "250.00",
       "PlanDates": "1/1/2022 - 12/31/2022",
-      "EligibilityDate": "1/1/2022",
-      "TerminationDate": "Termination Date :",
+      "EligibilityDate": "9/26/2022",
+      "TerminationDate": "",
+      "Result": "Deny",
       "ReasonsOfDenial": [
-        "Missing Date of Service"
-      ],
-      "Result": "Deny"
+        "Duplicate claim",
+        "Service date before eligibility date",
+        "Missing Date of Service",
+        "Service dates outside of plan year",
+        "Missing Cost Incurred",
+        "Missing Type of Service"
+      ]
     }
   ],
   "submit": true,
-  "pdf_storage": "29988893.tif.pdf",
+  "pdf_storage": "29858238.tif.pdf",
   "__BUCKET_NAME": "PharmacyClaimsStorageBucket"
 }
