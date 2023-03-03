@@ -1,4 +1,4 @@
-<Activity mc:Ignorable="sap sap2010" x:Class="RX_Validation" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=System.Private.CoreLib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data.Common" xmlns:uasa="clr-namespace:UiPath.Activities.System.Arrays;assembly=UiPath.System.Activities" xmlns:uasc="clr-namespace:UiPath.Activities.System.Collections;assembly=UiPath.System.Activities" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<Activity mc:Ignorable="sap sap2010" x:Class="RX_Validation" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data.Common" xmlns:uasa="clr-namespace:UiPath.Activities.System.Arrays;assembly=UiPath.System.Activities" xmlns:uasc="clr-namespace:UiPath.Activities.System.Collections;assembly=UiPath.System.Activities" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <x:Members>
     <x:Property Name="in_FlexmanIndex" Type="InArgument(x:Int32)" />
     <x:Property Name="in_MLmodelIndex" Type="InArgument(x:Int32)" />
@@ -10,10 +10,10 @@
   <VisualBasic.Settings>
     <x:Null />
   </VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>1054,1418</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>1178,1519</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>RX_Validation_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
-    <sco:Collection x:TypeArguments="x:String">
+    <scg:List x:TypeArguments="x:String" Capacity="60">
       <x:String>System.Activities</x:String>
       <x:String>System.Activities.Statements</x:String>
       <x:String>System.Activities.Expressions</x:String>
@@ -44,10 +44,11 @@
       <x:String>System.Xml.Serialization</x:String>
       <x:String>UiPath.Activities.System.Arrays</x:String>
       <x:String>UiPath.Activities.System.Collections</x:String>
-    </sco:Collection>
+      <x:String>System.Text.RegularExpressions</x:String>
+    </scg:List>
   </TextExpression.NamespacesForImplementation>
   <TextExpression.ReferencesForImplementation>
-    <scg:List x:TypeArguments="AssemblyReference" Capacity="46">
+    <scg:List x:TypeArguments="AssemblyReference" Capacity="92">
       <AssemblyReference>System.Activities</AssemblyReference>
       <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
       <AssemblyReference>System.Private.CoreLib</AssemblyReference>
@@ -93,19 +94,21 @@
       <AssemblyReference>System.Linq</AssemblyReference>
       <AssemblyReference>System.Linq.Queryable</AssemblyReference>
       <AssemblyReference>System.Collections</AssemblyReference>
+      <AssemblyReference>System.Text.RegularExpressions</AssemblyReference>
     </scg:List>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="RX_Validation" sap:VirtualizedContainerService.HintSize="540,1353" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="RX_Validation" sap:VirtualizedContainerService.HintSize="540,1414" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="sd:DataRow" Name="datarow_Flexman" />
       <Variable x:TypeArguments="sd:DataRow" Name="datarow_MLReceipt" />
+      <Variable x:TypeArguments="x:String" Name="Str_RXNumberRegex" />
     </Sequence.Variables>
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <Assign sap:VirtualizedContainerService.HintSize="478,81" sap2010:WorkflowViewState.IdRef="Assign_1">
+    <Assign sap:VirtualizedContainerService.HintSize="478,61" sap2010:WorkflowViewState.IdRef="Assign_1">
       <Assign.To>
         <OutArgument x:TypeArguments="sd:DataRow">[datarow_Flexman]</OutArgument>
       </Assign.To>
@@ -113,7 +116,7 @@
         <InArgument x:TypeArguments="sd:DataRow">[in_dt_FlexmanData(in_FlexmanIndex)]</InArgument>
       </Assign.Value>
     </Assign>
-    <Assign sap:VirtualizedContainerService.HintSize="478,81" sap2010:WorkflowViewState.IdRef="Assign_2">
+    <Assign sap:VirtualizedContainerService.HintSize="478,61" sap2010:WorkflowViewState.IdRef="Assign_2">
       <Assign.To>
         <OutArgument x:TypeArguments="sd:DataRow">[datarow_MLReceipt]</OutArgument>
       </Assign.To>
@@ -121,8 +124,16 @@
         <InArgument x:TypeArguments="sd:DataRow">[in_dt_MLReceiptData(in_MLmodelIndex)]</InArgument>
       </Assign.Value>
     </Assign>
+    <Assign sap:VirtualizedContainerService.HintSize="478,61" sap2010:WorkflowViewState.IdRef="Assign_3">
+      <Assign.To>
+        <OutArgument x:TypeArguments="x:String">[Str_RXNumberRegex]</OutArgument>
+      </Assign.To>
+      <Assign.Value>
+        <InArgument x:TypeArguments="x:String">[Regex.Matches((datarow_MLReceipt("RxNumber")).ToString,"\d+")(0).ToString]</InArgument>
+      </Assign.Value>
+    </Assign>
     <ui:Comment sap:VirtualizedContainerService.HintSize="478,56" sap2010:WorkflowViewState.IdRef="Comment_1" Text="&quot;RX number should be unique&quot;" />
-    <If Condition="[(datarow_MLReceipt(&quot;RxNumber&quot;).ToString) IsNot &quot;&quot; And Not(io_list_RX_numbers.Contains(datarow_MLReceipt(&quot;RxNumber&quot;).ToString))]" sap:VirtualizedContainerService.HintSize="478,904" sap2010:WorkflowViewState.IdRef="If_1">
+    <If Condition="[Str_RXNumberRegex IsNot &quot;&quot; And Not(io_list_RX_numbers.Contains(datarow_MLReceipt(&quot;RxNumber&quot;).ToString))]" sap:VirtualizedContainerService.HintSize="478,904" sap2010:WorkflowViewState.IdRef="If_1">
       <If.Then>
         <Sequence sap:VirtualizedContainerService.HintSize="400,484" sap2010:WorkflowViewState.IdRef="Sequence_2">
           <sap:WorkflowViewStateService.ViewState>

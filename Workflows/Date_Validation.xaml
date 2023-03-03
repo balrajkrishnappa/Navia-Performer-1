@@ -9,7 +9,7 @@
   <VisualBasic.Settings>
     <x:Null />
   </VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>608,3225</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>1178,5019</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>Date_Validation_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <sco:Collection x:TypeArguments="x:String">
@@ -101,7 +101,7 @@
       <AssemblyReference>System.Memory.Data</AssemblyReference>
     </scg:List>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="Date_Validation" sap:VirtualizedContainerService.HintSize="618,3120" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="Date_Validation" sap:VirtualizedContainerService.HintSize="692,4954" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="sd:DataRow" Name="datarow_Flexman" />
       <Variable x:TypeArguments="sd:DataRow" Name="datarow_MLReceipt" />
@@ -116,13 +116,15 @@
       <Variable x:TypeArguments="s:DateTime" Name="date_PlanEndDate" />
       <Variable x:TypeArguments="s:DateTime" Name="date_TerminationDate" />
       <Variable x:TypeArguments="s:DateTime" Name="date_EligibilityDate" />
+      <Variable x:TypeArguments="x:Boolean" Name="bool_EligibilityDateExist" />
+      <Variable x:TypeArguments="x:Boolean" Name="bool_TerminationDateExist" />
     </Sequence.Variables>
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <Assign sap:VirtualizedContainerService.HintSize="556,61" sap2010:WorkflowViewState.IdRef="Assign_1">
+    <Assign sap:VirtualizedContainerService.HintSize="630,61" sap2010:WorkflowViewState.IdRef="Assign_1">
       <Assign.To>
         <OutArgument x:TypeArguments="sd:DataRow">[datarow_Flexman]</OutArgument>
       </Assign.To>
@@ -130,7 +132,7 @@
         <InArgument x:TypeArguments="sd:DataRow">[in_dt_FlexmanData(in_FlexmanIndex)]</InArgument>
       </Assign.Value>
     </Assign>
-    <Assign sap:VirtualizedContainerService.HintSize="556,61" sap2010:WorkflowViewState.IdRef="Assign_2">
+    <Assign sap:VirtualizedContainerService.HintSize="630,61" sap2010:WorkflowViewState.IdRef="Assign_2">
       <Assign.To>
         <OutArgument x:TypeArguments="sd:DataRow">[datarow_MLReceipt]</OutArgument>
       </Assign.To>
@@ -138,7 +140,7 @@
         <InArgument x:TypeArguments="sd:DataRow">[in_dt_MLReceiptData(in_MLmodelIndex)]</InArgument>
       </Assign.Value>
     </Assign>
-    <ui:MultipleAssign DisplayName="Multiple Assign" sap:VirtualizedContainerService.HintSize="556,225" sap2010:WorkflowViewState.IdRef="MultipleAssign_1">
+    <ui:MultipleAssign DisplayName="Multiple Assign" sap:VirtualizedContainerService.HintSize="630,225" sap2010:WorkflowViewState.IdRef="MultipleAssign_1">
       <ui:MultipleAssign.AssignOperations>
         <scg:List x:TypeArguments="ui:AssignOperation" Capacity="8">
           <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_1">
@@ -190,7 +192,7 @@
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
     </ui:MultipleAssign>
-    <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="556,52" sap2010:WorkflowViewState.IdRef="CommentOut_1">
+    <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="630,52" sap2010:WorkflowViewState.IdRef="CommentOut_1">
       <ui:CommentOut.Body>
         <Sequence DisplayName="Ignored Activities" sap:VirtualizedContainerService.HintSize="400,576" sap2010:WorkflowViewState.IdRef="Sequence_3">
           <sap:WorkflowViewStateService.ViewState>
@@ -247,15 +249,15 @@
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
     </ui:CommentOut>
-    <TryCatch DisplayName="Try Catch" sap:VirtualizedContainerService.HintSize="556,324" sap2010:WorkflowViewState.IdRef="TryCatch_1">
+    <TryCatch DisplayName="Try Catch" sap:VirtualizedContainerService.HintSize="630,989" sap2010:WorkflowViewState.IdRef="TryCatch_1">
       <TryCatch.Try>
-        <Sequence sap:VirtualizedContainerService.HintSize="400,264" sap2010:WorkflowViewState.IdRef="Sequence_7">
+        <Sequence sap:VirtualizedContainerService.HintSize="540,761" sap2010:WorkflowViewState.IdRef="Sequence_7">
           <sap:WorkflowViewStateService.ViewState>
             <scg:Dictionary x:TypeArguments="x:String, x:Object">
               <x:Boolean x:Key="IsExpanded">True</x:Boolean>
             </scg:Dictionary>
           </sap:WorkflowViewStateService.ViewState>
-          <Assign sap:VirtualizedContainerService.HintSize="338,61" sap2010:WorkflowViewState.IdRef="Assign_15">
+          <Assign sap:VirtualizedContainerService.HintSize="478,61" sap2010:WorkflowViewState.IdRef="Assign_15">
             <Assign.To>
               <OutArgument x:TypeArguments="s:DateTime">[date_EligibilityDate]</OutArgument>
             </Assign.To>
@@ -263,31 +265,46 @@
               <InArgument x:TypeArguments="s:DateTime">[CDate(Str_EligibilityDate)]</InArgument>
             </Assign.Value>
           </Assign>
-          <If Condition="[Str_EligibilityDate.Trim IsNot &quot;&quot; And Not(Str_PlanStartDate = Str_EligibilityDate)]" sap:VirtualizedContainerService.HintSize="338,52" sap2010:WorkflowViewState.IdRef="If_4">
+          <If Condition="[Str_EligibilityDate.Trim IsNot &quot;&quot; And Not(Str_PlanStartDate = Str_EligibilityDate)]" sap:VirtualizedContainerService.HintSize="478,549" sap2010:WorkflowViewState.IdRef="If_4">
             <sap:WorkflowViewStateService.ViewState>
               <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                 <x:Boolean x:Key="IsPinned">False</x:Boolean>
               </scg:Dictionary>
             </sap:WorkflowViewStateService.ViewState>
             <If.Then>
-              <Assign sap:VirtualizedContainerService.HintSize="262,61" sap2010:WorkflowViewState.IdRef="Assign_10">
-                <Assign.To>
-                  <OutArgument x:TypeArguments="x:String">[Str_PlanStartDate]</OutArgument>
-                </Assign.To>
-                <Assign.Value>
-                  <InArgument x:TypeArguments="x:String">[Str_EligibilityDate]</InArgument>
-                </Assign.Value>
-              </Assign>
+              <Sequence sap:VirtualizedContainerService.HintSize="400,273" sap2010:WorkflowViewState.IdRef="Sequence_9">
+                <sap:WorkflowViewStateService.ViewState>
+                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                  </scg:Dictionary>
+                </sap:WorkflowViewStateService.ViewState>
+                <Assign sap:VirtualizedContainerService.HintSize="338,61" sap2010:WorkflowViewState.IdRef="Assign_10">
+                  <Assign.To>
+                    <OutArgument x:TypeArguments="x:String">[Str_PlanStartDate]</OutArgument>
+                  </Assign.To>
+                  <Assign.Value>
+                    <InArgument x:TypeArguments="x:String">[Str_EligibilityDate]</InArgument>
+                  </Assign.Value>
+                </Assign>
+                <Assign sap:VirtualizedContainerService.HintSize="338,61" sap2010:WorkflowViewState.IdRef="Assign_17">
+                  <Assign.To>
+                    <OutArgument x:TypeArguments="x:Boolean">[bool_EligibilityDateExist]</OutArgument>
+                  </Assign.To>
+                  <Assign.Value>
+                    <InArgument x:TypeArguments="x:Boolean">True</InArgument>
+                  </Assign.Value>
+                </Assign>
+              </Sequence>
             </If.Then>
           </If>
         </Sequence>
       </TryCatch.Try>
       <TryCatch.Catches>
-        <Catch x:TypeArguments="s:Exception" sap:VirtualizedContainerService.HintSize="400,161" sap2010:WorkflowViewState.IdRef="Catch`1_2">
+        <Catch x:TypeArguments="s:Exception" sap:VirtualizedContainerService.HintSize="544,21" sap2010:WorkflowViewState.IdRef="Catch`1_2">
           <sap:WorkflowViewStateService.ViewState>
             <scg:Dictionary x:TypeArguments="x:String, x:Object">
-              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              <x:Boolean x:Key="IsExpanded">False</x:Boolean>
               <x:Boolean x:Key="IsPinned">False</x:Boolean>
             </scg:Dictionary>
           </sap:WorkflowViewStateService.ViewState>
@@ -300,15 +317,15 @@
         </Catch>
       </TryCatch.Catches>
     </TryCatch>
-    <TryCatch DisplayName="Try Catch" sap:VirtualizedContainerService.HintSize="556,324" sap2010:WorkflowViewState.IdRef="TryCatch_2">
+    <TryCatch DisplayName="Try Catch" sap:VirtualizedContainerService.HintSize="630,989" sap2010:WorkflowViewState.IdRef="TryCatch_2">
       <TryCatch.Try>
-        <Sequence sap:VirtualizedContainerService.HintSize="400,264" sap2010:WorkflowViewState.IdRef="Sequence_8">
+        <Sequence sap:VirtualizedContainerService.HintSize="540,761" sap2010:WorkflowViewState.IdRef="Sequence_8">
           <sap:WorkflowViewStateService.ViewState>
             <scg:Dictionary x:TypeArguments="x:String, x:Object">
               <x:Boolean x:Key="IsExpanded">True</x:Boolean>
             </scg:Dictionary>
           </sap:WorkflowViewStateService.ViewState>
-          <Assign sap:VirtualizedContainerService.HintSize="338,61" sap2010:WorkflowViewState.IdRef="Assign_16">
+          <Assign sap:VirtualizedContainerService.HintSize="478,61" sap2010:WorkflowViewState.IdRef="Assign_16">
             <Assign.To>
               <OutArgument x:TypeArguments="s:DateTime">[date_TerminationDate]</OutArgument>
             </Assign.To>
@@ -316,31 +333,46 @@
               <InArgument x:TypeArguments="s:DateTime">[CDate(Str_TerminationDate)]</InArgument>
             </Assign.Value>
           </Assign>
-          <If Condition="[Str_TerminationDate.Trim IsNot &quot;&quot; And Not(Str_PlanEndDate = Str_TerminationDate)]" sap:VirtualizedContainerService.HintSize="338,52" sap2010:WorkflowViewState.IdRef="If_2">
+          <If Condition="[Str_TerminationDate.Trim IsNot &quot;&quot; And Not(Str_PlanEndDate = Str_TerminationDate)]" sap:VirtualizedContainerService.HintSize="478,549" sap2010:WorkflowViewState.IdRef="If_2">
             <sap:WorkflowViewStateService.ViewState>
               <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                 <x:Boolean x:Key="IsPinned">False</x:Boolean>
               </scg:Dictionary>
             </sap:WorkflowViewStateService.ViewState>
             <If.Then>
-              <Assign sap:VirtualizedContainerService.HintSize="262,61" sap2010:WorkflowViewState.IdRef="Assign_9">
-                <Assign.To>
-                  <OutArgument x:TypeArguments="x:String">[Str_PlanEndDate]</OutArgument>
-                </Assign.To>
-                <Assign.Value>
-                  <InArgument x:TypeArguments="x:String">[Str_TerminationDate]</InArgument>
-                </Assign.Value>
-              </Assign>
+              <Sequence sap:VirtualizedContainerService.HintSize="400,273" sap2010:WorkflowViewState.IdRef="Sequence_10">
+                <sap:WorkflowViewStateService.ViewState>
+                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                  </scg:Dictionary>
+                </sap:WorkflowViewStateService.ViewState>
+                <Assign sap:VirtualizedContainerService.HintSize="338,61" sap2010:WorkflowViewState.IdRef="Assign_9">
+                  <Assign.To>
+                    <OutArgument x:TypeArguments="x:String">[Str_PlanEndDate]</OutArgument>
+                  </Assign.To>
+                  <Assign.Value>
+                    <InArgument x:TypeArguments="x:String">[Str_TerminationDate]</InArgument>
+                  </Assign.Value>
+                </Assign>
+                <Assign sap:VirtualizedContainerService.HintSize="338,61" sap2010:WorkflowViewState.IdRef="Assign_18">
+                  <Assign.To>
+                    <OutArgument x:TypeArguments="x:Boolean">[bool_TerminationDateExist]</OutArgument>
+                  </Assign.To>
+                  <Assign.Value>
+                    <InArgument x:TypeArguments="x:Boolean">True</InArgument>
+                  </Assign.Value>
+                </Assign>
+              </Sequence>
             </If.Then>
           </If>
         </Sequence>
       </TryCatch.Try>
       <TryCatch.Catches>
-        <Catch x:TypeArguments="s:Exception" sap:VirtualizedContainerService.HintSize="400,161" sap2010:WorkflowViewState.IdRef="Catch`1_1">
+        <Catch x:TypeArguments="s:Exception" sap:VirtualizedContainerService.HintSize="544,21" sap2010:WorkflowViewState.IdRef="Catch`1_1">
           <sap:WorkflowViewStateService.ViewState>
             <scg:Dictionary x:TypeArguments="x:String, x:Object">
-              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              <x:Boolean x:Key="IsExpanded">False</x:Boolean>
               <x:Boolean x:Key="IsPinned">False</x:Boolean>
             </scg:Dictionary>
           </sap:WorkflowViewStateService.ViewState>
@@ -353,7 +385,7 @@
         </Catch>
       </TryCatch.Catches>
     </TryCatch>
-    <Assign sap:VirtualizedContainerService.HintSize="556,61" sap2010:WorkflowViewState.IdRef="Assign_11">
+    <Assign sap:VirtualizedContainerService.HintSize="630,61" sap2010:WorkflowViewState.IdRef="Assign_11">
       <Assign.To>
         <OutArgument x:TypeArguments="s:String[]">[arr_DateFormats]</OutArgument>
       </Assign.To>
@@ -361,7 +393,7 @@
         <InArgument x:TypeArguments="s:String[]">[{ "MM/dd/yyyy hh:mm:ss", "dd/yy","M/d/yyyy 00:00:00","MM/dd/yyyy","M/d/yyyy"}]</InArgument>
       </Assign.Value>
     </Assign>
-    <Assign sap:VirtualizedContainerService.HintSize="556,61" sap2010:WorkflowViewState.IdRef="Assign_12">
+    <Assign sap:VirtualizedContainerService.HintSize="630,61" sap2010:WorkflowViewState.IdRef="Assign_12">
       <Assign.To>
         <OutArgument x:TypeArguments="s:DateTime">[date_DateOfService]</OutArgument>
       </Assign.To>
@@ -369,7 +401,7 @@
         <InArgument x:TypeArguments="s:DateTime">[DateTime.ParseExact(Str_DateOfService.ToString, arr_DateFormats, System.Globalization.CultureInfo.InvariantCulture)]</InArgument>
       </Assign.Value>
     </Assign>
-    <Assign sap:VirtualizedContainerService.HintSize="556,61" sap2010:WorkflowViewState.IdRef="Assign_13">
+    <Assign sap:VirtualizedContainerService.HintSize="630,61" sap2010:WorkflowViewState.IdRef="Assign_13">
       <Assign.To>
         <OutArgument x:TypeArguments="s:DateTime">[date_PlanStartDate]</OutArgument>
       </Assign.To>
@@ -377,7 +409,7 @@
         <InArgument x:TypeArguments="s:DateTime">[DateTime.ParseExact(Str_PlanStartDate.ToString, arr_DateFormats, System.Globalization.CultureInfo.InvariantCulture)]</InArgument>
       </Assign.Value>
     </Assign>
-    <Assign sap:VirtualizedContainerService.HintSize="556,61" sap2010:WorkflowViewState.IdRef="Assign_14">
+    <Assign sap:VirtualizedContainerService.HintSize="630,61" sap2010:WorkflowViewState.IdRef="Assign_14">
       <Assign.To>
         <OutArgument x:TypeArguments="s:DateTime">[date_PlanEndDate]</OutArgument>
       </Assign.To>
@@ -385,40 +417,65 @@
         <InArgument x:TypeArguments="s:DateTime">[DateTime.ParseExact(Str_PlanEndDate.ToString, arr_DateFormats, System.Globalization.CultureInfo.InvariantCulture)]</InArgument>
       </Assign.Value>
     </Assign>
-    <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="556,92" sap2010:WorkflowViewState.IdRef="LogMessage_2" Message="[date_DateOfService.ToString+Environment.NewLine+&quot;Plan startDate: &quot;+date_PlanStartDate.ToString+Environment.NewLine+&quot;Plan End Date:&quot;+date_PlanEndDate.ToString]" />
-    <If Condition="[date_DateOfService&lt;date_PlanStartDate]" sap:VirtualizedContainerService.HintSize="556,1186" sap2010:WorkflowViewState.IdRef="If_5">
+    <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="630,92" sap2010:WorkflowViewState.IdRef="LogMessage_2" Message="[date_DateOfService.ToString+Environment.NewLine+&quot;Plan startDate: &quot;+date_PlanStartDate.ToString+Environment.NewLine+&quot;Plan End Date:&quot;+date_PlanEndDate.ToString]" />
+    <If Condition="[date_DateOfService&lt;date_PlanStartDate]" sap:VirtualizedContainerService.HintSize="630,1690" sap2010:WorkflowViewState.IdRef="If_5">
       <If.Then>
-        <Sequence sap:VirtualizedContainerService.HintSize="400,279" sap2010:WorkflowViewState.IdRef="Sequence_4">
+        <If Condition="[bool_EligibilityDateExist]" sap:VirtualizedContainerService.HintSize="412,512" sap2010:WorkflowViewState.IdRef="If_8">
           <sap:WorkflowViewStateService.ViewState>
             <scg:Dictionary x:TypeArguments="x:String, x:Object">
               <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              <x:Boolean x:Key="IsPinned">False</x:Boolean>
             </scg:Dictionary>
           </sap:WorkflowViewStateService.ViewState>
-          <uasc:AppendItemToCollection x:TypeArguments="x:String" Collection="[io_list_DenialReasons]" DisplayName="Append item to collection" sap:VirtualizedContainerService.HintSize="338,168" sap2010:WorkflowViewState.IdRef="AppendItemToCollection`1_2" Result="[io_list_DenialReasons]">
-            <uasc:AppendItemToCollection.Items>
-              <scg:List x:TypeArguments="InArgument(x:String)" Capacity="4">
-                <InArgument x:TypeArguments="x:String">Service date before eligibility date</InArgument>
-              </scg:List>
-            </uasc:AppendItemToCollection.Items>
-          </uasc:AppendItemToCollection>
-        </Sequence>
+          <If.Then>
+            <uasc:AppendItemToCollection x:TypeArguments="x:String" Collection="[io_list_DenialReasons]" DisplayName="Append item to collection" sap:VirtualizedContainerService.HintSize="334,168" sap2010:WorkflowViewState.IdRef="AppendItemToCollection`1_5" Result="[io_list_DenialReasons]">
+              <uasc:AppendItemToCollection.Items>
+                <scg:List x:TypeArguments="InArgument(x:String)" Capacity="4">
+                  <InArgument x:TypeArguments="x:String">Service date before eligibility date</InArgument>
+                </scg:List>
+              </uasc:AppendItemToCollection.Items>
+            </uasc:AppendItemToCollection>
+          </If.Then>
+          <If.Else>
+            <uasc:AppendItemToCollection x:TypeArguments="x:String" Collection="[io_list_DenialReasons]" DisplayName="Append item to collection" sap:VirtualizedContainerService.HintSize="334,168" sap2010:WorkflowViewState.IdRef="AppendItemToCollection`1_6" Result="[io_list_DenialReasons]">
+              <uasc:AppendItemToCollection.Items>
+                <scg:List x:TypeArguments="InArgument(x:String)" Capacity="4">
+                  <InArgument x:TypeArguments="x:String">Service dates outside of plan year</InArgument>
+                </scg:List>
+              </uasc:AppendItemToCollection.Items>
+            </uasc:AppendItemToCollection>
+          </If.Else>
+        </If>
       </If.Then>
       <If.Else>
-        <If Condition="[date_DateOfService&gt;date_PlanEndDate]" sap:VirtualizedContainerService.HintSize="478,731" sap2010:WorkflowViewState.IdRef="If_6">
+        <If Condition="[date_DateOfService&gt;date_PlanEndDate]" sap:VirtualizedContainerService.HintSize="552,1002" sap2010:WorkflowViewState.IdRef="If_6">
           <If.Then>
-            <Sequence sap:VirtualizedContainerService.HintSize="400,352" sap2010:WorkflowViewState.IdRef="Sequence_5">
+            <Sequence sap:VirtualizedContainerService.HintSize="474,623" sap2010:WorkflowViewState.IdRef="Sequence_5">
               <sap:WorkflowViewStateService.ViewState>
                 <scg:Dictionary x:TypeArguments="x:String, x:Object">
                   <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                 </scg:Dictionary>
               </sap:WorkflowViewStateService.ViewState>
-              <uasc:AppendItemToCollection x:TypeArguments="x:String" Collection="[io_list_DenialReasons]" DisplayName="Append item to collection" sap:VirtualizedContainerService.HintSize="338,241" sap2010:WorkflowViewState.IdRef="AppendItemToCollection`1_3" Result="[io_list_DenialReasons]">
-                <uasc:AppendItemToCollection.Items>
-                  <scg:List x:TypeArguments="InArgument(x:String)" Capacity="4">
-                    <InArgument x:TypeArguments="x:String">Service dates outside of plan year</InArgument>
-                  </scg:List>
-                </uasc:AppendItemToCollection.Items>
-              </uasc:AppendItemToCollection>
+              <If Condition="[bool_TerminationDateExist]" sap:VirtualizedContainerService.HintSize="412,512" sap2010:WorkflowViewState.IdRef="If_9">
+                <If.Then>
+                  <uasc:AppendItemToCollection x:TypeArguments="x:String" Collection="[io_list_DenialReasons]" DisplayName="Append item to collection" sap:VirtualizedContainerService.HintSize="334,168" sap2010:WorkflowViewState.IdRef="AppendItemToCollection`1_7" Result="[io_list_DenialReasons]">
+                    <uasc:AppendItemToCollection.Items>
+                      <scg:List x:TypeArguments="InArgument(x:String)" Capacity="4">
+                        <InArgument x:TypeArguments="x:String">Service date after termination date</InArgument>
+                      </scg:List>
+                    </uasc:AppendItemToCollection.Items>
+                  </uasc:AppendItemToCollection>
+                </If.Then>
+                <If.Else>
+                  <uasc:AppendItemToCollection x:TypeArguments="x:String" Collection="[io_list_DenialReasons]" DisplayName="Append item to collection" sap:VirtualizedContainerService.HintSize="334,168" sap2010:WorkflowViewState.IdRef="AppendItemToCollection`1_3" Result="[io_list_DenialReasons]">
+                    <uasc:AppendItemToCollection.Items>
+                      <scg:List x:TypeArguments="InArgument(x:String)" Capacity="4">
+                        <InArgument x:TypeArguments="x:String">Service dates outside of plan year</InArgument>
+                      </scg:List>
+                    </uasc:AppendItemToCollection.Items>
+                  </uasc:AppendItemToCollection>
+                </If.Else>
+              </If>
             </Sequence>
           </If.Then>
           <If.Else>
