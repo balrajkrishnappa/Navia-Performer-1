@@ -2,11 +2,12 @@
   <x:Members>
     <x:Property Name="in_Str_BatchNumber" Type="InArgument(x:String)" />
     <x:Property Name="out_Dt_ExtractedData" Type="OutArgument(sd:DataTable)" />
+    <x:Property Name="in_TransactionItem" Type="InArgument(ui:QueueItem)" />
   </x:Members>
   <VisualBasic.Settings>
     <x:Null />
   </VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>728,1121</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>872,636</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>Flexman_DataExtraction_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <scg:List x:TypeArguments="x:String" Capacity="44">
@@ -57,7 +58,7 @@
     </scg:List>
   </TextExpression.NamespacesForImplementation>
   <TextExpression.ReferencesForImplementation>
-    <scg:List x:TypeArguments="AssemblyReference" Capacity="56">
+    <scg:List x:TypeArguments="AssemblyReference" Capacity="112">
       <AssemblyReference>System.Activities</AssemblyReference>
       <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
       <AssemblyReference>System.Private.CoreLib</AssemblyReference>
@@ -113,15 +114,16 @@
       <AssemblyReference>UiPath.Excel</AssemblyReference>
       <AssemblyReference>System.Data.SqlClient</AssemblyReference>
       <AssemblyReference>System.Text.RegularExpressions</AssemblyReference>
+      <AssemblyReference>System.Collections</AssemblyReference>
     </scg:List>
   </TextExpression.ReferencesForImplementation>
-  <Sequence sap:VirtualizedContainerService.HintSize="734,976" sap2010:WorkflowViewState.IdRef="Sequence_21">
+  <Sequence sap:VirtualizedContainerService.HintSize="502,571" sap2010:WorkflowViewState.IdRef="Sequence_21">
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <TryCatch DisplayName="Try Catch" sap:VirtualizedContainerService.HintSize="672,865" sap2010:WorkflowViewState.IdRef="TryCatch_2">
+    <TryCatch DisplayName="Try Catch" sap:VirtualizedContainerService.HintSize="440,460" sap2010:WorkflowViewState.IdRef="TryCatch_2">
       <TryCatch.Try>
         <Flowchart DisplayName="Flexman_DataExtraction" sap:VirtualizedContainerService.HintSize="634,637" sap2010:WorkflowViewState.IdRef="Flowchart_1">
           <Flowchart.Variables>
@@ -200,7 +202,7 @@
                       <ActivityAction.Argument>
                         <DelegateInArgument x:TypeArguments="x:Object" Name="WSSessionData" />
                       </ActivityAction.Argument>
-                      <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="638,5331" sap2010:WorkflowViewState.IdRef="Sequence_20">
+                      <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="778,4987" sap2010:WorkflowViewState.IdRef="Sequence_20">
                         <Sequence.Variables>
                           <Variable x:TypeArguments="x:String" Name="Str_PlanDates" />
                           <Variable x:TypeArguments="x:String" Name="Str_EligibilityDate" />
@@ -212,12 +214,12 @@
                         </Sequence.Variables>
                         <sap:WorkflowViewStateService.ViewState>
                           <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                            <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                             <x:Boolean x:Key="IsPinned">False</x:Boolean>
                           </scg:Dictionary>
                         </sap:WorkflowViewStateService.ViewState>
-                        <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="576,92" sap2010:WorkflowViewState.IdRef="LogMessage_9" Level="Info" Message="[&quot;Extracting Total Line Items&quot;]" />
-                        <ui:RetryScope DisplayName="Retry Scope" sap:VirtualizedContainerService.HintSize="576,1006" sap2010:WorkflowViewState.IdRef="RetryScope_2">
+                        <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="716,92" sap2010:WorkflowViewState.IdRef="LogMessage_9" Level="Info" Message="[&quot;Extracting Total Line Items&quot;]" />
+                        <ui:RetryScope DisplayName="Retry Scope" sap:VirtualizedContainerService.HintSize="716,52" sap2010:WorkflowViewState.IdRef="RetryScope_2">
                           <ui:RetryScope.ActivityBody>
                             <ActivityAction>
                               <ui:WindowScope ApplicationWindow="{x:Null}" SearchScope="{x:Null}" TimeoutMS="{x:Null}" Window="{x:Null}" DisplayName="Attach Window 'flexwin.exe Claim'" sap:VirtualizedContainerService.HintSize="434,678" sap2010:WorkflowViewState.IdRef="WindowScope_3" InformativeScreenshot="43b22caeaa3b402eec6bafb85e9512c3" Selector="&lt;wnd app='flexwin.exe' ctrlname='FrmClaimEntry' /&gt;">
@@ -286,9 +288,15 @@
                               <ui:CheckTrue ErrorMessage="{x:Null}" DisplayName="Check True" Expression="[bool_WaitforLoad]" sap:VirtualizedContainerService.HintSize="334,88" sap2010:WorkflowViewState.IdRef="CheckTrue_2" />
                             </ActivityFunc>
                           </ui:RetryScope.Condition>
+                          <sap:WorkflowViewStateService.ViewState>
+                            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                              <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                              <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                            </scg:Dictionary>
+                          </sap:WorkflowViewStateService.ViewState>
                         </ui:RetryScope>
-                        <ui:BuildDataTable DataTable="[out_Dt_ExtractedData]" DisplayName="Build Data Table" sap:VirtualizedContainerService.HintSize="576,60" sap2010:WorkflowViewState.IdRef="BuildDataTable_5" TableInfo="&lt;NewDataSet&gt;&#xA;  &lt;xs:schema id=&quot;NewDataSet&quot; xmlns=&quot;&quot; xmlns:xs=&quot;http://www.w3.org/2001/XMLSchema&quot; xmlns:msdata=&quot;urn:schemas-microsoft-com:xml-msdata&quot;&gt;&#xA;    &lt;xs:element name=&quot;NewDataSet&quot; msdata:IsDataSet=&quot;true&quot; msdata:MainDataTable=&quot;TableName&quot; msdata:UseCurrentLocale=&quot;true&quot;&gt;&#xA;      &lt;xs:complexType&gt;&#xA;        &lt;xs:choice minOccurs=&quot;0&quot; maxOccurs=&quot;unbounded&quot;&gt;&#xA;          &lt;xs:element name=&quot;TableName&quot;&gt;&#xA;            &lt;xs:complexType&gt;&#xA;              &lt;xs:sequence&gt;&#xA;                &lt;xs:element name=&quot;LineItem&quot; msdata:Caption=&quot;&quot; minOccurs=&quot;0&quot;&gt;&#xA;                  &lt;xs:simpleType&gt;&#xA;                    &lt;xs:restriction base=&quot;xs:string&quot;&gt;&#xA;                      &lt;xs:maxLength value=&quot;100&quot; /&gt;&#xA;                    &lt;/xs:restriction&gt;&#xA;                  &lt;/xs:simpleType&gt;&#xA;                &lt;/xs:element&gt;&#xA;                &lt;xs:element name=&quot;Date&quot; msdata:Caption=&quot;&quot; minOccurs=&quot;0&quot;&gt;&#xA;                  &lt;xs:simpleType&gt;&#xA;                    &lt;xs:restriction base=&quot;xs:string&quot;&gt;&#xA;                      &lt;xs:maxLength value=&quot;100&quot; /&gt;&#xA;                    &lt;/xs:restriction&gt;&#xA;                  &lt;/xs:simpleType&gt;&#xA;                &lt;/xs:element&gt;&#xA;                &lt;xs:element name=&quot;Amount&quot; msdata:Caption=&quot;&quot; minOccurs=&quot;0&quot;&gt;&#xA;                  &lt;xs:simpleType&gt;&#xA;                    &lt;xs:restriction base=&quot;xs:string&quot;&gt;&#xA;                      &lt;xs:maxLength value=&quot;100&quot; /&gt;&#xA;                    &lt;/xs:restriction&gt;&#xA;                  &lt;/xs:simpleType&gt;&#xA;                &lt;/xs:element&gt;&#xA;                &lt;xs:element name=&quot;PlanDates&quot; msdata:Caption=&quot;&quot; minOccurs=&quot;0&quot;&gt;&#xA;                  &lt;xs:simpleType&gt;&#xA;                    &lt;xs:restriction base=&quot;xs:string&quot;&gt;&#xA;                      &lt;xs:maxLength value=&quot;100&quot; /&gt;&#xA;                    &lt;/xs:restriction&gt;&#xA;                  &lt;/xs:simpleType&gt;&#xA;                &lt;/xs:element&gt;&#xA;                &lt;xs:element name=&quot;EligibilityDate&quot; msdata:Caption=&quot;&quot; minOccurs=&quot;0&quot;&gt;&#xA;                  &lt;xs:simpleType&gt;&#xA;                    &lt;xs:restriction base=&quot;xs:string&quot;&gt;&#xA;                      &lt;xs:maxLength value=&quot;100&quot; /&gt;&#xA;                    &lt;/xs:restriction&gt;&#xA;                  &lt;/xs:simpleType&gt;&#xA;                &lt;/xs:element&gt;&#xA;                &lt;xs:element name=&quot;TerminationDate&quot; msdata:Caption=&quot;&quot; minOccurs=&quot;0&quot;&gt;&#xA;                  &lt;xs:simpleType&gt;&#xA;                    &lt;xs:restriction base=&quot;xs:string&quot;&gt;&#xA;                      &lt;xs:maxLength value=&quot;100&quot; /&gt;&#xA;                    &lt;/xs:restriction&gt;&#xA;                  &lt;/xs:simpleType&gt;&#xA;                &lt;/xs:element&gt;&#xA;                &lt;xs:element name=&quot;ReasonsOfDenial&quot; msdata:DataType=&quot;System.Collections.Generic.List`1[[System.String, System.Private.CoreLib, Version=6.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]], System.Private.CoreLib, Version=6.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e&quot; msdata:Caption=&quot;&quot; type=&quot;xs:anyType&quot; minOccurs=&quot;0&quot; /&gt;&#xA;                &lt;xs:element name=&quot;Result&quot; msdata:Caption=&quot;&quot; type=&quot;xs:string&quot; default=&quot;Deny&quot; minOccurs=&quot;0&quot; /&gt;&#xA;              &lt;/xs:sequence&gt;&#xA;            &lt;/xs:complexType&gt;&#xA;          &lt;/xs:element&gt;&#xA;        &lt;/xs:choice&gt;&#xA;      &lt;/xs:complexType&gt;&#xA;    &lt;/xs:element&gt;&#xA;  &lt;/xs:schema&gt;&#xA;&lt;/NewDataSet&gt;" />
-                        <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="576,52" sap2010:WorkflowViewState.IdRef="CommentOut_3">
+                        <ui:BuildDataTable DataTable="[out_Dt_ExtractedData]" DisplayName="Build Data Table" sap:VirtualizedContainerService.HintSize="716,60" sap2010:WorkflowViewState.IdRef="BuildDataTable_5" TableInfo="&lt;NewDataSet&gt;&#xA;  &lt;xs:schema id=&quot;NewDataSet&quot; xmlns=&quot;&quot; xmlns:xs=&quot;http://www.w3.org/2001/XMLSchema&quot; xmlns:msdata=&quot;urn:schemas-microsoft-com:xml-msdata&quot;&gt;&#xA;    &lt;xs:element name=&quot;NewDataSet&quot; msdata:IsDataSet=&quot;true&quot; msdata:MainDataTable=&quot;TableName&quot; msdata:UseCurrentLocale=&quot;true&quot;&gt;&#xA;      &lt;xs:complexType&gt;&#xA;        &lt;xs:choice minOccurs=&quot;0&quot; maxOccurs=&quot;unbounded&quot;&gt;&#xA;          &lt;xs:element name=&quot;TableName&quot;&gt;&#xA;            &lt;xs:complexType&gt;&#xA;              &lt;xs:sequence&gt;&#xA;                &lt;xs:element name=&quot;LineItem&quot; msdata:Caption=&quot;&quot; minOccurs=&quot;0&quot;&gt;&#xA;                  &lt;xs:simpleType&gt;&#xA;                    &lt;xs:restriction base=&quot;xs:string&quot;&gt;&#xA;                      &lt;xs:maxLength value=&quot;100&quot; /&gt;&#xA;                    &lt;/xs:restriction&gt;&#xA;                  &lt;/xs:simpleType&gt;&#xA;                &lt;/xs:element&gt;&#xA;                &lt;xs:element name=&quot;Date&quot; msdata:Caption=&quot;&quot; minOccurs=&quot;0&quot;&gt;&#xA;                  &lt;xs:simpleType&gt;&#xA;                    &lt;xs:restriction base=&quot;xs:string&quot;&gt;&#xA;                      &lt;xs:maxLength value=&quot;100&quot; /&gt;&#xA;                    &lt;/xs:restriction&gt;&#xA;                  &lt;/xs:simpleType&gt;&#xA;                &lt;/xs:element&gt;&#xA;                &lt;xs:element name=&quot;Amount&quot; msdata:Caption=&quot;&quot; minOccurs=&quot;0&quot;&gt;&#xA;                  &lt;xs:simpleType&gt;&#xA;                    &lt;xs:restriction base=&quot;xs:string&quot;&gt;&#xA;                      &lt;xs:maxLength value=&quot;100&quot; /&gt;&#xA;                    &lt;/xs:restriction&gt;&#xA;                  &lt;/xs:simpleType&gt;&#xA;                &lt;/xs:element&gt;&#xA;                &lt;xs:element name=&quot;PlanDates&quot; msdata:Caption=&quot;&quot; minOccurs=&quot;0&quot;&gt;&#xA;                  &lt;xs:simpleType&gt;&#xA;                    &lt;xs:restriction base=&quot;xs:string&quot;&gt;&#xA;                      &lt;xs:maxLength value=&quot;100&quot; /&gt;&#xA;                    &lt;/xs:restriction&gt;&#xA;                  &lt;/xs:simpleType&gt;&#xA;                &lt;/xs:element&gt;&#xA;                &lt;xs:element name=&quot;EligibilityDate&quot; msdata:Caption=&quot;&quot; minOccurs=&quot;0&quot;&gt;&#xA;                  &lt;xs:simpleType&gt;&#xA;                    &lt;xs:restriction base=&quot;xs:string&quot;&gt;&#xA;                      &lt;xs:maxLength value=&quot;100&quot; /&gt;&#xA;                    &lt;/xs:restriction&gt;&#xA;                  &lt;/xs:simpleType&gt;&#xA;                &lt;/xs:element&gt;&#xA;                &lt;xs:element name=&quot;TerminationDate&quot; msdata:Caption=&quot;&quot; minOccurs=&quot;0&quot;&gt;&#xA;                  &lt;xs:simpleType&gt;&#xA;                    &lt;xs:restriction base=&quot;xs:string&quot;&gt;&#xA;                      &lt;xs:maxLength value=&quot;100&quot; /&gt;&#xA;                    &lt;/xs:restriction&gt;&#xA;                  &lt;/xs:simpleType&gt;&#xA;                &lt;/xs:element&gt;&#xA;                &lt;xs:element name=&quot;ReasonsOfDenial&quot; msdata:DataType=&quot;System.Collections.Generic.List`1[[System.String, System.Private.CoreLib, Version=6.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]], System.Private.CoreLib, Version=6.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e&quot; msdata:Caption=&quot;&quot; type=&quot;xs:anyType&quot; minOccurs=&quot;0&quot; /&gt;&#xA;                &lt;xs:element name=&quot;Result&quot; msdata:Caption=&quot;&quot; type=&quot;xs:string&quot; default=&quot;Deny&quot; minOccurs=&quot;0&quot; /&gt;&#xA;              &lt;/xs:sequence&gt;&#xA;            &lt;/xs:complexType&gt;&#xA;          &lt;/xs:element&gt;&#xA;        &lt;/xs:choice&gt;&#xA;      &lt;/xs:complexType&gt;&#xA;    &lt;/xs:element&gt;&#xA;  &lt;/xs:schema&gt;&#xA;&lt;/NewDataSet&gt;" />
+                        <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="716,52" sap2010:WorkflowViewState.IdRef="CommentOut_3">
                           <ui:CommentOut.Body>
                             <Sequence DisplayName="Ignored Activities" sap:VirtualizedContainerService.HintSize="400,171" sap2010:WorkflowViewState.IdRef="Sequence_15">
                               <sap:WorkflowViewStateService.ViewState>
@@ -306,24 +314,25 @@
                             </scg:Dictionary>
                           </sap:WorkflowViewStateService.ViewState>
                         </ui:CommentOut>
-                        <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="576,92" sap2010:WorkflowViewState.IdRef="LogMessage_10" Level="Info" Message="[&quot;Total Line items : &quot;+int_TotalLineItems.ToString]" />
-                        <ui:InterruptibleWhile Condition="[index&lt;int_TotalLineItems]" CurrentIndex="[index]" DisplayName="While" sap:VirtualizedContainerService.HintSize="576,3260" sap2010:WorkflowViewState.IdRef="InterruptibleWhile_2">
+                        <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="716,92" sap2010:WorkflowViewState.IdRef="LogMessage_10" Level="Info" Message="[&quot;Total Line items : &quot;+int_TotalLineItems.ToString]" />
+                        <ui:InterruptibleWhile Condition="[index&lt;int_TotalLineItems]" CurrentIndex="[index]" DisplayName="While" sap:VirtualizedContainerService.HintSize="716,3870" sap2010:WorkflowViewState.IdRef="InterruptibleWhile_2">
                           <ui:InterruptibleWhile.Body>
-                            <Sequence DisplayName="ExtractingEachLineItem" sap:VirtualizedContainerService.HintSize="540,3054" sap2010:WorkflowViewState.IdRef="Sequence_19">
+                            <Sequence DisplayName="ExtractingEachLineItem" sap:VirtualizedContainerService.HintSize="680,3704" sap2010:WorkflowViewState.IdRef="Sequence_19">
                               <Sequence.Variables>
                                 <Variable x:TypeArguments="x:Int32" Default="1" Name="int_RowIndex" />
                                 <Variable x:TypeArguments="x:String" Name="Str_Date" />
                                 <Variable x:TypeArguments="x:String" Name="Str_ClaimType" />
                                 <Variable x:TypeArguments="x:String" Name="Str_ApprovedAmount" />
                                 <Variable x:TypeArguments="x:String" Name="Str_DeniedAmount" />
-                                <Variable x:TypeArguments="x:Boolean" Name="bool_PotentialDuplicate" />
+                                <Variable x:TypeArguments="x:Boolean" Default="True" Name="bool_NoPotentialDuplicate" />
+                                <Variable x:TypeArguments="x:Boolean" Name="Str_CheckDuplicate" />
                               </Sequence.Variables>
                               <sap:WorkflowViewStateService.ViewState>
                                 <scg:Dictionary x:TypeArguments="x:String, x:Object">
                                   <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                                 </scg:Dictionary>
                               </sap:WorkflowViewStateService.ViewState>
-                              <Assign sap:VirtualizedContainerService.HintSize="478,61" sap2010:WorkflowViewState.IdRef="Assign_8">
+                              <Assign sap:VirtualizedContainerService.HintSize="618,61" sap2010:WorkflowViewState.IdRef="Assign_8">
                                 <Assign.To>
                                   <OutArgument x:TypeArguments="x:Int32">[int_RowIndex]</OutArgument>
                                 </Assign.To>
@@ -331,8 +340,8 @@
                                   <InArgument x:TypeArguments="x:Int32">[index+1]</InArgument>
                                 </Assign.Value>
                               </Assign>
-                              <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="478,92" sap2010:WorkflowViewState.IdRef="LogMessage_11" Level="Info" Message="[&quot;Selecting line item &quot;+index.ToString+&quot; and extracting Data, from Batch :&quot;+in_Str_BatchNumber]" />
-                              <ui:Click AlterIfDisabled="{x:Null}" DelayBefore="{x:Null}" DelayMS="{x:Null}" SendWindowMessages="{x:Null}" SimulateClick="{x:Null}" ClickType="CLICK_DOUBLE" DisplayName="Click 'cell  Needs Approval'" sap:VirtualizedContainerService.HintSize="478,107" sap2010:WorkflowViewState.IdRef="Click_4" KeyModifiers="None" MouseButton="BTN_LEFT">
+                              <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="618,92" sap2010:WorkflowViewState.IdRef="LogMessage_11" Level="Info" Message="[&quot;Selecting line item &quot;+index.ToString+&quot; and extracting Data, from Batch :&quot;+in_Str_BatchNumber]" />
+                              <ui:Click AlterIfDisabled="{x:Null}" DelayBefore="{x:Null}" DelayMS="{x:Null}" SendWindowMessages="{x:Null}" SimulateClick="{x:Null}" ClickType="CLICK_DOUBLE" DisplayName="Click 'cell  Needs Approval'" sap:VirtualizedContainerService.HintSize="618,107" sap2010:WorkflowViewState.IdRef="Click_4" KeyModifiers="None" MouseButton="BTN_LEFT">
                                 <ui:Click.CursorPosition>
                                   <ui:CursorPosition Position="Center">
                                     <ui:CursorPosition.OffsetX>
@@ -354,113 +363,107 @@
                                   </ui:Target>
                                 </ui:Click.Target>
                               </ui:Click>
-                              <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="478,52" sap2010:WorkflowViewState.IdRef="CommentOut_5">
-                                <ui:CommentOut.Body>
-                                  <Sequence DisplayName="Ignored Activities" sap:VirtualizedContainerService.HintSize="400,163" sap2010:WorkflowViewState.IdRef="Sequence_24">
+                              <ui:GetRobotAsset AssetName="CheckDuplicateLineItems" CacheStrategy="None" DisplayName="Get Asset" FolderPath="Shared" sap:VirtualizedContainerService.HintSize="618,168" sap2010:WorkflowViewState.IdRef="GetRobotAsset_1">
+                                <ui:GetRobotAsset.TimeoutMS>
+                                  <InArgument x:TypeArguments="x:Int32" />
+                                </ui:GetRobotAsset.TimeoutMS>
+                                <ui:GetRobotAsset.Value>
+                                  <OutArgument x:TypeArguments="x:Boolean">[Str_CheckDuplicate]</OutArgument>
+                                </ui:GetRobotAsset.Value>
+                              </ui:GetRobotAsset>
+                              <If Condition="[CBool(Str_CheckDuplicate)]" sap:VirtualizedContainerService.HintSize="618,1106" sap2010:WorkflowViewState.IdRef="If_6">
+                                <If.Then>
+                                  <Sequence DisplayName="DuplicateCheckActivities" sap:VirtualizedContainerService.HintSize="540,830" sap2010:WorkflowViewState.IdRef="Sequence_24">
                                     <sap:WorkflowViewStateService.ViewState>
                                       <scg:Dictionary x:TypeArguments="x:String, x:Object">
                                         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                        <x:Boolean x:Key="IsPinned">False</x:Boolean>
                                       </scg:Dictionary>
                                     </sap:WorkflowViewStateService.ViewState>
-                                    <uix:NCheckState DisplayName="Check App State" sap:VirtualizedContainerService.HintSize="338,52" sap2010:WorkflowViewState.IdRef="NCheckState_1" Version="V3">
-                                      <uix:NCheckState.IfExists>
-                                        <Sequence DisplayName="Target appears" sap:VirtualizedContainerService.HintSize="400,105" sap2010:WorkflowViewState.IdRef="Sequence_22">
-                                          <sap:WorkflowViewStateService.ViewState>
-                                            <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                                              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-                                            </scg:Dictionary>
-                                          </sap:WorkflowViewStateService.ViewState>
-                                        </Sequence>
-                                      </uix:NCheckState.IfExists>
-                                      <uix:NCheckState.IfNotExists>
-                                        <Sequence DisplayName="Target does not appear" sap:VirtualizedContainerService.HintSize="400,105" sap2010:WorkflowViewState.IdRef="Sequence_23">
-                                          <sap:WorkflowViewStateService.ViewState>
-                                            <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                                              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-                                            </scg:Dictionary>
-                                          </sap:WorkflowViewStateService.ViewState>
-                                        </Sequence>
-                                      </uix:NCheckState.IfNotExists>
+                                    <ui:Click AlterIfDisabled="{x:Null}" DelayBefore="{x:Null}" SendWindowMessages="{x:Null}" SimulateClick="{x:Null}" ClickType="CLICK_SINGLE" DelayMS="2000" DisplayName="Click 'WindowsForms10.EDIT.app...'" sap:VirtualizedContainerService.HintSize="478,107" sap2010:WorkflowViewState.IdRef="Click_5" KeyModifiers="None" MouseButton="BTN_LEFT">
+                                      <ui:Click.CursorPosition>
+                                        <ui:CursorPosition Position="Center">
+                                          <ui:CursorPosition.OffsetX>
+                                            <InArgument x:TypeArguments="x:Int32" />
+                                          </ui:CursorPosition.OffsetX>
+                                          <ui:CursorPosition.OffsetY>
+                                            <InArgument x:TypeArguments="x:Int32" />
+                                          </ui:CursorPosition.OffsetY>
+                                        </ui:CursorPosition>
+                                      </ui:Click.CursorPosition>
+                                      <ui:Click.Target>
+                                        <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="55bc7e77-1142-4f33-a000-8ab0a1a78d65" InformativeScreenshot="0188bc14503f26ecc18b2ea193c26f63" Selector="&lt;wnd ctrlname='gbClaim' /&gt;&lt;wnd ctrlname='gbAmount' /&gt;&lt;wnd ctrlname='txtApprovedAmt' /&gt;">
+                                          <ui:Target.TimeoutMS>
+                                            <InArgument x:TypeArguments="x:Int32" />
+                                          </ui:Target.TimeoutMS>
+                                          <ui:Target.WaitForReady>
+                                            <InArgument x:TypeArguments="ui:WaitForReady" />
+                                          </ui:Target.WaitForReady>
+                                        </ui:Target>
+                                      </ui:Click.Target>
+                                    </ui:Click>
+                                    <ui:UiElementExists DisplayName="Element Exists 'WindowsForms10.Window.8...'" Exists="[bool_NoPotentialDuplicate]" sap:VirtualizedContainerService.HintSize="478,52" sap2010:WorkflowViewState.IdRef="UiElementExists_6">
+                                      <ui:UiElementExists.Target>
+                                        <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="a9dcb021-9428-45f8-8c63-fee4a1aefbb3" InformativeScreenshot="6050093d3861603c951e9eda8bd9c965" Selector="&lt;wnd ctrlname='gbClaim' /&gt;&lt;wnd ctrlname='txtDuplicate' aaname='Memo :' /&gt;" TimeoutMS="5000" WaitForReady="COMPLETE" />
+                                      </ui:UiElementExists.Target>
                                       <sap:WorkflowViewStateService.ViewState>
                                         <scg:Dictionary x:TypeArguments="x:String, x:Object">
                                           <x:Boolean x:Key="IsExpanded">False</x:Boolean>
                                           <x:Boolean x:Key="IsPinned">False</x:Boolean>
                                         </scg:Dictionary>
                                       </sap:WorkflowViewStateService.ViewState>
-                                    </uix:NCheckState>
-                                  </Sequence>
-                                </ui:CommentOut.Body>
-                                <sap:WorkflowViewStateService.ViewState>
-                                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                                    <x:Boolean x:Key="IsExpanded">False</x:Boolean>
-                                    <x:Boolean x:Key="IsPinned">False</x:Boolean>
-                                  </scg:Dictionary>
-                                </sap:WorkflowViewStateService.ViewState>
-                              </ui:CommentOut>
-                              <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="478,52" sap2010:WorkflowViewState.IdRef="CommentOut_6">
-                                <ui:CommentOut.Body>
-                                  <Sequence DisplayName="Ignored Activities" sap:VirtualizedContainerService.HintSize="400,218" sap2010:WorkflowViewState.IdRef="Sequence_25">
-                                    <sap:WorkflowViewStateService.ViewState>
-                                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-                                      </scg:Dictionary>
-                                    </sap:WorkflowViewStateService.ViewState>
-                                    <ui:UiElementExists DisplayName="Element Exists 'WindowsForms10.Window.8...'" Exists="[bool_PotentialDuplicate]" sap:VirtualizedContainerService.HintSize="338,107" sap2010:WorkflowViewState.IdRef="UiElementExists_5">
-                                      <ui:UiElementExists.Target>
-                                        <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="a9dcb021-9428-45f8-8c63-fee4a1aefbb3" InformativeScreenshot="6050093d3861603c951e9eda8bd9c965" Selector="&lt;wnd ctrlname='gbClaim' /&gt;&lt;wnd ctrlname='txtDuplicate' /&gt;" TimeoutMS="5000" WaitForReady="COMPLETE" />
-                                      </ui:UiElementExists.Target>
                                     </ui:UiElementExists>
-                                  </Sequence>
-                                </ui:CommentOut.Body>
-                                <sap:WorkflowViewStateService.ViewState>
-                                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                                    <x:Boolean x:Key="IsExpanded">False</x:Boolean>
-                                    <x:Boolean x:Key="IsPinned">False</x:Boolean>
-                                  </scg:Dictionary>
-                                </sap:WorkflowViewStateService.ViewState>
-                              </ui:CommentOut>
-                              <If Condition="[bool_PotentialDuplicate]" sap:VirtualizedContainerService.HintSize="478,480" sap2010:WorkflowViewState.IdRef="If_3">
-                                <If.Then>
-                                  <Sequence sap:VirtualizedContainerService.HintSize="400,201" sap2010:WorkflowViewState.IdRef="Sequence_16">
-                                    <sap:WorkflowViewStateService.ViewState>
-                                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-                                      </scg:Dictionary>
-                                    </sap:WorkflowViewStateService.ViewState>
-                                    <Throw Exception="[New BusinessRuleException(in_Str_BatchNumber+&quot; Batch has line Item which is a Potential Duplicate.&quot;)]" sap:VirtualizedContainerService.HintSize="338,90" sap2010:WorkflowViewState.IdRef="Throw_2" />
+                                    <If Condition="[Not bool_NoPotentialDuplicate]" sap:VirtualizedContainerService.HintSize="478,480" sap2010:WorkflowViewState.IdRef="If_3">
+                                      <sap:WorkflowViewStateService.ViewState>
+                                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                        </scg:Dictionary>
+                                      </sap:WorkflowViewStateService.ViewState>
+                                      <If.Then>
+                                        <Sequence sap:VirtualizedContainerService.HintSize="400,201" sap2010:WorkflowViewState.IdRef="Sequence_16">
+                                          <sap:WorkflowViewStateService.ViewState>
+                                            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                            </scg:Dictionary>
+                                          </sap:WorkflowViewStateService.ViewState>
+                                          <Throw Exception="[New BusinessRuleException(in_Str_BatchNumber+&quot; Batch has line Item which is a Potential Duplicate.&quot;)]" sap:VirtualizedContainerService.HintSize="338,90" sap2010:WorkflowViewState.IdRef="Throw_2" />
+                                        </Sequence>
+                                      </If.Then>
+                                      <If.Else>
+                                        <Sequence sap:VirtualizedContainerService.HintSize="400,103" sap2010:WorkflowViewState.IdRef="Sequence_17">
+                                          <sap:WorkflowViewStateService.ViewState>
+                                            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                            </scg:Dictionary>
+                                          </sap:WorkflowViewStateService.ViewState>
+                                        </Sequence>
+                                      </If.Else>
+                                    </If>
                                   </Sequence>
                                 </If.Then>
-                                <If.Else>
-                                  <Sequence sap:VirtualizedContainerService.HintSize="400,103" sap2010:WorkflowViewState.IdRef="Sequence_17">
-                                    <sap:WorkflowViewStateService.ViewState>
-                                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-                                      </scg:Dictionary>
-                                    </sap:WorkflowViewStateService.ViewState>
-                                  </Sequence>
-                                </If.Else>
                               </If>
-                              <uix:NGetText DisplayName="Get Text DateOfService" sap:VirtualizedContainerService.HintSize="478,157" sap2010:WorkflowViewState.IdRef="NGetText_8" ScopeIdentifier="2f53cb84-51ff-4547-86c5-5b84837a0397" TextString="[Str_Date]" Version="V3">
+                              <uix:NGetText DisplayName="Get Text DateOfService" sap:VirtualizedContainerService.HintSize="618,157" sap2010:WorkflowViewState.IdRef="NGetText_8" ScopeIdentifier="2f53cb84-51ff-4547-86c5-5b84837a0397" TextString="[Str_Date]" Version="V3">
                                 <uix:NGetText.Target>
                                   <uix:TargetAnchorable DesignTimeRectangle="78, 119, 64, 18" DesignTimeScaleFactor="1" ElementType="Cell" FriendlyName="'09/19/2022'" FullSelectorArgument="[string.Format(&quot;&lt;ctrl name='List`1 row {0}' role='row' /&gt;&lt;ctrl name='Date' role='cell' /&gt;&quot;, int_RowIndex)]" FuzzySelectorArgument="[string.Format(&quot;&lt;wnd ctrlname='gbBatchDetail' /&gt;&lt;wnd ctrlname='flexGridBatchDetail' /&gt;&lt;ctrl name='flexUltraGrid2' role='table' /&gt;&lt;ctrl name='List`1 row 1' role='row' /&gt;&lt;ctrl name='List`1 row {0}' role='row' /&gt;&lt;ctrl name='Date' role='cell' automationid='' /&gt;&quot;, int_RowIndex)]" Guid="83ca06da-f1bd-4584-9af9-d8b74bc1aea6" ImageBase64="" InformativeScreenshot="b8bb970007c3020a10d3b467e7b3e0f7.png" ScopeSelectorArgument="&lt;wnd app='flexwin.exe' ctrlname='FrmClaimEntry' /&gt;" SearchSteps="Selector" Version="V1" Visibility="Interactive" />
                                 </uix:NGetText.Target>
                               </uix:NGetText>
-                              <uix:NGetText DisplayName="Get Text ClaimType" sap:VirtualizedContainerService.HintSize="478,157" sap2010:WorkflowViewState.IdRef="NGetText_9" ScopeIdentifier="2f53cb84-51ff-4547-86c5-5b84837a0397" TextString="[Str_ClaimType]" Version="V3">
+                              <uix:NGetText DisplayName="Get Text ClaimType" sap:VirtualizedContainerService.HintSize="618,157" sap2010:WorkflowViewState.IdRef="NGetText_9" ScopeIdentifier="2f53cb84-51ff-4547-86c5-5b84837a0397" TextString="[Str_ClaimType]" Version="V3">
                                 <uix:NGetText.Target>
                                   <uix:TargetAnchorable DesignTimeRectangle="141, 119, 70, 18" DesignTimeScaleFactor="1" ElementType="Cell" FriendlyName="'VISION'" FullSelectorArgument="[string.Format(&quot;&lt;ctrl name='List`1 row {0}' role='row' /&gt;&lt;ctrl name='Claim Type' role='cell' /&gt;&quot;, int_RowIndex)]" FuzzySelectorArgument="[string.Format(&quot;&lt;wnd ctrlname='gbBatchDetail' /&gt;&lt;wnd ctrlname='flexGridBatchDetail' /&gt;&lt;ctrl name='flexUltraGrid2' role='table' /&gt;&lt;ctrl name='List`1 row 1' role='row' /&gt;&lt;ctrl name='List`1 row {0}' role='row' /&gt;&lt;ctrl name='Claim Type' role='cell' automationid='' /&gt;&quot;, int_RowIndex)]" Guid="2a21339e-44dc-4c31-9889-47cd7a56b813" ImageBase64="" InformativeScreenshot="f180d14127ba658032efff0eec56f928.png" ScopeSelectorArgument="&lt;wnd app='flexwin.exe' ctrlname='FrmClaimEntry' /&gt;" SearchSteps="Selector" Version="V1" Visibility="Interactive" />
                                 </uix:NGetText.Target>
                               </uix:NGetText>
-                              <uix:NGetText DisplayName="Get Text ApprovedAmount" sap:VirtualizedContainerService.HintSize="478,157" sap2010:WorkflowViewState.IdRef="NGetText_10" ScopeIdentifier="2f53cb84-51ff-4547-86c5-5b84837a0397" TextString="[Str_ApprovedAmount]" Version="V3">
+                              <uix:NGetText DisplayName="Get Text ApprovedAmount" sap:VirtualizedContainerService.HintSize="618,157" sap2010:WorkflowViewState.IdRef="NGetText_10" ScopeIdentifier="2f53cb84-51ff-4547-86c5-5b84837a0397" TextString="[Str_ApprovedAmount]" Version="V3">
                                 <uix:NGetText.Target>
                                   <uix:TargetAnchorable DesignTimeRectangle="210, 119, 67, 18" DesignTimeScaleFactor="1" ElementType="Cell" FriendlyName="'83.99'" FullSelectorArgument="[string.Format(&quot;&lt;ctrl name='List`1 row {0}' role='row' /&gt;&lt;ctrl name='Approved Amount' role='cell' /&gt;&quot;, int_RowIndex)]" FuzzySelectorArgument="[string.Format(&quot;&lt;wnd ctrlname='gbBatchDetail' /&gt;&lt;wnd ctrlname='flexGridBatchDetail' /&gt;&lt;ctrl name='flexUltraGrid2' role='table' /&gt;&lt;ctrl name='List`1 row 1' role='row' /&gt;&lt;ctrl name='List`1 row {0}' role='row' /&gt;&lt;ctrl name='Approved Amount' role='cell' automationid='' /&gt;&quot;, int_RowIndex)]" Guid="e699a403-d653-48b6-9977-a2c40c30a679" ImageBase64="" InformativeScreenshot="25b59b736d3416c273df5d8bec0d579c.png" ScopeSelectorArgument="&lt;wnd app='flexwin.exe' ctrlname='FrmClaimEntry' /&gt;" SearchSteps="Selector" Version="V1" Visibility="Interactive" />
                                 </uix:NGetText.Target>
                               </uix:NGetText>
-                              <uix:NGetText DisplayName="Get Text DeniedAmount" sap:VirtualizedContainerService.HintSize="478,157" sap2010:WorkflowViewState.IdRef="NGetText_11" ScopeIdentifier="2f53cb84-51ff-4547-86c5-5b84837a0397" TextString="[Str_DeniedAmount]" Version="V3">
+                              <uix:NGetText DisplayName="Get Text DeniedAmount" sap:VirtualizedContainerService.HintSize="618,157" sap2010:WorkflowViewState.IdRef="NGetText_11" ScopeIdentifier="2f53cb84-51ff-4547-86c5-5b84837a0397" TextString="[Str_DeniedAmount]" Version="V3">
                                 <uix:NGetText.Target>
                                   <uix:TargetAnchorable DesignTimeRectangle="276, 138, 67, 18" DesignTimeScaleFactor="1" ElementType="Cell" FriendlyName="'0.00'" FullSelectorArgument="[string.Format(&quot;&lt;ctrl name='List`1 row {0}' role='row' /&gt;&lt;ctrl name='Denied Amount' role='cell' /&gt;&quot;, int_RowIndex)]" FuzzySelectorArgument="[string.Format(&quot;&lt;ctrl name='List`1 row {0}' role='row' /&gt;&lt;ctrl name='Denied Amount' role='cell' automationid='' /&gt;&quot;, int_RowIndex)]" Guid="f7845cc0-bf9b-4922-908c-cf1360101472" ImageBase64="" InformativeScreenshot="5fe9d3b3e176296088517188484268d1.png" ScopeSelectorArgument="&lt;wnd app='flexwin.exe' ctrlname='FrmClaimEntry' /&gt;" SearchSteps="Selector" Version="V1" Visibility="Interactive" />
                                 </uix:NGetText.Target>
                               </uix:NGetText>
-                              <uix:NGetText DisplayName="Get Text 'Plan Dates'" sap:VirtualizedContainerService.HintSize="478,157" sap2010:WorkflowViewState.IdRef="NGetText_12" ScopeIdentifier="2f53cb84-51ff-4547-86c5-5b84837a0397" TextString="[Str_PlanDates]" Version="V3">
+                              <uix:NGetText DisplayName="Get Text 'Plan Dates'" sap:VirtualizedContainerService.HintSize="618,157" sap2010:WorkflowViewState.IdRef="NGetText_12" ScopeIdentifier="2f53cb84-51ff-4547-86c5-5b84837a0397" TextString="[Str_PlanDates]" Version="V3">
                                 <uix:NGetText.Target>
                                   <uix:TargetAnchorable DesignTimeRectangle="846, 71, 138, 21" DesignTimeScaleFactor="1" ElementType="InputBox" FriendlyName="'1/1/2022 - 12/31/2022'" FullSelectorArgument="&lt;wnd ctrlname='gbEmployee' /&gt;&lt;wnd ctrlname='txtPlanDates' /&gt;&lt;ctrl role='editable text' text='*-*' /&gt;" FuzzySelectorArgument="&lt;wnd ctrlname='gbEmployee' /&gt;&lt;wnd ctrlname='txtPlanDates' /&gt;&lt;ctrl role='editable text' automationid='' /&gt;" Guid="720b01d2-3f63-4826-b392-adbff97d39cf" InformativeScreenshot="680d1af54b04653e903c82905af8c499.png" IsResponsive="True" ScopeSelectorArgument="&lt;wnd app='flexwin.exe' ctrlname='FrmClaimEntry' /&gt;" SearchSteps="Selector, FuzzySelector" Version="V1" Visibility="Interactive">
                                     <uix:TargetAnchorable.Anchors>
@@ -471,7 +474,7 @@
                                   </uix:TargetAnchorable>
                                 </uix:NGetText.Target>
                               </uix:NGetText>
-                              <uix:NGetText DisplayName="Get Text 'Eligibility Date'" sap:VirtualizedContainerService.HintSize="478,157" sap2010:WorkflowViewState.IdRef="NGetText_13" ScopeIdentifier="2f53cb84-51ff-4547-86c5-5b84837a0397" TextString="[Str_EligibilityDate]" Version="V3">
+                              <uix:NGetText DisplayName="Get Text 'Eligibility Date'" sap:VirtualizedContainerService.HintSize="618,157" sap2010:WorkflowViewState.IdRef="NGetText_13" ScopeIdentifier="2f53cb84-51ff-4547-86c5-5b84837a0397" TextString="[Str_EligibilityDate]" Version="V3">
                                 <uix:NGetText.Target>
                                   <uix:TargetAnchorable DesignTimeRectangle="881, 99, 103, 21" DesignTimeScaleFactor="1" ElementType="InputBox" FriendlyName="'Eligibility Date'" FullSelectorArgument="&lt;wnd ctrlname='gbEmployee' /&gt;&lt;wnd ctrlname='txtEligDate' /&gt;" FuzzySelectorArgument="&lt;wnd ctrlname='txtEligDate' /&gt;&lt;ctrl role='editable text' automationid='' /&gt;" Guid="0a443784-e52a-452f-979f-cf1c144ffb57" ImageBase64="" InformativeScreenshot="99db2a2b8c562f4a5e9e192df7e40ce8.png" IsResponsive="True" ScopeSelectorArgument="&lt;wnd app='flexwin.exe' ctrlname='FrmClaimEntry' /&gt;" SearchSteps="Selector" Version="V1" Visibility="Interactive">
                                     <uix:TargetAnchorable.Anchors>
@@ -482,7 +485,7 @@
                                   </uix:TargetAnchorable>
                                 </uix:NGetText.Target>
                               </uix:NGetText>
-                              <Assign sap:VirtualizedContainerService.HintSize="478,61" sap2010:WorkflowViewState.IdRef="Assign_9">
+                              <Assign sap:VirtualizedContainerService.HintSize="618,61" sap2010:WorkflowViewState.IdRef="Assign_9">
                                 <Assign.To>
                                   <OutArgument x:TypeArguments="x:String">[Str_EligibilityDate]</OutArgument>
                                 </Assign.To>
@@ -490,7 +493,7 @@
                                   <InArgument x:TypeArguments="x:String">[Str_EligibilityDate.Replace("Eligibility Date :","")]</InArgument>
                                 </Assign.Value>
                               </Assign>
-                              <uix:NGetText DisplayName="Get Text 'Termination Date'" sap:VirtualizedContainerService.HintSize="478,157" sap2010:WorkflowViewState.IdRef="NGetText_14" ScopeIdentifier="2f53cb84-51ff-4547-86c5-5b84837a0397" TextString="[Str_TerminationDate]" Version="V3">
+                              <uix:NGetText DisplayName="Get Text 'Termination Date'" sap:VirtualizedContainerService.HintSize="618,157" sap2010:WorkflowViewState.IdRef="NGetText_14" ScopeIdentifier="2f53cb84-51ff-4547-86c5-5b84837a0397" TextString="[Str_TerminationDate]" Version="V3">
                                 <uix:NGetText.Target>
                                   <uix:TargetAnchorable DesignTimeRectangle="881, 125, 103, 21" DesignTimeScaleFactor="1" ElementType="InputBox" FriendlyName="'Termination Date'" FullSelectorArgument="&lt;wnd ctrlname='txtTermDate' aaname='Termination Date :*' /&gt;&lt;ctrl name='Termination Date :*' /&gt;" FuzzySelectorArgument="&lt;wnd ctrlname='txtTermDate' aaname='Termination Date :*' /&gt;&lt;ctrl role='editable text' automationid='' /&gt;" Guid="9ec1d63a-268f-4e7f-b8d2-5a582e18f14c" InformativeScreenshot="28615cc80d137630bd9612b1390ee227.png" IsResponsive="True" ScopeSelectorArgument="&lt;wnd app='flexwin.exe' ctrlname='FrmClaimEntry' /&gt;" SearchSteps="Selector" Version="V1" Visibility="Interactive">
                                     <uix:TargetAnchorable.Anchors>
@@ -501,7 +504,7 @@
                                   </uix:TargetAnchorable>
                                 </uix:NGetText.Target>
                               </uix:NGetText>
-                              <Assign sap:VirtualizedContainerService.HintSize="478,61" sap2010:WorkflowViewState.IdRef="Assign_10">
+                              <Assign sap:VirtualizedContainerService.HintSize="618,61" sap2010:WorkflowViewState.IdRef="Assign_10">
                                 <Assign.To>
                                   <OutArgument x:TypeArguments="x:String">[Str_TerminationDate]</OutArgument>
                                 </Assign.To>
@@ -509,7 +512,7 @@
                                   <InArgument x:TypeArguments="x:String">[Str_TerminationDate.Replace("Termination Date :","")]</InArgument>
                                 </Assign.Value>
                               </Assign>
-                              <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="478,52" sap2010:WorkflowViewState.IdRef="CommentOut_4">
+                              <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="618,52" sap2010:WorkflowViewState.IdRef="CommentOut_4">
                                 <ui:CommentOut.Body>
                                   <Sequence DisplayName="Ignored Activities" sap:VirtualizedContainerService.HintSize="400,297" sap2010:WorkflowViewState.IdRef="Sequence_18">
                                     <sap:WorkflowViewStateService.ViewState>
@@ -527,13 +530,13 @@
                                   </scg:Dictionary>
                                 </sap:WorkflowViewStateService.ViewState>
                               </ui:CommentOut>
-                              <ui:AddDataRow DataRow="{x:Null}" ArrayRow="[{int_RowIndex.ToString,Str_Date,Str_ApprovedAmount,Str_PlanDates,Str_EligibilityDate,Str_TerminationDate,Nothing,nothing}]" DataTable="[out_Dt_ExtractedData]" DisplayName="Add Data Row" sap:VirtualizedContainerService.HintSize="478,186" sap2010:WorkflowViewState.IdRef="AddDataRow_4" />
+                              <ui:AddDataRow DataRow="{x:Null}" ArrayRow="[{int_RowIndex.ToString,Str_Date,Str_ApprovedAmount,Str_PlanDates,Str_EligibilityDate,Str_TerminationDate,Nothing,nothing}]" DataTable="[out_Dt_ExtractedData]" DisplayName="Add Data Row" sap:VirtualizedContainerService.HintSize="618,186" sap2010:WorkflowViewState.IdRef="AddDataRow_4" />
                             </Sequence>
                           </ui:InterruptibleWhile.Body>
                         </ui:InterruptibleWhile>
-                        <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="576,92" sap2010:WorkflowViewState.IdRef="LogMessage_12" Level="Info" Message="[Str_Output]" />
-                        <ui:WriteCsvFile AddHeaders="True" DataTable="[out_Dt_ExtractedData]" Delimitator="Comma" DisplayName="Write CSV" FilePath="[&quot;ExtractedData\&quot;+in_Str_BatchNumber+&quot;-Flexman.csv&quot;]" sap:VirtualizedContainerService.HintSize="576,154" sap2010:WorkflowViewState.IdRef="WriteCsvFile_3" ShouldQuote="True" />
-                        <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="576,92" sap2010:WorkflowViewState.IdRef="LogMessage_13" Level="Info" Message="[&quot;Succesfully extracted all Line Items for Batch: &quot;+in_Str_BatchNumber]" />
+                        <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="716,92" sap2010:WorkflowViewState.IdRef="LogMessage_12" Level="Info" Message="[Str_Output]" />
+                        <ui:WriteCsvFile AddHeaders="True" DataTable="[out_Dt_ExtractedData]" Delimitator="Comma" DisplayName="Write CSV" FilePath="[&quot;ExtractedData\&quot;+in_Str_BatchNumber+&quot;-Flexman.csv&quot;]" sap:VirtualizedContainerService.HintSize="716,154" sap2010:WorkflowViewState.IdRef="WriteCsvFile_3" ShouldQuote="True" />
+                        <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="716,92" sap2010:WorkflowViewState.IdRef="LogMessage_13" Level="Info" Message="[&quot;Succesfully extracted all Line Items for Batch: &quot;+in_Str_BatchNumber]" />
                       </Sequence>
                     </ActivityAction>
                   </uix:NApplicationCard.Body>
@@ -684,10 +687,10 @@
         </Flowchart>
       </TryCatch.Try>
       <TryCatch.Catches>
-        <Catch x:TypeArguments="ui:BusinessRuleException" sap:VirtualizedContainerService.HintSize="638,21" sap2010:WorkflowViewState.IdRef="Catch`1_1">
+        <Catch x:TypeArguments="ui:BusinessRuleException" sap:VirtualizedContainerService.HintSize="406,297" sap2010:WorkflowViewState.IdRef="Catch`1_1">
           <sap:WorkflowViewStateService.ViewState>
             <scg:Dictionary x:TypeArguments="x:String, x:Object">
-              <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
               <x:Boolean x:Key="IsPinned">False</x:Boolean>
             </scg:Dictionary>
           </sap:WorkflowViewStateService.ViewState>
@@ -695,20 +698,70 @@
             <ActivityAction.Argument>
               <DelegateInArgument x:TypeArguments="ui:BusinessRuleException" Name="exception" />
             </ActivityAction.Argument>
-            <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Workflows\Template_Email.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="334,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_1" UnSafe="False" WorkflowFileName="Workflows\Template_Email.xaml">
-              <ui:InvokeWorkflowFile.Arguments>
-                <InArgument x:TypeArguments="x:String" x:Key="in_Str_Subject">
-                  <Literal x:TypeArguments="x:String">Business Exception</Literal>
-                </InArgument>
-                <InArgument x:TypeArguments="ui:QueueItem" x:Key="in_TransactionItem" />
-                <InArgument x:TypeArguments="x:String" x:Key="in_ExceptionType">
-                  <Literal x:TypeArguments="x:String">Business Exception</Literal>
-                </InArgument>
-                <InArgument x:TypeArguments="x:String" x:Key="in_ErrorMessage">
-                  <VisualBasicValue x:TypeArguments="x:String" ExpressionText="exception.Message" />
-                </InArgument>
-              </ui:InvokeWorkflowFile.Arguments>
-            </ui:InvokeWorkflowFile>
+            <Sequence DisplayName="Handle Business Exception" sap:VirtualizedContainerService.HintSize="400,228" sap2010:WorkflowViewState.IdRef="Sequence_25">
+              <Sequence.Variables>
+                <Variable x:TypeArguments="x:Boolean" Name="bool_FlagSendMail" />
+              </Sequence.Variables>
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+              <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="338,52" sap2010:WorkflowViewState.IdRef="CommentOut_5">
+                <ui:CommentOut.Body>
+                  <Sequence DisplayName="Ignored Activities" sap:VirtualizedContainerService.HintSize="474,854" sap2010:WorkflowViewState.IdRef="Sequence_26">
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                    <ui:GetRobotAsset AssetName="SendBusinessMail" CacheStrategy="None" DisplayName="Get Asset" FolderPath="Shared" sap:VirtualizedContainerService.HintSize="412,314" sap2010:WorkflowViewState.IdRef="GetRobotAsset_2">
+                      <ui:GetRobotAsset.TimeoutMS>
+                        <InArgument x:TypeArguments="x:Int32" />
+                      </ui:GetRobotAsset.TimeoutMS>
+                      <ui:GetRobotAsset.Value>
+                        <OutArgument x:TypeArguments="x:Boolean">[bool_FlagSendMail]</OutArgument>
+                      </ui:GetRobotAsset.Value>
+                      <sap:WorkflowViewStateService.ViewState>
+                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                        </scg:Dictionary>
+                      </sap:WorkflowViewStateService.ViewState>
+                    </ui:GetRobotAsset>
+                    <If Condition="[bool_FlagSendMail]" sap:VirtualizedContainerService.HintSize="412,389" sap2010:WorkflowViewState.IdRef="If_7">
+                      <sap:WorkflowViewStateService.ViewState>
+                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                        </scg:Dictionary>
+                      </sap:WorkflowViewStateService.ViewState>
+                      <If.Then>
+                        <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Workflows\Template_Email.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="334,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_2" UnSafe="False" WorkflowFileName="Workflows\Template_Email.xaml">
+                          <ui:InvokeWorkflowFile.Arguments>
+                            <InArgument x:TypeArguments="x:String" x:Key="in_Str_Subject">Business Exception</InArgument>
+                            <InArgument x:TypeArguments="ui:QueueItem" x:Key="in_TransactionItem">[in_TransactionItem]</InArgument>
+                            <InArgument x:TypeArguments="x:String" x:Key="in_ExceptionType">Business Exception</InArgument>
+                            <InArgument x:TypeArguments="x:String" x:Key="in_ErrorMessage">[Exception.Message]</InArgument>
+                            <InArgument x:TypeArguments="x:String" x:Key="in_Str_EmailAccount" />
+                            <InArgument x:TypeArguments="x:String" x:Key="Str_Email_To">balraj.krishnappa@speridian.com;balrajbhagyed@gmail.com;ashwini.kempraj@speridian.com</InArgument>
+                            <InArgument x:TypeArguments="x:String" x:Key="Str_Email_cc" />
+                          </ui:InvokeWorkflowFile.Arguments>
+                        </ui:InvokeWorkflowFile>
+                      </If.Then>
+                    </If>
+                  </Sequence>
+                </ui:CommentOut.Body>
+                <sap:WorkflowViewStateService.ViewState>
+                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                    <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                    <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                  </scg:Dictionary>
+                </sap:WorkflowViewStateService.ViewState>
+              </ui:CommentOut>
+              <Rethrow sap:VirtualizedContainerService.HintSize="338,25" sap2010:WorkflowViewState.IdRef="Rethrow_1" />
+            </Sequence>
           </ActivityAction>
         </Catch>
       </TryCatch.Catches>

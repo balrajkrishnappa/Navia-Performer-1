@@ -1,26 +1,24 @@
 {
   "mainTable": [
     {
-      "DateOfService": "01/06/2023",
-      "TotalAmount": "",
-      "Tax Amount": "",
-      "RxNumber": "6992729",
-      "Amount": "13.05"
+      "DateOfService": "Jan 18, 2023",
+      "RxNumber": "**5770000",
+      "Amount": "10.12N"
     }
   ],
   "FlexmanTable": [
     {
       "LineItem": "1",
-      "Date": "01/06/2023",
-      "Amount": "13.05",
-      "PlanDates": "1/1/2023 - 12/31/2023",
-      "EligibilityDate": "1/1/2023",
+      "Date": "01/18/2023",
+      "Amount": "10.12",
+      "PlanDates": "9/1/2022 - 8/31/2023",
+      "EligibilityDate": "9/1/2022",
       "TerminationDate": "",
       "Result": "Approve",
       "ReasonsOfDenial": []
     }
   ],
   "submit": true,
-  "pdf_storage": "29909536.tif.pdf",
+  "pdf_storage": "29926557.tif.pdf",
   "__BUCKET_NAME": "PharmacyClaimsStorageBucket"
 }
