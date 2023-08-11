@@ -1,11 +1,12 @@
-﻿<Activity mc:Ignorable="sap sap2010" x:Class="FlexMan_Login" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:av="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:ss="clr-namespace:System.Security;assembly=System.Private.CoreLib" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:uix="http://schemas.uipath.com/workflow/activities/uix" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<Activity mc:Ignorable="sap sap2010" x:Class="FlexMan_Login" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:av="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:ss="clr-namespace:System.Security;assembly=System.Private.CoreLib" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:uix="http://schemas.uipath.com/workflow/activities/uix" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <x:Members>
     <x:Property Name="out_FlexmanUiElement" Type="OutArgument(ui:UiElement)" />
+    <x:Property sap2010:Annotation.AnnotationText="Dictionary structure to store configuration data of the process (settings, constants and assets)." Name="in_Config" Type="InArgument(scg:Dictionary(x:String, x:Object))" />
   </x:Members>
   <VisualBasic.Settings>
     <x:Null />
   </VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>624,702</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>1178,744</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>FlexMan_Login_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <scg:List x:TypeArguments="x:String" Capacity="34">
@@ -46,7 +47,7 @@
     </scg:List>
   </TextExpression.NamespacesForImplementation>
   <TextExpression.ReferencesForImplementation>
-    <scg:List x:TypeArguments="AssemblyReference" Capacity="90">
+    <scg:List x:TypeArguments="AssemblyReference" Capacity="48">
       <AssemblyReference>System.Activities</AssemblyReference>
       <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
       <AssemblyReference>System.Private.CoreLib</AssemblyReference>
@@ -92,54 +93,69 @@
       <AssemblyReference>System.Memory</AssemblyReference>
       <AssemblyReference>System.Private.Uri</AssemblyReference>
       <AssemblyReference>UiPath.System.Activities.Design</AssemblyReference>
+      <AssemblyReference>System.Memory.Data</AssemblyReference>
+      <AssemblyReference>UiPath.Workflow</AssemblyReference>
     </scg:List>
   </TextExpression.ReferencesForImplementation>
-  <Flowchart DisplayName="FlexMan_Login" sap:VirtualizedContainerService.HintSize="634,637" sap2010:WorkflowViewState.IdRef="Flowchart_1">
+  <Flowchart sap2010:Annotation.AnnotationText="Logging into Flexman Application in UAT AND DEV Environments where we first check for &quot;Login Prompt&quot; to login into the Application" DisplayName="FlexMan_Login" sap:VirtualizedContainerService.HintSize="634,679" sap2010:WorkflowViewState.IdRef="Flowchart_1">
+    <Flowchart.Variables>
+      <Variable x:TypeArguments="x:Int32" Name="timeoutLoginPrompt">
+        <Variable.Default>
+          <Literal x:TypeArguments="x:Int32" Value="360000" />
+        </Variable.Default>
+      </Variable>
+    </Flowchart.Variables>
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
         <av:Point x:Key="ShapeLocation">270,2.5</av:Point>
         <av:Size x:Key="ShapeSize">60,75</av:Size>
-        <av:PointCollection x:Key="ConnectorLocation">300,77.5 300,154</av:PointCollection>
+        <av:PointCollection x:Key="ConnectorLocation">300,77.5 300,134</av:PointCollection>
+        <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
     <Flowchart.StartNode>
-      <x:Reference>__ReferenceID0</x:Reference>
+      <x:Reference>__ReferenceID2</x:Reference>
     </Flowchart.StartNode>
     <FlowStep x:Name="__ReferenceID0">
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
-          <av:Point x:Key="ShapeLocation">200,154</av:Point>
+          <av:Point x:Key="ShapeLocation">200,354</av:Point>
           <av:Size x:Key="ShapeSize">200,52</av:Size>
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
-      <uix:NApplicationCard AttachMode="ByInstance" CloseMode="Never" DisplayName="Use Application: FlexMan - TEST Version using DB Server - SEASDBLN, Database = Staging !_!_!_!_!_!_!" sap:VirtualizedContainerService.HintSize="1028,2676" sap2010:WorkflowViewState.IdRef="NApplicationCard_1" OutUiElement="[out_FlexmanUiElement]" ScopeGuid="8abd569d-b4d9-4af6-80b6-eba089904758" Timeout="180" Version="V2">
+      <uix:NApplicationCard AttachMode="ByInstance" CloseMode="Never" DisplayName="Use Application: FlexMan - TEST Version using DB Server - SEASDBLN, Database = Staging !_!_!_!_!_!_!" sap:VirtualizedContainerService.HintSize="1028,2544" sap2010:WorkflowViewState.IdRef="NApplicationCard_1" OpenMode="Never" OutUiElement="[out_FlexmanUiElement]" ScopeGuid="8abd569d-b4d9-4af6-80b6-eba089904758" Timeout="180" Version="V2" WindowResize="Maximize">
         <uix:NApplicationCard.Body>
           <ActivityAction x:TypeArguments="x:Object">
             <ActivityAction.Argument>
               <DelegateInArgument x:TypeArguments="x:Object" Name="WSSessionData" />
             </ActivityAction.Argument>
-            <uix:NCheckState DisplayName="Check App State 'FlexMan Login'" sap:VirtualizedContainerService.HintSize="994,2385" sap2010:WorkflowViewState.IdRef="NCheckState_1" Timeout="120" Version="V3">
+            <uix:NCheckState DisplayName="Check App State 'FlexMan Login'" sap:VirtualizedContainerService.HintSize="994,2253" sap2010:WorkflowViewState.IdRef="NCheckState_1" Timeout="120" Version="V3">
               <uix:NCheckState.IfExists>
-                <Sequence DisplayName="Target appears" sap:VirtualizedContainerService.HintSize="540,2168" sap2010:WorkflowViewState.IdRef="Sequence_1">
+                <Sequence DisplayName="Target appears" sap:VirtualizedContainerService.HintSize="540,2036" sap2010:WorkflowViewState.IdRef="Sequence_1">
                   <Sequence.Variables>
-                    <Variable x:TypeArguments="x:String" Name="Str_FlexmanUsername" />
-                    <Variable x:TypeArguments="ss:SecureString" Name="Str_FlexmanPassword" />
-                    <Variable x:TypeArguments="x:Boolean" Name="bool_SuccessfullyLoggedIn" />
+                    <Variable x:TypeArguments="x:String" Name="StrFlexmanUsername" />
+                    <Variable x:TypeArguments="ss:SecureString" Name="StrFlexmanPassword" />
+                    <Variable x:TypeArguments="x:Boolean" Name="boolSuccessfullyLoggedIn" />
+                    <Variable x:TypeArguments="x:Int32" Name="timeoutLoginCheck">
+                      <Variable.Default>
+                        <Literal x:TypeArguments="x:Int32" Value="120000" />
+                      </Variable.Default>
+                    </Variable>
                   </Sequence.Variables>
                   <sap:WorkflowViewStateService.ViewState>
                     <scg:Dictionary x:TypeArguments="x:String, x:Object">
                       <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                     </scg:Dictionary>
                   </sap:WorkflowViewStateService.ViewState>
-                  <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="478,92" sap2010:WorkflowViewState.IdRef="LogMessage_4" Level="Info" Message="[&quot;Successfully Launched FlexMan Application&quot;]" />
-                  <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="478,92" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Info" Message="[&quot;Getting Login credentials for Flexman&quot;]" />
-                  <ui:GetRobotCredential AssetName="Flexman_Credentials" CacheStrategy="None" DisplayName="Get Credential" FolderPath="Shared" sap:VirtualizedContainerService.HintSize="478,168" sap2010:WorkflowViewState.IdRef="GetRobotCredential_1" Password="[Str_FlexmanPassword]" Username="[Str_FlexmanUsername]">
+                  <ui:LogMessage DisplayName="Log Message-Launch Success" sap:VirtualizedContainerService.HintSize="478,92" sap2010:WorkflowViewState.IdRef="LogMessage_4" Level="Info" Message="[&quot;Successfully Launched FlexMan Application&quot;]" />
+                  <ui:LogMessage DisplayName="Log Message-Credentials" sap:VirtualizedContainerService.HintSize="478,92" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Info" Message="[&quot;Getting Login credentials for Flexman&quot;]" />
+                  <ui:GetRobotCredential AssetName="Flexman_Credentials" CacheStrategy="None" DisplayName="Get Credential-FlexmanLoginCredentials" FolderPath="Shared" sap:VirtualizedContainerService.HintSize="478,168" sap2010:WorkflowViewState.IdRef="GetRobotCredential_1" Password="[StrFlexmanPassword]" Username="[StrFlexmanUsername]">
                     <ui:GetRobotCredential.TimeoutMS>
                       <InArgument x:TypeArguments="x:Int32" />
                     </ui:GetRobotCredential.TimeoutMS>
                   </ui:GetRobotCredential>
-                  <uix:NTypeInto ActivateBefore="True" ClickBeforeMode="Single" DisplayName="Type Into 'Username'" EmptyFieldMode="SingleLine" sap:VirtualizedContainerService.HintSize="478,218" sap2010:WorkflowViewState.IdRef="NTypeInto_1" ScopeIdentifier="8abd569d-b4d9-4af6-80b6-eba089904758" Text="[Str_FlexmanUsername]" Version="V3">
+                  <uix:NTypeInto ActivateBefore="True" ClickBeforeMode="None" DisplayName="Type Into 'Username'" EmptyFieldMode="SingleLine" sap:VirtualizedContainerService.HintSize="478,218" sap2010:WorkflowViewState.IdRef="NTypeInto_1" ScopeIdentifier="8abd569d-b4d9-4af6-80b6-eba089904758" Text="[StrFlexmanUsername]" Version="V3">
                     <uix:NTypeInto.Target>
                       <uix:TargetAnchorable DesignTimeRectangle="112, 47, 136, 20" DesignTimeScaleFactor="1" ElementType="InputBox" FriendlyName="'WindowsForms10.EDIT.app…'" FullSelectorArgument="&lt;wnd ctrlname='txtUserName' /&gt;" FuzzySelectorArgument="&lt;wnd ctrlname='txtUserName' /&gt;" Guid="244cecfb-f0aa-464f-9be6-5ad1cee2f47f" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAAIwAAAAYCAYAAAAoNxVrAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAB2SURBVGhD7dK7DcAgAEPBrMtW7MYCbJCIJsoHIdzfSa7cvqP3fprtTjAW7Q6m1mo23TANppRi9lprbR0MPAmGiGCICIaIYIgIhohgiAiGiGCICIaIYIgIhohgiAiGiGCICIbIMphxmn03DQZWfsGY7UwwFqyfF5as/BV6j+HAAAAAAElFTkSuQmCC" InformativeScreenshot="05da5a75ff2e9455e7ebabc8518ffb35.png" IsResponsive="True" ScopeSelectorArgument="&lt;wnd app='flexwin.exe' ctrlname='frmLogin' /&gt;" SearchSteps="Selector, FuzzySelector, Image" Version="V1" Visibility="Interactive" WaitForReadyArgument="Complete">
                         <uix:TargetAnchorable.Anchors>
@@ -150,7 +166,7 @@
                       </uix:TargetAnchorable>
                     </uix:NTypeInto.Target>
                   </uix:NTypeInto>
-                  <uix:NTypeInto ActivateBefore="True" ClickBeforeMode="Single" DisplayName="Type Into 'Password'" EmptyFieldMode="SingleLine" sap:VirtualizedContainerService.HintSize="478,218" sap2010:WorkflowViewState.IdRef="NTypeInto_2" IsPassword="True" ScopeIdentifier="8abd569d-b4d9-4af6-80b6-eba089904758" SecureText="[Str_FlexmanPassword]" Version="V3">
+                  <uix:NTypeInto ActivateBefore="True" ClickBeforeMode="None" DisplayName="Type Into 'Password'" EmptyFieldMode="SingleLine" sap:VirtualizedContainerService.HintSize="478,218" sap2010:WorkflowViewState.IdRef="NTypeInto_2" IsPassword="True" ScopeIdentifier="8abd569d-b4d9-4af6-80b6-eba089904758" SecureText="[StrFlexmanPassword]" Version="V3">
                     <uix:NTypeInto.Target>
                       <uix:TargetAnchorable DesignTimeRectangle="112, 71, 136, 20" DesignTimeScaleFactor="1" ElementType="InputBoxPassword" FriendlyName="'WindowsForms10.EDIT.app…'" FullSelectorArgument="&lt;wnd ctrlname='txtPassword' /&gt;" FuzzySelectorArgument="&lt;wnd ctrlname='txtPassword' /&gt;" Guid="98e35bd1-7db1-4d2f-b5a3-351d6f99cbf4" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAAIwAAAAYCAYAAAAoNxVrAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAB+SURBVGhD7dLBCcMwEERRtauu1JsaUAcONjjEjhCa+3sw7GGvv4wxDrPdCcaifYNprZlNd5oGU2s1e6z3vg4Gfm0FU0q5LgiGiGCICIaIYIgIhohgiAiGiGCICIaIYIgIhohgiGwFAzfBEFkGcz7N3psGAyt/wZjtTDAWbBwf+K3VPA2ug2kAAAAASUVORK5CYII=" InformativeScreenshot="e2093b953291297597796c6c9a2ce215.png" ScopeSelectorArgument="&lt;wnd app='flexwin.exe' ctrlname='frmLogin' /&gt;" SearchSteps="Selector" Version="V1" Visibility="Interactive" WaitForReadyArgument="Complete">
                         <uix:TargetAnchorable.Anchors>
@@ -166,29 +182,28 @@
                       <uix:TargetAnchorable DesignTimeRectangle="112, 97, 75, 23" DesignTimeScaleFactor="1" ElementType="Button" FriendlyName="'Login'" FullSelectorArgument="&lt;wnd ctrlname='ubtnLogin' /&gt;" FuzzySelectorArgument="&lt;wnd ctrlname='ubtnLogin' check:text='Login' /&gt;" Guid="6fe8c8ed-356d-443d-8c19-500428434bf8" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAAE8AAAAbCAYAAAA9K9JnAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAECSURBVGhD7ZXbDcMgDEXZjG2YoSswCoMwQ7+zARu4kJKHEVWauBGkuR9Hio1BypHBKoRA4BiQJwDyBDB56vEEGzBfLKgUAw7zxYJcMAwDKIA8AZAnAPIENJbnyChDrrq2A2dIaUu+tnYi/yGvEZAnoFt53mpSSr0xbs47k3MZ42J+fW3Hb0NG55oTr3Of8oo3LAnT1hd5TzYKqspTmqxf9o41+axf0qW8WdaUS0Ji96VuXOdnMaW8QjzkRXmlCMg7fG3T3tvL4wNg+vHtgRGHwr07T0IaGMtgaMGl5LFujLB3sQGXktcbkCfga3ngM8wXCyrFgMN8rQOwD8gTAHmHCfQC68klteGo90MAAAAASUVORK5CYII=" InformativeScreenshot="b7cb245808761c264f16fcaf75873278.png" ScopeSelectorArgument="&lt;wnd app='flexwin.exe' ctrlname='frmLogin' /&gt;" SearchSteps="Selector, FuzzySelector, Image" Version="V1" Visibility="Interactive" />
                     </uix:NClick.Target>
                   </uix:NClick>
-                  <ui:UiElementExists DisplayName="Element Exists" Exists="[bool_SuccessfullyLoggedIn]" sap:VirtualizedContainerService.HintSize="478,87" sap2010:WorkflowViewState.IdRef="UiElementExists_1">
+                  <ui:UiElementExists DisplayName="Element Exists-ClaimEntryButton" Exists="[boolSuccessfullyLoggedIn]" sap:VirtualizedContainerService.HintSize="478,87" sap2010:WorkflowViewState.IdRef="UiElementExists_1">
                     <ui:UiElementExists.Target>
-                      <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="c7f155a5-f90b-4b19-8e94-0e5359d1d258" Selector="&lt;ctrl name='Claim Entry' role='push button' text='Claim Entry' /&gt;">
-                        <ui:Target.TimeoutMS>
-                          <InArgument x:TypeArguments="x:Int32" />
-                        </ui:Target.TimeoutMS>
+                      <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="c7f155a5-f90b-4b19-8e94-0e5359d1d258" Selector="&lt;ctrl name='Claim Entry' role='push button' text='Claim Entry' /&gt;" TimeoutMS="[timeoutLoginCheck]">
                         <ui:Target.WaitForReady>
                           <InArgument x:TypeArguments="ui:WaitForReady" />
                         </ui:Target.WaitForReady>
                       </ui:Target>
                     </ui:UiElementExists.Target>
                   </ui:UiElementExists>
-                  <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="478,92" sap2010:WorkflowViewState.IdRef="LogMessage_2" Message="[&quot;Selecting Claim Entry&quot;]" />
-                  <If Condition="[bool_SuccessfullyLoggedIn]" sap:VirtualizedContainerService.HintSize="478,609" sap2010:WorkflowViewState.IdRef="If_1">
+                  <If Condition="[boolSuccessfullyLoggedIn]" DisplayName="If-No SuccessLogin" sap:VirtualizedContainerService.HintSize="478,609" sap2010:WorkflowViewState.IdRef="If_1">
+                    <If.Then>
+                      <ui:LogMessage DisplayName="Log Message-ClaimEntry" sap:VirtualizedContainerService.HintSize="334,92" sap2010:WorkflowViewState.IdRef="LogMessage_2" Message="[&quot;Selecting Claim Entry&quot;]" />
+                    </If.Then>
                     <If.Else>
-                      <Sequence sap:VirtualizedContainerService.HintSize="400,333" sap2010:WorkflowViewState.IdRef="Sequence_3">
+                      <Sequence DisplayName="Login Failed" sap:VirtualizedContainerService.HintSize="400,333" sap2010:WorkflowViewState.IdRef="Sequence_3">
                         <sap:WorkflowViewStateService.ViewState>
                           <scg:Dictionary x:TypeArguments="x:String, x:Object">
                             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                           </scg:Dictionary>
                         </sap:WorkflowViewStateService.ViewState>
-                        <Throw Exception="[New BusinessRuleException( &quot;Login Credentials Expired!&quot;)]" sap:VirtualizedContainerService.HintSize="338,90" sap2010:WorkflowViewState.IdRef="Throw_2" />
-                        <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="338,92" sap2010:WorkflowViewState.IdRef="LogMessage_5" Level="Info" Message="[&quot;Login Failed..&quot;]" />
+                        <Throw DisplayName="Throw-FlexmanLogin CredentialsExpired" Exception="[New BusinessRuleException( &quot;Login Credentials Expired!&quot;)]" sap:VirtualizedContainerService.HintSize="338,90" sap2010:WorkflowViewState.IdRef="Throw_2" />
+                        <ui:LogMessage DisplayName="Log Message-Login Failed" sap:VirtualizedContainerService.HintSize="338,92" sap2010:WorkflowViewState.IdRef="LogMessage_5" Level="Info" Message="[&quot;Login Failed..&quot;]" />
                       </Sequence>
                     </If.Else>
                   </If>
@@ -201,8 +216,8 @@
                       <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                     </scg:Dictionary>
                   </sap:WorkflowViewStateService.ViewState>
-                  <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="338,92" sap2010:WorkflowViewState.IdRef="LogMessage_3" Level="Error" Message="[&quot;FlexMan Application timeout&quot;]" />
-                  <Throw Exception="[New Exception(&quot;Failed to  Launch FlexMan Application&quot;)]" sap:VirtualizedContainerService.HintSize="338,90" sap2010:WorkflowViewState.IdRef="Throw_1" />
+                  <ui:LogMessage DisplayName="Log Message-TimeOut" sap:VirtualizedContainerService.HintSize="338,92" sap2010:WorkflowViewState.IdRef="LogMessage_3" Level="Error" Message="[&quot;FlexMan Application timeout&quot;]" />
+                  <Throw DisplayName="Throw-FailedToLoadFlexman" Exception="[New Exception(&quot;Failed to  Launch FlexMan Application&quot;)]" sap:VirtualizedContainerService.HintSize="338,90" sap2010:WorkflowViewState.IdRef="Throw_1" />
                 </Sequence>
               </uix:NCheckState.IfNotExists>
               <uix:NCheckState.Target>
@@ -217,7 +232,7 @@
           </ActivityAction>
         </uix:NApplicationCard.Body>
         <uix:NApplicationCard.TargetApp>
-          <uix:TargetApp Area="-8, -8, 1382, 744" FilePath="C:\FlexMan Staging\flexwin.exe" IconBase64="iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAVWSURBVFhHvZd7TFNXHMeBogULBdpisFhaLPTBa4CiMlSGTpxEETUujOh0QJyP6CZjUWE6UEZEMEFxU3QDsSBPcYCAkyoPhWFwYT6yzT2M7hExBnQzEYH2nv3Ovb21jwtc/sBv8knbe3739/3de8/5nVubSdRUYAr19fVL0HHYJXXzcoe18J1HHXp9st+zzjHpxQXhi5tHXR/C7xjAjhx5HeI52Kh/+9rtjv6iCI3Ui4i8ZF4zHJ5JjU6+pmlSnXN1DSICF4D5q0QwqPDk7ICxyZ8PAVJOxONzgke0OU3VXudbMOxPRU1ctobP8cRvyuQXg6Hx6mkGKoW6yMApmRDjQIWylA/X0TVZ5LHKc8rUWPgZAAgAezxmqQg/+6j+SmG/pTlNw+f8exAWTEWzV7BGpnwCDBZI5A/2zfBqinUV7nO0s1sCY2IAr3Usp8ZMfhEYWV09zUCVUB+ussd3gUudwk7+x8G4epYa0VTNUhOnpb5PD4qlnatdhQeggkWuPJvlfWWCPiZjU2rS+Hcgp5pKzU7uB8TSVtMCTMHFnPDyeZK/QvxopN591Kun+VsjGJ4pssMrgkOlH1/cJJFHPpO5JZdiVOh+ngwN101nNKfJTeJpIa8HlX582Sq4jgml3sohJlMmmqJV6GG+FOka3BkL6Ml37Ye8S6n07BR4zGIesKE1QYGeaTytCvi3RkjMU9pnQ156Ao8rt70ekjomk/GoDVKj33NkSN9gXsSxLU4dkJf1Y+AscOJ/VOGt0jOZsOGHFB/YF149krYclz7IO59Kz05zYDn+w5ScLd3bfJHOUMT9IrdhyLkJYNVl8SYSsjVk9s9MiSfC7TQ5WcDz80LCV8zJMeQeVbhj+St37U4PL6u9tVTbpdesWsOY2JLzb8xGLTt2IG3KLlQ7N/zVmI8a9RVKYIWIUGK0QwXkdyKdLISrUqs+Tc+IqL7465L2Hv2SjpsIk1lQaGbERM/JE+jF0wFEa+j5f+h2+Tkw9yPHW1YrySV6YP20FvDBe4tR+K1F4rNl566IqvqfwJigjWnitJ2oPHKxlSlNT+FJRBCEwdpcd2uqjXGPT0nQ4UTeNfCbTjqDeB7LYuLmFZd3LG69obM0NiUr/yszU5rzoXPR4LOnBjtr6V6+RHXRy8jYW3vkKHsjrx183bG5XVBWbtxbl6/1MxlasvLq90izMs6qgCufpBisRlfXkTwytv19Bdoa41AP3i64AFtnpTos5Mjx7iiYaEymlqSerUTVcuqZ0rSlpxtsRld3wTEytn6FglBLOAXgbXxBwRMvzOvdhKL5pTXP4PkzGtO8DRxNzzAr4EJkFBoZHDRYWYvQ6VBjfDwZ+2WgHPeBZMCqDwjsuNx4VWpa+8K6y0NM5jSxV7rQmYQNZkXca2o02FnrQed1Y1yK1OsBeIVSltbCe7U3TypLCcw89OOiBu0IUwGY+OY2VGoyH2r8g9EfbVcRodcbbEGwKv680W3sB8U+KsLPxfkUePBJtzFE9gOet3xPQEZ274LaZsY78h4UUbx+k7EIzKXED1BvcRHqLTmDLm/bZjxeIVejDeIZdyHvhPYBvG0quO7Tt/tu/1g795uygaiW62Y9YgWsjNwvclFVUKhZIaZo5CoiUSz+BXKtAcZswaMJPxq8hb7jFhqWp96970bYqZL+hd9+p4PeQRa08aIW5WXloLNr16EKuOUVwXPQaaWa2O8l648QutXAuVEA6/eAsYSXjwTACXcK571ZOCtx8yVo3z3+nx2865eWcWd28oddyvD51TC+H4gGcNNh+x9jQsIt3BHAfd0TkAFSAN8tPNEY/0dQsrH5H1vOGOuYiOmSAAAAAElFTkSuQmCC" InformativeScreenshot="0a421bf213ca4429986cca697b5f94a7.png" Selector="&lt;wnd app='flexwin.exe' ctrlname='frmMain' /&gt;" />
+          <uix:TargetApp Area="-8, -8, 1382, 744" FilePath="[in_Config(&quot;FlexmanApp_Path&quot;).ToString]" IconBase64="iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAVWSURBVFhHvZd7TFNXHMeBogULBdpisFhaLPTBa4CiMlSGTpxEETUujOh0QJyP6CZjUWE6UEZEMEFxU3QDsSBPcYCAkyoPhWFwYT6yzT2M7hExBnQzEYH2nv3Ovb21jwtc/sBv8knbe3739/3de8/5nVubSdRUYAr19fVL0HHYJXXzcoe18J1HHXp9st+zzjHpxQXhi5tHXR/C7xjAjhx5HeI52Kh/+9rtjv6iCI3Ui4i8ZF4zHJ5JjU6+pmlSnXN1DSICF4D5q0QwqPDk7ICxyZ8PAVJOxONzgke0OU3VXudbMOxPRU1ctobP8cRvyuQXg6Hx6mkGKoW6yMApmRDjQIWylA/X0TVZ5LHKc8rUWPgZAAgAezxmqQg/+6j+SmG/pTlNw+f8exAWTEWzV7BGpnwCDBZI5A/2zfBqinUV7nO0s1sCY2IAr3Usp8ZMfhEYWV09zUCVUB+ussd3gUudwk7+x8G4epYa0VTNUhOnpb5PD4qlnatdhQeggkWuPJvlfWWCPiZjU2rS+Hcgp5pKzU7uB8TSVtMCTMHFnPDyeZK/QvxopN591Kun+VsjGJ4pssMrgkOlH1/cJJFHPpO5JZdiVOh+ngwN101nNKfJTeJpIa8HlX582Sq4jgml3sohJlMmmqJV6GG+FOka3BkL6Ml37Ye8S6n07BR4zGIesKE1QYGeaTytCvi3RkjMU9pnQ156Ao8rt70ekjomk/GoDVKj33NkSN9gXsSxLU4dkJf1Y+AscOJ/VOGt0jOZsOGHFB/YF149krYclz7IO59Kz05zYDn+w5ScLd3bfJHOUMT9IrdhyLkJYNVl8SYSsjVk9s9MiSfC7TQ5WcDz80LCV8zJMeQeVbhj+St37U4PL6u9tVTbpdesWsOY2JLzb8xGLTt2IG3KLlQ7N/zVmI8a9RVKYIWIUGK0QwXkdyKdLISrUqs+Tc+IqL7465L2Hv2SjpsIk1lQaGbERM/JE+jF0wFEa+j5f+h2+Tkw9yPHW1YrySV6YP20FvDBe4tR+K1F4rNl566IqvqfwJigjWnitJ2oPHKxlSlNT+FJRBCEwdpcd2uqjXGPT0nQ4UTeNfCbTjqDeB7LYuLmFZd3LG69obM0NiUr/yszU5rzoXPR4LOnBjtr6V6+RHXRy8jYW3vkKHsjrx183bG5XVBWbtxbl6/1MxlasvLq90izMs6qgCufpBisRlfXkTwytv19Bdoa41AP3i64AFtnpTos5Mjx7iiYaEymlqSerUTVcuqZ0rSlpxtsRld3wTEytn6FglBLOAXgbXxBwRMvzOvdhKL5pTXP4PkzGtO8DRxNzzAr4EJkFBoZHDRYWYvQ6VBjfDwZ+2WgHPeBZMCqDwjsuNx4VWpa+8K6y0NM5jSxV7rQmYQNZkXca2o02FnrQed1Y1yK1OsBeIVSltbCe7U3TypLCcw89OOiBu0IUwGY+OY2VGoyH2r8g9EfbVcRodcbbEGwKv680W3sB8U+KsLPxfkUePBJtzFE9gOet3xPQEZ274LaZsY78h4UUbx+k7EIzKXED1BvcRHqLTmDLm/bZjxeIVejDeIZdyHvhPYBvG0quO7Tt/tu/1g795uygaiW62Y9YgWsjNwvclFVUKhZIaZo5CoiUSz+BXKtAcZswaMJPxq8hb7jFhqWp96970bYqZL+hd9+p4PeQRa08aIW5WXloLNr16EKuOUVwXPQaaWa2O8l648QutXAuVEA6/eAsYSXjwTACXcK571ZOCtx8yVo3z3+nx2865eWcWd28oddyvD51TC+H4gGcNNh+x9jQsIt3BHAfd0TkAFSAN8tPNEY/0dQsrH5H1vOGOuYiOmSAAAAAElFTkSuQmCC" InformativeScreenshot="0a421bf213ca4429986cca697b5f94a7.png" Selector="&lt;wnd app='flexwin.exe' ctrlname='frmMain' /&gt;" />
         </uix:NApplicationCard.TargetApp>
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
@@ -226,5 +241,50 @@
         </sap:WorkflowViewStateService.ViewState>
       </uix:NApplicationCard>
     </FlowStep>
+    <FlowStep x:Name="__ReferenceID2">
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <av:Point x:Key="ShapeLocation">200,134</av:Point>
+          <av:Size x:Key="ShapeSize">200,52</av:Size>
+          <av:PointCollection x:Key="ConnectorLocation">300,186 300,244</av:PointCollection>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+      <ui:StartProcess Arguments="{x:Null}" WorkingDirectory="{x:Null}" DisplayName="Start Process-Flewin.exe" FileName="[in_Config(&quot;FlexmanApp_Path&quot;).ToString]" sap:VirtualizedContainerService.HintSize="200,52" sap2010:WorkflowViewState.IdRef="StartProcess_1">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </ui:StartProcess>
+      <FlowStep.Next>
+        <FlowStep x:Name="__ReferenceID1">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <av:Point x:Key="ShapeLocation">200,244</av:Point>
+              <av:Size x:Key="ShapeSize">200,52</av:Size>
+              <av:PointCollection x:Key="ConnectorLocation">300,296 300,354</av:PointCollection>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+          <ui:UiElementExists Exists="{x:Null}" DisplayName="Element Exists LoginPrompt" sap:VirtualizedContainerService.HintSize="200,52" sap2010:WorkflowViewState.IdRef="UiElementExists_2">
+            <ui:UiElementExists.Target>
+              <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="7963e9c8-afd7-4bc4-a667-26fc48f47d35" InformativeScreenshot="effbbcf919278808e2adf959f45fb7da" Selector="&lt;wnd app='flexwin.exe' ctrlname='frmLogin' /&gt;" TimeoutMS="[timeoutLoginPrompt]">
+                <ui:Target.WaitForReady>
+                  <InArgument x:TypeArguments="ui:WaitForReady" />
+                </ui:Target.WaitForReady>
+              </ui:Target>
+            </ui:UiElementExists.Target>
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+          </ui:UiElementExists>
+          <FlowStep.Next>
+            <x:Reference>__ReferenceID0</x:Reference>
+          </FlowStep.Next>
+        </FlowStep>
+      </FlowStep.Next>
+    </FlowStep>
+    <x:Reference>__ReferenceID1</x:Reference>
   </Flowchart>
 </Activity>

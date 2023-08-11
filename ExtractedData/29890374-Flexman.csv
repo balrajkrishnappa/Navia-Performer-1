@@ -1,4 +1,0 @@
-﻿LineItem,Date,Amount,PlanDates,EligibilityDate,TerminationDate,ReasonsOfDenial,Result
-1,01/15/2023,10.00,1/1/2023 - 12/31/2023,1/1/2023,,,Deny
-2,01/15/2023,5.00,1/1/2023 - 12/31/2023,1/1/2023,,,Deny
-3,01/15/2023,5.00,1/1/2023 - 12/31/2023,1/1/2023,,,Deny

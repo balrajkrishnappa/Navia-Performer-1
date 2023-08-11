@@ -1,0 +1,117 @@
+<Activity mc:Ignorable="sap sap2010" x:Class="PrioritizingDateOfService" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=System.Private.CoreLib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data.Common" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <x:Members>
+    <x:Property Name="in_dt_MLmodelValidatedData" Type="InArgument(sd:DataTable)" />
+    <x:Property Name="io_dt_FlexmanData" Type="InOutArgument(sd:DataTable)" />
+  </x:Members>
+  <VisualBasic.Settings>
+    <x:Null />
+  </VisualBasic.Settings>
+  <sap:VirtualizedContainerService.HintSize>654,597</sap:VirtualizedContainerService.HintSize>
+  <sap2010:WorkflowViewState.IdRef>PrioritizingDateOfService_1</sap2010:WorkflowViewState.IdRef>
+  <TextExpression.NamespacesForImplementation>
+    <sco:Collection x:TypeArguments="x:String">
+      <x:String>System.Activities</x:String>
+      <x:String>System.Activities.Statements</x:String>
+      <x:String>System.Activities.Expressions</x:String>
+      <x:String>System.Activities.Validation</x:String>
+      <x:String>System.Activities.XamlIntegration</x:String>
+      <x:String>Microsoft.VisualBasic</x:String>
+      <x:String>Microsoft.VisualBasic.Activities</x:String>
+      <x:String>System</x:String>
+      <x:String>System.Collections</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Data</x:String>
+      <x:String>System.Diagnostics</x:String>
+      <x:String>System.Drawing</x:String>
+      <x:String>System.IO</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>System.Net.Mail</x:String>
+      <x:String>System.Xml</x:String>
+      <x:String>System.Xml.Linq</x:String>
+      <x:String>UiPath.Core</x:String>
+      <x:String>UiPath.Core.Activities</x:String>
+      <x:String>System.Windows.Markup</x:String>
+      <x:String>GlobalVariablesNamespace</x:String>
+      <x:String>GlobalConstantsNamespace</x:String>
+      <x:String>System.Reflection</x:String>
+      <x:String>System.Collections.ObjectModel</x:String>
+      <x:String>System.Runtime.Serialization</x:String>
+      <x:String>System.ComponentModel</x:String>
+      <x:String>System.Xml.Serialization</x:String>
+      <x:String>UiPath.Excel</x:String>
+      <x:String>UiPath.Excel.Activities</x:String>
+      <x:String>System.Text.RegularExpressions</x:String>
+      <x:String>UiPath.DataTableUtilities</x:String>
+    </sco:Collection>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <scg:List x:TypeArguments="AssemblyReference" Capacity="68">
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
+      <AssemblyReference>System.Private.CoreLib</AssemblyReference>
+      <AssemblyReference>System.Data</AssemblyReference>
+      <AssemblyReference>System.Data.DataSetExtensions</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Drawing</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System.Xml</AssemblyReference>
+      <AssemblyReference>System.Xml.Linq</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.UiAutomation.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Studio.Constants</AssemblyReference>
+      <AssemblyReference>System.Reflection.DispatchProxy</AssemblyReference>
+      <AssemblyReference>System.Reflection.TypeExtensions</AssemblyReference>
+      <AssemblyReference>System.ObjectModel</AssemblyReference>
+      <AssemblyReference>System.Reflection.Metadata</AssemblyReference>
+      <AssemblyReference>System.Private.ServiceModel</AssemblyReference>
+      <AssemblyReference>System.Runtime.Serialization.Formatters</AssemblyReference>
+      <AssemblyReference>System.Private.DataContractSerialization</AssemblyReference>
+      <AssemblyReference>System.Runtime.Serialization.Primitives</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.EventBasedAsync</AssemblyReference>
+      <AssemblyReference>PresentationFramework</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.TypeConverter</AssemblyReference>
+      <AssemblyReference>WindowsBase</AssemblyReference>
+      <AssemblyReference>Microsoft.Win32.Primitives</AssemblyReference>
+      <AssemblyReference>System.ComponentModel</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.Primitives</AssemblyReference>
+      <AssemblyReference>System.Private.Xml</AssemblyReference>
+      <AssemblyReference>UiPath.Excel.Activities.Design</AssemblyReference>
+      <AssemblyReference>UiPath.Excel.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Excel</AssemblyReference>
+      <AssemblyReference>System.Data.SqlClient</AssemblyReference>
+      <AssemblyReference>System.Data.Common</AssemblyReference>
+      <AssemblyReference>NPOI</AssemblyReference>
+      <AssemblyReference>System.Memory.Data</AssemblyReference>
+      <AssemblyReference>System.Console</AssemblyReference>
+      <AssemblyReference>System.Configuration.ConfigurationManager</AssemblyReference>
+      <AssemblyReference>System.Security.Permissions</AssemblyReference>
+      <AssemblyReference>System.Memory</AssemblyReference>
+      <AssemblyReference>System.Private.Uri</AssemblyReference>
+      <AssemblyReference>UiPath.Workflow</AssemblyReference>
+      <AssemblyReference>System.Text.RegularExpressions</AssemblyReference>
+    </scg:List>
+  </TextExpression.ReferencesForImplementation>
+  <Sequence sap:VirtualizedContainerService.HintSize="400,532" sap2010:WorkflowViewState.IdRef="Sequence_2">
+    <Sequence.Variables>
+      <Variable x:TypeArguments="scg:Dictionary(x:Int32, x:Int32)" Default="[New Dictionary(of Integer,Integer)]" Name="Dict_Matchrows" />
+    </Sequence.Variables>
+    <sap:WorkflowViewStateService.ViewState>
+      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+      </scg:Dictionary>
+    </sap:WorkflowViewStateService.ViewState>
+    <ui:ReadRange Range="{x:Null}" AddHeaders="True" DataTable="[in_dt_MLmodelValidatedData]" DisplayName="Read Range Workbook" sap:VirtualizedContainerService.HintSize="338,88" sap2010:WorkflowViewState.IdRef="ReadRange_1" SheetName="Sheet2" WorkbookPath="C:\Users\BKrishnappa\Downloads\FlexmanExport_30283183.xls" />
+    <ui:ReadRange Range="{x:Null}" AddHeaders="True" DataTable="[io_dt_FlexmanData]" DisplayName="Read Range Workbook" sap:VirtualizedContainerService.HintSize="338,88" sap2010:WorkflowViewState.IdRef="ReadRange_2" SheetName="Sheet3" WorkbookPath="C:\Users\BKrishnappa\Downloads\FlexmanExport_30283183.xls" />
+    <ui:InvokeCode ContinueOnError="{x:Null}" Code="&#xD;&#xA;table1.Columns.Add(&quot;DateOfService&quot;, typeof(string));&#xD;&#xA;&#xD;&#xA;// Loop through each row in table1&#xD;&#xA;for (int i = 0; i &lt; table1.Rows.Count; i++)&#xD;&#xA;{&#xD;&#xA;    DataRow row = table1.Rows[i];&#xD;&#xA;    DateTime dateOfService = DateTime.MinValue; // Default value for DateOfService&#xD;&#xA;&#xD;&#xA;    // Loop through each row in table2&#xD;&#xA;    for (int j = 0; j &lt; table2.Rows.Count; j++)&#xD;&#xA;    {&#xD;&#xA;        DataRow row2 = table2.Rows[j];&#xD;&#xA;        DateTime dateToMatch = DateTime.MinValue; // Default value for date to match&#xD;&#xA;        double amountToMatch = 0.0; // Default value for amount to match&#xD;&#xA;&#xD;&#xA;        // Check if the row in table2 is already used for comparison&#xD;&#xA;        if (row2[&quot;IsMatched&quot;] != DBNull.Value &amp;&amp; (bool)row2[&quot;IsMatched&quot;])&#xD;&#xA;        {&#xD;&#xA;            continue; // Skip to the next row in table2&#xD;&#xA;        }&#xD;&#xA;&#xD;&#xA;        // Extract double number from amount string using regex and convert to double&#xD;&#xA;        string amountString = (string)row2[&quot;Amount&quot;];&#xD;&#xA;        string amountNumberString = Regex.Match(amountString, @&quot;\d+(\.\d+)?&quot;).Value;&#xD;&#xA;        double.TryParse(amountNumberString, out amountToMatch);&#xD;&#xA;&#xD;&#xA;        // Convert date string to DateTime object using CDate&#xD;&#xA;        string dateString = (string)row2[&quot;Date&quot;];&#xD;&#xA;        DateTime.TryParse(dateString, out dateToMatch);&#xD;&#xA;&#xD;&#xA;        // Loop through each row in table1 and compare Amount column&#xD;&#xA;        for (int k = 0; k &lt; table1.Rows.Count; k++)&#xD;&#xA;        {&#xD;&#xA;            DataRow row1 = table1.Rows[k];&#xD;&#xA;            double amountInTable1 = 0.0; // Default value for amount in table1&#xD;&#xA;            DateTime dateInTable1 = DateTime.MinValue; // Default value for date in table1&#xD;&#xA;&#xD;&#xA;            // Extract double number from amount string using regex and convert to double&#xD;&#xA;            string amountStringTable1 = (string)row1[&quot;Amount&quot;];&#xD;&#xA;            string amountNumberStringTable1 = Regex.Match(amountStringTable1, @&quot;\d+(\.\d+)?&quot;).Value;&#xD;&#xA;            double.TryParse(amountNumberStringTable1, out amountInTable1);&#xD;&#xA;&#xD;&#xA;            // Convert date string to DateTime object using CDate&#xD;&#xA;            string dateStringTable1 = (string)row1[&quot;Date&quot;];&#xD;&#xA;            DateTime.TryParse(dateStringTable1, out dateInTable1);&#xD;&#xA;&#xD;&#xA;            // Check if Amount and Date match&#xD;&#xA;            if (amountInTable1 == amountToMatch &amp;&amp; dateInTable1 == dateToMatch)&#xD;&#xA;            {&#xD;&#xA;                // Check ReceiptDate&#xD;&#xA;                if (row1[&quot;ReceiptDate&quot;] != DBNull.Value)&#xD;&#xA;                {&#xD;&#xA;                    DateTime receiptDate = (DateTime)row1[&quot;ReceiptDate&quot;];&#xD;&#xA;                    dateOfService = receiptDate;&#xD;&#xA;                    row2[&quot;IsMatched&quot;] = true; // Mark the row in table2 as matched&#xD;&#xA;                    break; // Exit the inner loop if a match is found&#xD;&#xA;                }&#xD;&#xA;                // Check coldatefiled if ReceiptDate did not match&#xD;&#xA;                else if (row1[&quot;coldatefiled&quot;] != DBNull.Value)&#xD;&#xA;                {&#xD;&#xA;                    DateTime coldatefiled = (DateTime)row1[&quot;coldatefiled&quot;];&#xD;&#xA;                    dateOfService = coldatefiled;&#xD;&#xA;                    row2[&quot;IsMatched&quot;] = true; // Mark the row in table2 as matched&#xD;&#xA;                    break; // Exit the inner loop if a match is found&#xD;&#xA;                }&#xD;&#xA;                // Check DOS if coldatefiled and ReceiptDate did not match&#xD;&#xA;                else if (row1[&quot;DOS&quot;] != DBNull.Value)&#xD;&#xA;                {&#xD;&#xA;                    DateTime dos = (DateTime)row1[&quot;DOS&quot;];&#xD;&#xA;                    dateOfService = dos;&#xD;&#xA;                    row2[&quot;IsMatched&quot;] = true; // Mark the row in table2 as matched&#xD;&#xA;                    break; // Exit the inner loop if a match is found&#xD;&#xA;                }&#xD;&#xA;            }&#xD;&#xA;        }&#xD;&#xA;    }&#xD;&#xA;&#xD;&#xA;    // Convert DateOfService to string&#xD;&#xA;    row[&quot;DateOfService&quot;] = dateOfService.ToString();&#xD;&#xA;}&#xD;&#xA;&#xD;&#xA;&#xD;&#xA;table2.Columns.Remove(&quot;IsMatched&quot;);&#xD;&#xA;" DisplayName="Invoke Code" sap:VirtualizedContainerService.HintSize="338,165" sap2010:WorkflowViewState.IdRef="InvokeCode_1" Language="CSharp">
+      <ui:InvokeCode.Arguments>
+        <InOutArgument x:TypeArguments="sd:DataTable" x:Key="table1">
+          <VisualBasicReference x:TypeArguments="sd:DataTable" ExpressionText="in_dt_MLmodelValidatedData" />
+        </InOutArgument>
+        <InArgument x:TypeArguments="sd:DataTable" x:Key="table2">
+          <VisualBasicValue x:TypeArguments="sd:DataTable" ExpressionText="io_dt_FlexmanData" />
+        </InArgument>
+      </ui:InvokeCode.Arguments>
+    </ui:InvokeCode>
+  </Sequence>
+</Activity>

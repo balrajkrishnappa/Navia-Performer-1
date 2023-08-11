@@ -9,7 +9,7 @@
   <VisualBasic.Settings>
     <x:Null />
   </VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>728,4659</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>1178,6744</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>ProcessTransaction_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <scg:List x:TypeArguments="x:String" Capacity="43">
@@ -59,7 +59,7 @@
     </scg:List>
   </TextExpression.NamespacesForImplementation>
   <TextExpression.ReferencesForImplementation>
-    <scg:List x:TypeArguments="AssemblyReference" Capacity="65">
+    <scg:List x:TypeArguments="AssemblyReference" Capacity="130">
       <AssemblyReference>System.Activities</AssemblyReference>
       <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
       <AssemblyReference>mscorlib</AssemblyReference>
@@ -124,9 +124,10 @@
       <AssemblyReference>System.Linq.Queryable</AssemblyReference>
       <AssemblyReference>System.Memory.Data</AssemblyReference>
       <AssemblyReference>System.Text.RegularExpressions</AssemblyReference>
+      <AssemblyReference>System.Linq.Async</AssemblyReference>
     </scg:List>
   </TextExpression.ReferencesForImplementation>
-  <Sequence sap2010:Annotation.AnnotationText="Invoke major steps of the business process, which are usually implemented by multiple subworkflows.&#xA;&#xA;If a BusinessRuleException is thrown, the transaction is skipped. &#xA;If another kind of exception occurs, the current transaction can be retried. " DisplayName="Process" sap:VirtualizedContainerService.HintSize="695,6369" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence sap2010:Annotation.AnnotationText="Invoke major steps of the business process, which are usually implemented by multiple subworkflows.&#xA;&#xA;If a BusinessRuleException is thrown, the transaction is skipped. &#xA;If another kind of exception occurs, the current transaction can be retried. " DisplayName="Process" sap:VirtualizedContainerService.HintSize="736,6679" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="x:Int32" Name="FlexmanIndex" />
       <Variable x:TypeArguments="x:Int32" Name="MLIndex" />
@@ -152,9 +153,9 @@
         <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <ui:Comment sap:VirtualizedContainerService.HintSize="633,94" sap2010:WorkflowViewState.IdRef="Comment_2" Text="&quot;Processing file in Navia Claims STAGING environment - NewClaims folder for file based on Queue Item&quot;" />
-    <ui:LogMessage DisplayName="Log Message Process Start" sap:VirtualizedContainerService.HintSize="633,92" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Info" Message="[&quot;Started Processing Performer 1 for fle with batch number:  &quot;+in_Str_BatchNumber]" />
-    <If sap2010:Annotation.AnnotationText="Checking if line items are matching are not&#xD;&#xA;and throws Business Exception" Condition="[Not (io_dt_FlexmanData.RowCount=in_dt_MLmodelValidatedData.RowCount)]" sap:VirtualizedContainerService.HintSize="633,124" sap2010:WorkflowViewState.IdRef="If_15">
+    <ui:Comment sap:VirtualizedContainerService.HintSize="674,94" sap2010:WorkflowViewState.IdRef="Comment_2" Text="&quot;Processing file in Navia Claims STAGING environment - NewClaims folder for file based on Queue Item&quot;" />
+    <ui:LogMessage DisplayName="Log Message Process Start" sap:VirtualizedContainerService.HintSize="674,92" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Info" Message="[&quot;Started Processing Performer 1 for fle with batch number:  &quot;+in_Str_BatchNumber]" />
+    <If sap2010:Annotation.AnnotationText="Checking if line items are matching are not&#xA;and throws Business Exception" Condition="[Not (io_dt_FlexmanData.RowCount=in_dt_MLmodelValidatedData.RowCount)]" sap:VirtualizedContainerService.HintSize="674,124" sap2010:WorkflowViewState.IdRef="If_15">
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
           <x:Boolean x:Key="IsExpanded">False</x:Boolean>
@@ -166,7 +167,7 @@
         <Throw Exception="[new BusinessRuleException(&quot;Count of Line Items in Flexman doesn't match Receipt&quot;)]" sap:VirtualizedContainerService.HintSize="334,90" sap2010:WorkflowViewState.IdRef="Throw_2" />
       </If.Then>
     </If>
-    <ui:MultipleAssign sap2010:Annotation.AnnotationText="Initializing all the lists in the flow&#xA;" DisplayName="Multiple Initialization Of Lists" sap:VirtualizedContainerService.HintSize="633,298" sap2010:WorkflowViewState.IdRef="MultipleAssign_1">
+    <ui:MultipleAssign sap2010:Annotation.AnnotationText="Initializing all the lists in the flow&#xA;" DisplayName="Multiple Initialization Of Lists" sap:VirtualizedContainerService.HintSize="674,298" sap2010:WorkflowViewState.IdRef="MultipleAssign_1">
       <ui:MultipleAssign.AssignOperations>
         <scg:List x:TypeArguments="ui:AssignOperation" Capacity="8">
           <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_3">
@@ -227,7 +228,7 @@
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
     </ui:MultipleAssign>
-    <Sequence sap2010:Annotation.AnnotationText="Date Validation for Entire Batch" DisplayName="Date Validation for Entire Batch" sap:VirtualizedContainerService.HintSize="633,1330" sap2010:WorkflowViewState.IdRef="Sequence_7">
+    <Sequence sap2010:Annotation.AnnotationText="Date Validation for Entire Batch" DisplayName="Date Validation for Entire Batch" sap:VirtualizedContainerService.HintSize="674,1330" sap2010:WorkflowViewState.IdRef="Sequence_7">
       <Sequence.Variables>
         <Variable x:TypeArguments="x:String" Name="Str_DateOfService" />
         <Variable x:TypeArguments="s:String[]" Name="arr_DateFormats" />
@@ -317,11 +318,10 @@
               <If.Then>
                 <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Workflows\Date_Validation.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="334,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_10" UnSafe="False" WorkflowFileName="Workflows\Date_Validation.xaml">
                   <ui:InvokeWorkflowFile.Arguments>
-                    <InArgument x:TypeArguments="x:Int32" x:Key="in_FlexmanIndex">0</InArgument>
-                    <InArgument x:TypeArguments="x:Int32" x:Key="in_MLmodelIndex">0</InArgument>
-                    <InArgument x:TypeArguments="sd:DataTable" x:Key="in_dt_FlexmanData">[io_dt_FlexmanData]</InArgument>
-                    <InArgument x:TypeArguments="sd:DataTable" x:Key="in_dt_MLReceiptData">[in_dt_MLmodelValidatedData]</InArgument>
-                    <InOutArgument x:TypeArguments="scg:List(x:String)" x:Key="io_list_DenialReasons">[list_DenialReason]</InOutArgument>
+                    <InOutArgument x:TypeArguments="scg:List(x:String)" x:Key="io_list_DenialReasons">
+                      <VisualBasicReference x:TypeArguments="scg:List(x:String)" ExpressionText="list_DenialReason" />
+                    </InOutArgument>
+                    <InArgument x:TypeArguments="sd:DataRow" x:Key="datarow_currentLineItem" />
                   </ui:InvokeWorkflowFile.Arguments>
                 </ui:InvokeWorkflowFile>
               </If.Then>
@@ -339,8 +339,8 @@
         </If.Else>
       </If>
     </Sequence>
-    <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="633,92" sap2010:WorkflowViewState.IdRef="LogMessage_7" Message="[&quot;Creating new list of exactly matching rows and mapping them in Dictionary&quot;]" />
-    <Sequence sap2010:Annotation.AnnotationText="Creating Dictionary of exactly Matching Row indexes and Cost which is lesser than in ReceiptData, of both Receipt and Flexman Table" DisplayName="Mapping Line Item" sap:VirtualizedContainerService.HintSize="633,426" sap2010:WorkflowViewState.IdRef="Sequence_5">
+    <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="674,92" sap2010:WorkflowViewState.IdRef="LogMessage_7" Message="[&quot;Creating new list of exactly matching rows and mapping them in Dictionary&quot;]" />
+    <Sequence sap2010:Annotation.AnnotationText="Creating Dictionary of exactly Matching Row indexes and Cost which is lesser than in ReceiptData, of both Receipt and Flexman Table" DisplayName="Mapping Line Item" sap:VirtualizedContainerService.HintSize="674,426" sap2010:WorkflowViewState.IdRef="Sequence_5">
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
           <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -558,8 +558,8 @@
         </sap:WorkflowViewStateService.ViewState>
       </ui:ForEachRow>
     </Sequence>
-    <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="633,92" sap2010:WorkflowViewState.IdRef="LogMessage_3" Level="Info" Message="[(Dict_Matchrows.Count).ToString+&quot; rows of Flexman mapped successfully with Receipt Data&quot;]" />
-    <ui:ForEach x:TypeArguments="scg:KeyValuePair(x:Int32, x:Int32)" sap2010:Annotation.AnnotationText="Looping through all the Matched" CurrentIndex="[index]" DisplayName="For Each" sap:VirtualizedContainerService.HintSize="633,2041" sap2010:WorkflowViewState.IdRef="ForEach`1_1" Values="[Dict_Matchrows]">
+    <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="674,92" sap2010:WorkflowViewState.IdRef="LogMessage_3" Level="Info" Message="[(Dict_Matchrows.Count).ToString+&quot; rows of Flexman mapped successfully with Receipt Data&quot;]" />
+    <ui:ForEach x:TypeArguments="scg:KeyValuePair(x:Int32, x:Int32)" sap2010:Annotation.AnnotationText="Looping through all the Matched" CurrentIndex="[index]" DisplayName="For Each" sap:VirtualizedContainerService.HintSize="674,2041" sap2010:WorkflowViewState.IdRef="ForEach`1_1" Values="[Dict_Matchrows]">
       <ui:ForEach.Body>
         <ActivityAction x:TypeArguments="scg:KeyValuePair(x:Int32, x:Int32)">
           <ActivityAction.Argument>
@@ -629,12 +629,8 @@
             </Assign>
             <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Workflows\RX_Validation.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="478,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_1" UnSafe="False" WorkflowFileName="Workflows\RX_Validation.xaml">
               <ui:InvokeWorkflowFile.Arguments>
-                <InArgument x:TypeArguments="x:Int32" x:Key="in_FlexmanIndex">[int_MatchingFlexManIndex]</InArgument>
-                <InArgument x:TypeArguments="x:Int32" x:Key="in_MLmodelIndex">[int_MatchingReceiptIndex]</InArgument>
-                <InArgument x:TypeArguments="sd:DataTable" x:Key="in_dt_FlexmanData">[io_dt_FlexmanData]</InArgument>
-                <InArgument x:TypeArguments="sd:DataTable" x:Key="in_dt_MLReceiptData">[in_dt_MLmodelValidatedData]</InArgument>
-                <InOutArgument x:TypeArguments="scg:List(x:String)" x:Key="io_list_RX_numbers">[list_RX_numbers]</InOutArgument>
-                <OutArgument x:TypeArguments="scg:List(x:String)" x:Key="out_ListOfDenialsLineItem">[list_DenialReason2]</OutArgument>
+                <InOutArgument x:TypeArguments="scg:List(x:String)" x:Key="io_ListOfDenialsReasons" />
+                <InArgument x:TypeArguments="sd:DataRow" x:Key="datarow_currentrow" />
               </ui:InvokeWorkflowFile.Arguments>
               <sap:WorkflowViewStateService.ViewState>
                 <scg:Dictionary x:TypeArguments="x:String, x:Object">
@@ -645,12 +641,9 @@
             </ui:InvokeWorkflowFile>
             <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Workflows\Amount_Validation.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="478,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_8" UnSafe="False" WorkflowFileName="Workflows\Amount_Validation.xaml">
               <ui:InvokeWorkflowFile.Arguments>
-                <InArgument x:TypeArguments="x:Int32" x:Key="in_FlexmanIndex">[int_MatchingFlexManIndex]</InArgument>
-                <InArgument x:TypeArguments="x:Int32" x:Key="in_MLmodelIndex">[int_MatchingReceiptIndex]</InArgument>
-                <InArgument x:TypeArguments="sd:DataTable" x:Key="in_dt_FlexmanData">[io_dt_FlexmanData]</InArgument>
-                <InArgument x:TypeArguments="sd:DataTable" x:Key="in_dt_MLReceiptData">[in_dt_MLmodelValidatedData]</InArgument>
-                <OutArgument x:TypeArguments="scg:List(x:String)" x:Key="out_ListOfDenialsLineItem">[list_DenialReason3]</OutArgument>
-                <InOutArgument x:TypeArguments="scg:List(x:String)" x:Key="io_list_LineAmounts">[list_LineAmounts]</InOutArgument>
+                <InOutArgument x:TypeArguments="scg:List(x:String)" x:Key="io_ListOfDenialReasons" />
+                <InArgument x:TypeArguments="sd:DataRow" x:Key="datarow_currentlineItem" />
+                <InOutArgument x:TypeArguments="scg:Dictionary(x:String, x:String)" x:Key="io_Dict_LineAmountandDateOfService" />
               </ui:InvokeWorkflowFile.Arguments>
               <sap:WorkflowViewStateService.ViewState>
                 <scg:Dictionary x:TypeArguments="x:String, x:Object">
@@ -894,7 +887,7 @@
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
     </ui:ForEach>
-    <TryCatch sap2010:Annotation.AnnotationText="Trying to loop through unmapped rows aswell" DisplayName="Try Catch" sap:VirtualizedContainerService.HintSize="633,1237" sap2010:WorkflowViewState.IdRef="TryCatch_1">
+    <TryCatch sap2010:Annotation.AnnotationText="Trying to loop through unmapped rows aswell" DisplayName="Try Catch" sap:VirtualizedContainerService.HintSize="674,1547" sap2010:WorkflowViewState.IdRef="TryCatch_1">
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
           <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -903,19 +896,19 @@
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
       <TryCatch.Try>
-        <ui:ForEachRow ColumnNames="{x:Null}" CurrentIndex="[int_MoreCostindex]" DataTable="[io_dt_FlexmanData]" DisplayName="For Each Row in Data Table" sap:VirtualizedContainerService.HintSize="229,52" sap2010:WorkflowViewState.IdRef="ForEachRow_5">
+        <ui:ForEachRow ColumnNames="{x:Null}" CurrentIndex="[int_MoreCostindex]" DataTable="[io_dt_FlexmanData]" DisplayName="For Each Row in Data Table" sap:VirtualizedContainerService.HintSize="636,1288" sap2010:WorkflowViewState.IdRef="ForEachRow_5">
           <ui:ForEachRow.Body>
             <ActivityAction x:TypeArguments="sd:DataRow">
               <ActivityAction.Argument>
                 <DelegateInArgument x:TypeArguments="sd:DataRow" Name="row" />
               </ActivityAction.Argument>
-              <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="602,1245" sap2010:WorkflowViewState.IdRef="Sequence_17">
+              <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="602,1172" sap2010:WorkflowViewState.IdRef="Sequence_17">
                 <sap:WorkflowViewStateService.ViewState>
                   <scg:Dictionary x:TypeArguments="x:String, x:Object">
                     <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                   </scg:Dictionary>
                 </sap:WorkflowViewStateService.ViewState>
-                <If Condition="[Dict_Matchrows(int_MoreCostindex).ToString.Trim=&quot;&quot;]" sap:VirtualizedContainerService.HintSize="540,1134" sap2010:WorkflowViewState.IdRef="If_16">
+                <If Condition="[Dict_Matchrows(int_MoreCostindex).ToString.Trim=&quot;&quot;]" sap:VirtualizedContainerService.HintSize="540,1061" sap2010:WorkflowViewState.IdRef="If_16">
                   <sap:WorkflowViewStateService.ViewState>
                     <scg:Dictionary x:TypeArguments="x:String, x:Object">
                       <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -923,7 +916,7 @@
                     </scg:Dictionary>
                   </sap:WorkflowViewStateService.ViewState>
                   <If.Then>
-                    <Sequence sap:VirtualizedContainerService.HintSize="462,858" sap2010:WorkflowViewState.IdRef="Sequence_16">
+                    <Sequence sap:VirtualizedContainerService.HintSize="462,785" sap2010:WorkflowViewState.IdRef="Sequence_16">
                       <sap:WorkflowViewStateService.ViewState>
                         <scg:Dictionary x:TypeArguments="x:String, x:Object">
                           <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -938,7 +931,7 @@
                           <InArgument x:TypeArguments="scg:List(x:String)">[New List(Of String)]</InArgument>
                         </Assign.Value>
                       </Assign>
-                      <uasc:AppendItemToCollection x:TypeArguments="x:String" Collection="[list_DenialReasonFinal]" DisplayName="Append item to collection" sap:VirtualizedContainerService.HintSize="400,241" sap2010:WorkflowViewState.IdRef="AppendItemToCollection`1_14" Result="[list_DenialReasonFinal]">
+                      <uasc:AppendItemToCollection x:TypeArguments="x:String" Collection="[list_DenialReasonFinal]" DisplayName="Append item to collection" sap:VirtualizedContainerService.HintSize="400,168" sap2010:WorkflowViewState.IdRef="AppendItemToCollection`1_14" Result="[list_DenialReasonFinal]">
                         <uasc:AppendItemToCollection.Items>
                           <scg:List x:TypeArguments="InArgument(x:String)" Capacity="4">
                             <InArgument x:TypeArguments="x:String">Missing Cost Incurred</InArgument>
@@ -984,17 +977,17 @@
           </ui:ForEachRow.Body>
           <sap:WorkflowViewStateService.ViewState>
             <scg:Dictionary x:TypeArguments="x:String, x:Object">
-              <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
               <x:Boolean x:Key="IsPinned">False</x:Boolean>
             </scg:Dictionary>
           </sap:WorkflowViewStateService.ViewState>
         </ui:ForEachRow>
       </TryCatch.Try>
       <TryCatch.Catches>
-        <Catch x:TypeArguments="s:Exception" sap:VirtualizedContainerService.HintSize="502,1043" sap2010:WorkflowViewState.IdRef="Catch`1_1">
+        <Catch x:TypeArguments="s:Exception" sap:VirtualizedContainerService.HintSize="640,21" sap2010:WorkflowViewState.IdRef="Catch`1_1">
           <sap:WorkflowViewStateService.ViewState>
             <scg:Dictionary x:TypeArguments="x:String, x:Object">
-              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              <x:Boolean x:Key="IsExpanded">False</x:Boolean>
               <x:Boolean x:Key="IsPinned">False</x:Boolean>
             </scg:Dictionary>
           </sap:WorkflowViewStateService.ViewState>

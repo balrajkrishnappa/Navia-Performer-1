@@ -1,24 +1,40 @@
 {
   "mainTable": [
     {
-      "DateOfService": "Jan 18, 2023",
-      "RxNumber": "**5770000",
-      "Amount": "10.12N"
+      "RxNumber": "# RX 2821273-15246",
+      "Amount": "2.06",
+      "DateOfService": "05/14/2023"
     }
   ],
   "FlexmanTable": [
     {
       "LineItem": "1",
-      "Date": "01/18/2023",
-      "Amount": "10.12",
-      "PlanDates": "9/1/2022 - 8/31/2023",
-      "EligibilityDate": "9/1/2022",
+      "DateOfService": "05/14/2023",
+      "Amount": "2.06",
+      "PlanDates": "1/1/2023 - 12/31/2023",
+      "EligibilityDate": "1/1/2023",
       "TerminationDate": "",
-      "Result": "Approve",
-      "ReasonsOfDenial": []
+      "ReasonsOfDenial": [
+        "Duplicate claim"
+      ],
+      "Result": "Deny"
     }
   ],
-  "submit": true,
-  "pdf_storage": "29926557.tif.pdf",
-  "__BUCKET_NAME": "PharmacyClaimsStorageBucket"
+  "RowToBeAdded": [
+    {
+      "Amount": "",
+      "DateOfService": "",
+      "ReasonsOfDenial": [],
+      "Result": "",
+      "selectLineItem": false
+    }
+  ],
+  "customersClaimAmount": "2.06",
+  "totalApprovedAmountFromFlexmanLineItemsToBeAddSections": "0.00",
+  "exceptionMessage": "",
+  "discardFromQueue": false,
+  "decision": "Add LineItems",
+  "pdf_storage": "31768210.tif.pdf",
+  "__BUCKET_NAME": "PharmacyClaimsStorageBucket",
+  "submit": true
 }

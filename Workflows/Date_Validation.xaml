@@ -1,15 +1,19 @@
-<Activity mc:Ignorable="sap sap2010" x:Class="Date_Validation" this:Date_Validation.in_FlexmanIndex="0" this:Date_Validation.in_MLmodelIndex="0" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:s="clr-namespace:System;assembly=System.Private.CoreLib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=System.Private.CoreLib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data.Common" xmlns:this="clr-namespace:" xmlns:uasc="clr-namespace:UiPath.Activities.System.Collections;assembly=UiPath.System.Activities" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<Activity mc:Ignorable="sap sap2010" x:Class="Date_Validation" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:s="clr-namespace:System;assembly=System.Private.CoreLib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=System.Private.CoreLib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data.Common" xmlns:this="clr-namespace:" xmlns:uasc="clr-namespace:UiPath.Activities.System.Collections;assembly=UiPath.System.Activities" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <x:Members>
-    <x:Property Name="in_FlexmanIndex" Type="InArgument(x:Int32)" />
-    <x:Property Name="in_MLmodelIndex" Type="InArgument(x:Int32)" />
-    <x:Property Name="in_dt_FlexmanData" Type="InArgument(sd:DataTable)" />
-    <x:Property Name="in_dt_MLReceiptData" Type="InArgument(sd:DataTable)" />
     <x:Property Name="io_list_DenialReasons" Type="InOutArgument(scg:List(x:String))" />
+    <x:Property Name="datarow_currentLineItem" Type="InArgument(sd:DataRow)" />
+    <x:Property Name="date_PlanStartDate" Type="OutArgument(s:DateTime)" />
+    <x:Property Name="date_PlanEndDate" Type="OutArgument(s:DateTime)" />
+    <x:Property Name="bool_EligibilityDateExist" Type="OutArgument(x:Boolean)" />
+    <x:Property Name="bool_TerminationDateExist" Type="OutArgument(x:Boolean)" />
   </x:Members>
+  <this:Date_Validation.datarow_currentLineItem>
+    <InArgument x:TypeArguments="sd:DataRow" />
+  </this:Date_Validation.datarow_currentLineItem>
   <VisualBasic.Settings>
     <x:Null />
   </VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>1178,5019</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>1178,4817</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>Date_Validation_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <sco:Collection x:TypeArguments="x:String">
@@ -101,9 +105,8 @@
       <AssemblyReference>System.Memory.Data</AssemblyReference>
     </scg:List>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="Date_Validation" sap:VirtualizedContainerService.HintSize="692,4954" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="Date_Validation" sap:VirtualizedContainerService.HintSize="692,4752" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
-      <Variable x:TypeArguments="sd:DataRow" Name="datarow_Flexman" />
       <Variable x:TypeArguments="sd:DataRow" Name="datarow_MLReceipt" />
       <Variable x:TypeArguments="x:String" Name="Str_DateOfService" />
       <Variable x:TypeArguments="x:String" Name="Str_PlanStartDate" />
@@ -112,34 +115,14 @@
       <Variable x:TypeArguments="x:String" Name="Str_TerminationDate" />
       <Variable x:TypeArguments="s:String[]" Name="arr_DateFormats" />
       <Variable x:TypeArguments="s:DateTime" Name="date_DateOfService" />
-      <Variable x:TypeArguments="s:DateTime" Name="date_PlanStartDate" />
-      <Variable x:TypeArguments="s:DateTime" Name="date_PlanEndDate" />
       <Variable x:TypeArguments="s:DateTime" Name="date_TerminationDate" />
       <Variable x:TypeArguments="s:DateTime" Name="date_EligibilityDate" />
-      <Variable x:TypeArguments="x:Boolean" Name="bool_EligibilityDateExist" />
-      <Variable x:TypeArguments="x:Boolean" Name="bool_TerminationDateExist" />
     </Sequence.Variables>
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <Assign sap:VirtualizedContainerService.HintSize="630,61" sap2010:WorkflowViewState.IdRef="Assign_1">
-      <Assign.To>
-        <OutArgument x:TypeArguments="sd:DataRow">[datarow_Flexman]</OutArgument>
-      </Assign.To>
-      <Assign.Value>
-        <InArgument x:TypeArguments="sd:DataRow">[in_dt_FlexmanData(in_FlexmanIndex)]</InArgument>
-      </Assign.Value>
-    </Assign>
-    <Assign sap:VirtualizedContainerService.HintSize="630,61" sap2010:WorkflowViewState.IdRef="Assign_2">
-      <Assign.To>
-        <OutArgument x:TypeArguments="sd:DataRow">[datarow_MLReceipt]</OutArgument>
-      </Assign.To>
-      <Assign.Value>
-        <InArgument x:TypeArguments="sd:DataRow">[in_dt_MLReceiptData(in_MLmodelIndex)]</InArgument>
-      </Assign.Value>
-    </Assign>
     <ui:MultipleAssign DisplayName="Multiple Assign" sap:VirtualizedContainerService.HintSize="630,225" sap2010:WorkflowViewState.IdRef="MultipleAssign_1">
       <ui:MultipleAssign.AssignOperations>
         <scg:List x:TypeArguments="ui:AssignOperation" Capacity="8">
@@ -148,7 +131,7 @@
               <OutArgument x:TypeArguments="x:String">[Str_DateOfService]</OutArgument>
             </ui:AssignOperation.To>
             <ui:AssignOperation.Value>
-              <InArgument x:TypeArguments="x:String">[datarow_Flexman("Date").ToString]</InArgument>
+              <InArgument x:TypeArguments="x:String">[If(datarow_currentlineItem("Date Of Service") Is DBNull.Value, datarow_currentlineItem("DateOfService").ToString, datarow_currentlineItem("Date Of Service").ToString())]</InArgument>
             </ui:AssignOperation.Value>
           </ui:AssignOperation>
           <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_2">
@@ -156,7 +139,7 @@
               <OutArgument x:TypeArguments="x:String">[Str_PlanStartDate]</OutArgument>
             </ui:AssignOperation.To>
             <ui:AssignOperation.Value>
-              <InArgument x:TypeArguments="x:String">[Regex.Matches(datarow_Flexman("PlanDates").ToString,".*\d(?= -)")(0).ToString]</InArgument>
+              <InArgument x:TypeArguments="x:String">[if(datarow_currentLineItem("PlanDates") is nothing or String.IsNullOrEmpty(datarow_currentLineItem("PlanDates").ToString),Nothing,Regex.Matches(datarow_currentLineItem("PlanDates").ToString,".*\d(?= -)")(0).ToString)]</InArgument>
             </ui:AssignOperation.Value>
           </ui:AssignOperation>
           <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_3">
@@ -164,7 +147,7 @@
               <OutArgument x:TypeArguments="x:String">[Str_PlanEndDate]</OutArgument>
             </ui:AssignOperation.To>
             <ui:AssignOperation.Value>
-              <InArgument x:TypeArguments="x:String">[Regex.Matches(datarow_Flexman("PlanDates").ToString,"(?&lt;=-.).*\d")(0).ToString]</InArgument>
+              <InArgument x:TypeArguments="x:String">[if(datarow_currentLineItem("PlanDates") is nothing or String.IsNullOrEmpty(datarow_currentLineItem("PlanDates").ToString),Nothing,Regex.Matches(datarow_currentLineItem("PlanDates").ToString,"(?&lt;=-.).*\d")(0).ToString)]</InArgument>
             </ui:AssignOperation.Value>
           </ui:AssignOperation>
           <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_4">
@@ -172,7 +155,7 @@
               <OutArgument x:TypeArguments="x:String">[Str_EligibilityDate]</OutArgument>
             </ui:AssignOperation.To>
             <ui:AssignOperation.Value>
-              <InArgument x:TypeArguments="x:String">[datarow_Flexman("EligibilityDate").ToString]</InArgument>
+              <InArgument x:TypeArguments="x:String">[datarow_currentLineItem("EligibilityDate").ToString]</InArgument>
             </ui:AssignOperation.Value>
           </ui:AssignOperation>
           <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_5">
@@ -180,7 +163,7 @@
               <OutArgument x:TypeArguments="x:String">[Str_TerminationDate]</OutArgument>
             </ui:AssignOperation.To>
             <ui:AssignOperation.Value>
-              <InArgument x:TypeArguments="x:String">[datarow_Flexman("TerminationDate").ToString]</InArgument>
+              <InArgument x:TypeArguments="x:String">[datarow_currentLineItem("TerminationDate").ToString]</InArgument>
             </ui:AssignOperation.Value>
           </ui:AssignOperation>
         </scg:List>
@@ -205,7 +188,7 @@
               <OutArgument x:TypeArguments="x:String">[Str_DateOfService]</OutArgument>
             </Assign.To>
             <Assign.Value>
-              <InArgument x:TypeArguments="x:String">[datarow_Flexman("Date").ToString]</InArgument>
+              <InArgument x:TypeArguments="x:String">[datarow_currentLineItem("Date").ToString]</InArgument>
             </Assign.Value>
           </Assign>
           <Assign sap:VirtualizedContainerService.HintSize="338,61" sap2010:WorkflowViewState.IdRef="Assign_4">
@@ -213,7 +196,7 @@
               <OutArgument x:TypeArguments="x:String">[Str_PlanStartDate]</OutArgument>
             </Assign.To>
             <Assign.Value>
-              <InArgument x:TypeArguments="x:String">[Regex.Matches(datarow_Flexman("Plan Dates").ToString,".*\d(?= -)")(0).ToString]</InArgument>
+              <InArgument x:TypeArguments="x:String">[Regex.Matches(datarow_currentLineItem("Plan Dates").ToString,".*\d(?= -)")(0).ToString]</InArgument>
             </Assign.Value>
           </Assign>
           <Assign sap:VirtualizedContainerService.HintSize="338,61" sap2010:WorkflowViewState.IdRef="Assign_5">
@@ -221,7 +204,7 @@
               <OutArgument x:TypeArguments="x:String">[Str_PlanEndDate]</OutArgument>
             </Assign.To>
             <Assign.Value>
-              <InArgument x:TypeArguments="x:String">[Regex.Matches(datarow_Flexman("Plan Dates").ToString,"(?&lt;=-.).*\d").ToString]</InArgument>
+              <InArgument x:TypeArguments="x:String">[Regex.Matches(datarow_currentLineItem("Plan Dates").ToString,"(?&lt;=-.).*\d").ToString]</InArgument>
             </Assign.Value>
           </Assign>
           <Assign sap:VirtualizedContainerService.HintSize="338,61" sap2010:WorkflowViewState.IdRef="Assign_6">
@@ -229,7 +212,7 @@
               <OutArgument x:TypeArguments="x:String">[Str_EligibilityDate]</OutArgument>
             </Assign.To>
             <Assign.Value>
-              <InArgument x:TypeArguments="x:String">[datarow_Flexman("Eligibility Date").ToString]</InArgument>
+              <InArgument x:TypeArguments="x:String">[datarow_currentLineItem("Eligibility Date").ToString]</InArgument>
             </Assign.Value>
           </Assign>
           <Assign sap:VirtualizedContainerService.HintSize="338,61" sap2010:WorkflowViewState.IdRef="Assign_7">
@@ -237,7 +220,7 @@
               <OutArgument x:TypeArguments="x:String">[Str_TerminationDate]</OutArgument>
             </Assign.To>
             <Assign.Value>
-              <InArgument x:TypeArguments="x:String">[datarow_Flexman("Termination Date").ToString]</InArgument>
+              <InArgument x:TypeArguments="x:String">[datarow_currentLineItem("Termination Date").ToString]</InArgument>
             </Assign.Value>
           </Assign>
         </Sequence>
@@ -390,7 +373,7 @@
         <OutArgument x:TypeArguments="s:String[]">[arr_DateFormats]</OutArgument>
       </Assign.To>
       <Assign.Value>
-        <InArgument x:TypeArguments="s:String[]">[{ "MM/dd/yyyy hh:mm:ss", "dd/yy","M/d/yyyy 00:00:00","MM/dd/yyyy","M/d/yyyy"}]</InArgument>
+        <InArgument x:TypeArguments="s:String[]">[{ "MM/dd/yyyy", "dd/yy","M/d/yyyy 00:00:00","MM/dd/yyyy","M/d/yyyy"}]</InArgument>
       </Assign.Value>
     </Assign>
     <Assign sap:VirtualizedContainerService.HintSize="630,61" sap2010:WorkflowViewState.IdRef="Assign_12">
@@ -419,6 +402,12 @@
     </Assign>
     <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="630,92" sap2010:WorkflowViewState.IdRef="LogMessage_2" Message="[date_DateOfService.ToString+Environment.NewLine+&quot;Plan startDate: &quot;+date_PlanStartDate.ToString+Environment.NewLine+&quot;Plan End Date:&quot;+date_PlanEndDate.ToString]" />
     <If Condition="[date_DateOfService&lt;date_PlanStartDate]" sap:VirtualizedContainerService.HintSize="630,1690" sap2010:WorkflowViewState.IdRef="If_5">
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
       <If.Then>
         <If Condition="[bool_EligibilityDateExist]" sap:VirtualizedContainerService.HintSize="412,512" sap2010:WorkflowViewState.IdRef="If_8">
           <sap:WorkflowViewStateService.ViewState>

@@ -1,18 +1,20 @@
 <Activity mc:Ignorable="sap sap2010" x:Class="ReceiptValidation" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:njl="clr-namespace:Newtonsoft.Json.Linq;assembly=Newtonsoft.Json" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data.Common" xmlns:ucas="clr-namespace:UiPath.Core.Activities.Storage;assembly=UiPath.System.Activities" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:upaf="clr-namespace:UiPath.Persistence.Activities.FormTask;assembly=UiPath.Persistence.Activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <x:Members>
-    <x:Property Name="In_MLDatatable" Type="InArgument(sd:DataTable)" />
-    <x:Property Name="In_FlexmanDatatable" Type="InArgument(sd:DataTable)" />
-    <x:Property Name="In_Config" Type="InArgument(scg:Dictionary(x:String, x:Object))" />
+    <x:Property sap2010:Annotation.AnnotationText="This DataTable will contain the  ML Model extracted result" Name="In_MLDatatable" Type="InArgument(sd:DataTable)" />
     <x:Property Name="in_TransactionItem" Type="InArgument(ui:QueueItem)" />
     <x:Property Name="out_TaskData" Type="OutArgument(upaf:FormTaskData)" />
+    <x:Property sap2010:Annotation.AnnotationText="This variable will contain lineitems that are successfully matched and the one 's which aren't matched.(Join Table Output)" Name="In_FlexmanAndReceiptDatatable" Type="InArgument(sd:DataTable)" />
+    <x:Property Name="in_Config" Type="InArgument(scg:Dictionary(x:String, x:Object))" />
+    <x:Property Name="out_bool_CreateForm" Type="OutArgument(x:Boolean)" />
+    <x:Property Name="in_ClaimTotal" Type="InArgument(x:String)" />
   </x:Members>
   <VisualBasic.Settings>
     <x:Null />
   </VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>1178,1524</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>1178,5404</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>ReceiptValidation_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
-    <scg:List x:TypeArguments="x:String" Capacity="40">
+    <scg:List x:TypeArguments="x:String" Capacity="80">
       <x:String>System.Activities</x:String>
       <x:String>System.Activities.Statements</x:String>
       <x:String>System.Activities.Expressions</x:String>
@@ -53,10 +55,12 @@
       <x:String>Newtonsoft.Json</x:String>
       <x:String>System.Dynamic</x:String>
       <x:String>System.Collections.Specialized</x:String>
+      <x:String>Microsoft.VisualBasic.CompilerServices</x:String>
+      <x:String>UiPath.Activities.Contracts</x:String>
     </scg:List>
   </TextExpression.NamespacesForImplementation>
   <TextExpression.ReferencesForImplementation>
-    <scg:List x:TypeArguments="AssemblyReference" Capacity="56">
+    <scg:List x:TypeArguments="AssemblyReference" Capacity="114">
       <AssemblyReference>System.Activities</AssemblyReference>
       <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
       <AssemblyReference>System.Private.CoreLib</AssemblyReference>
@@ -112,9 +116,17 @@
       <AssemblyReference>System.Collections.Specialized</AssemblyReference>
       <AssemblyReference>System.Collections.NonGeneric</AssemblyReference>
       <AssemblyReference>System.Collections</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities.Design</AssemblyReference>
+      <AssemblyReference>System.Linq.Async</AssemblyReference>
+      <AssemblyReference>System.Linq.Async.Queryable</AssemblyReference>
+      <AssemblyReference>System.Linq.Parallel</AssemblyReference>
+      <AssemblyReference>System.Collections.Immutable</AssemblyReference>
+      <AssemblyReference>System.Linq</AssemblyReference>
+      <AssemblyReference>System.Linq.Queryable</AssemblyReference>
+      <AssemblyReference>UiPath.Activities.Contracts</AssemblyReference>
     </scg:List>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="ReceiptValidation" sap:VirtualizedContainerService.HintSize="400,1459" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="ReceiptValidation" sap:VirtualizedContainerService.HintSize="914,5339" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="x:String" Name="filePath" />
       <Variable x:TypeArguments="x:String" Name="filename" />
@@ -126,13 +138,60 @@
       <Variable x:TypeArguments="x:String" Name="storageBucket" />
       <Variable x:TypeArguments="sd:DataTable" Name="out_newDatatable" />
       <Variable x:TypeArguments="upaf:FormTaskData" Name="task" />
+      <Variable x:TypeArguments="x:Boolean" Name="bool_HasDenyInDt" />
+      <Variable x:TypeArguments="x:Boolean" Name="bool_HasExtraLineItems" />
+      <Variable x:TypeArguments="x:Boolean" Name="bool_HasApproveOnly" />
     </Sequence.Variables>
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <Assign sap:VirtualizedContainerService.HintSize="338,61" sap2010:WorkflowViewState.IdRef="Assign_10">
+    <ui:InvokeCode ContinueOnError="{x:Null}" Code="&#xA;int startingIndex = 7;&#xA;&#xA;&#xA;while (yourDataTable.Columns.Count &gt; startingIndex + 1)&#xA;{&#xA;    yourDataTable.Columns.RemoveAt(startingIndex + 1);&#xA;}&#xA;" DisplayName="Invoke Code" sap:VirtualizedContainerService.HintSize="852,165" sap2010:WorkflowViewState.IdRef="InvokeCode_1" Language="CSharp">
+      <ui:InvokeCode.Arguments>
+        <InOutArgument x:TypeArguments="sd:DataTable" x:Key="yourDataTable">[In_FlexmanAndReceiptDatatable]</InOutArgument>
+      </ui:InvokeCode.Arguments>
+    </ui:InvokeCode>
+    <Assign sap:VirtualizedContainerService.HintSize="852,61" sap2010:WorkflowViewState.IdRef="Assign_14">
+      <Assign.To>
+        <OutArgument x:TypeArguments="x:String">[In_MLDatatable.Columns("Date Of Service").ColumnName]</OutArgument>
+      </Assign.To>
+      <Assign.Value>
+        <InArgument x:TypeArguments="x:String">DateOfService</InArgument>
+      </Assign.Value>
+    </Assign>
+    <Assign sap:VirtualizedContainerService.HintSize="852,61" sap2010:WorkflowViewState.IdRef="Assign_15">
+      <Assign.To>
+        <OutArgument x:TypeArguments="x:String">[In_MLDatatable.Columns("rxnumber").ColumnName]</OutArgument>
+      </Assign.To>
+      <Assign.Value>
+        <InArgument x:TypeArguments="x:String">RxNumber</InArgument>
+      </Assign.Value>
+    </Assign>
+    <Assign sap:VirtualizedContainerService.HintSize="852,61" sap2010:WorkflowViewState.IdRef="Assign_16">
+      <Assign.To>
+        <OutArgument x:TypeArguments="x:String">[In_MLDatatable.Columns("amount").ColumnName]</OutArgument>
+      </Assign.To>
+      <Assign.Value>
+        <InArgument x:TypeArguments="x:String">Amount</InArgument>
+      </Assign.Value>
+    </Assign>
+    <ui:FilterDataTable DataTable="[In_MLDatatable]" DisplayName="Filter Data Table" FilterRowsMode="Remove" sap:VirtualizedContainerService.HintSize="852,161" sap2010:WorkflowViewState.IdRef="FilterDataTable_1" OutputDataTable="[In_MLDatatable]" SelectColumnsMode="Remove">
+      <ui:FilterDataTable.Filters>
+        <scg:List x:TypeArguments="ui:FilterOperationArgument" Capacity="4">
+          <ui:FilterOperationArgument Column="{x:Null}" Operand="{x:Null}" BooleanOperator="And" Operator="LT" />
+        </scg:List>
+      </ui:FilterDataTable.Filters>
+      <ui:FilterDataTable.SelectColumns>
+        <scg:List x:TypeArguments="InArgument" Capacity="4">
+          <InArgument x:TypeArguments="x:String">["ReceiptDate"]</InArgument>
+          <InArgument x:TypeArguments="x:String">["prescription"]</InArgument>
+          <InArgument x:TypeArguments="x:String">["coldatefiled"]</InArgument>
+          <InArgument x:TypeArguments="x:String">["DOS"]</InArgument>
+        </scg:List>
+      </ui:FilterDataTable.SelectColumns>
+    </ui:FilterDataTable>
+    <Assign sap:VirtualizedContainerService.HintSize="852,61" sap2010:WorkflowViewState.IdRef="Assign_10">
       <Assign.To>
         <OutArgument x:TypeArguments="sd:DataTable">[out_newDatatable]</OutArgument>
       </Assign.To>
@@ -140,96 +199,238 @@
         <InArgument x:TypeArguments="sd:DataTable">[In_MLDatatable]</InArgument>
       </Assign.Value>
     </Assign>
-    <Assign sap:VirtualizedContainerService.HintSize="338,61" sap2010:WorkflowViewState.IdRef="Assign_11">
+    <Assign sap:VirtualizedContainerService.HintSize="852,61" sap2010:WorkflowViewState.IdRef="Assign_11">
       <Assign.To>
         <OutArgument x:TypeArguments="sd:DataTable">[flexman]</OutArgument>
       </Assign.To>
       <Assign.Value>
-        <InArgument x:TypeArguments="sd:DataTable">[In_FlexmanDatatable]</InArgument>
+        <InArgument x:TypeArguments="sd:DataTable">[In_FlexmanAndReceiptDatatable]</InArgument>
       </Assign.Value>
     </Assign>
-    <Assign sap:VirtualizedContainerService.HintSize="338,61" sap2010:WorkflowViewState.IdRef="Assign_3">
+    <Assign sap:VirtualizedContainerService.HintSize="852,61" sap2010:WorkflowViewState.IdRef="Assign_18">
       <Assign.To>
-        <OutArgument x:TypeArguments="x:String">[storageBucket]</OutArgument>
+        <OutArgument x:TypeArguments="x:Boolean">[bool_HasDenyInDt]</OutArgument>
       </Assign.To>
       <Assign.Value>
-        <InArgument x:TypeArguments="x:String">[In_Config("StorageBucketName").ToString]</InArgument>
+        <InArgument x:TypeArguments="x:Boolean">[In_FlexmanAndReceiptDatatable.AsEnumerable().Any(Function(row) row.Field(Of String)("Result") = "Deny")]</InArgument>
       </Assign.Value>
     </Assign>
-    <Assign sap:VirtualizedContainerService.HintSize="338,61" sap2010:WorkflowViewState.IdRef="Assign_1">
+    <Assign sap:VirtualizedContainerService.HintSize="852,61" sap2010:WorkflowViewState.IdRef="Assign_23">
       <Assign.To>
-        <OutArgument x:TypeArguments="x:String">[filePath]</OutArgument>
+        <OutArgument x:TypeArguments="x:Boolean">[bool_HasApproveOnly]</OutArgument>
       </Assign.To>
       <Assign.Value>
-        <InArgument x:TypeArguments="x:String">[in_TransactionItem.SpecificContent("FilePath").ToString]</InArgument>
+        <InArgument x:TypeArguments="x:Boolean">[not bool_HasDenyInDt]</InArgument>
       </Assign.Value>
     </Assign>
-    <Assign sap:VirtualizedContainerService.HintSize="338,61" sap2010:WorkflowViewState.IdRef="Assign_2">
+    <Assign sap:VirtualizedContainerService.HintSize="852,61" sap2010:WorkflowViewState.IdRef="Assign_19">
       <Assign.To>
-        <OutArgument x:TypeArguments="x:String">[filename]</OutArgument>
+        <OutArgument x:TypeArguments="x:Boolean">[bool_HasExtraLineItems]</OutArgument>
       </Assign.To>
       <Assign.Value>
-        <InArgument x:TypeArguments="x:String">[path.GetFileName(filePath)]</InArgument>
+        <InArgument x:TypeArguments="x:Boolean">[In_FlexmanAndReceiptDatatable.AsEnumerable().Any(Function(row) String.IsNullOrEmpty(row.Field(Of String)("LineItem")))]</InArgument>
       </Assign.Value>
     </Assign>
-    <ucas:UploadStorageFile FileResource="{x:Null}" TimeoutMS="{x:Null}" ContinueOnError="False" Destination="[filename]" DisplayName="Upload Storage File" sap:VirtualizedContainerService.HintSize="338,239" sap2010:WorkflowViewState.IdRef="UploadStorageFile_1" Path="[filePath]" StorageBucketName="[storageBucket]">
+    <Sequence DisplayName="FORM_DECISION" sap:VirtualizedContainerService.HintSize="852,2378" sap2010:WorkflowViewState.IdRef="Sequence_9">
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
           <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-          <x:Boolean x:Key="IsPinned">False</x:Boolean>
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
-    </ucas:UploadStorageFile>
-    <upaf:CreateFormTask BucketFolderPath="{x:Null}" BulkFormLayout="{x:Null}" DynamicFormPath="{x:Null}" ExternalTag="{x:Null}" Labels="{x:Null}" TimeoutMs="{x:Null}" BucketName="[storageBucket]" BulkFormLayoutGuid="c28f0577-6f92-42af-a082-85af2916f1dc" DisplayName="Create Form Task" EnableBulkEdit="False" EnableDynamicForms="False" FormLayout="%[{&quot;components&quot;:[{&quot;label&quot;:&quot;Data Comparison&quot;,&quot;key&quot;:&quot;dataComparison&quot;,&quot;components&quot;:[{&quot;label&quot;:&quot;Extracted Data from Receipt&quot;,&quot;disableAddingRemovingRows&quot;:true,&quot;reorder&quot;:false,&quot;addAnotherPosition&quot;:&quot;bottom&quot;,&quot;layoutFixed&quot;:true,&quot;enableRowGroups&quot;:false,&quot;initEmpty&quot;:false,&quot;disabled&quot;:true,&quot;key&quot;:&quot;mainTable&quot;,&quot;type&quot;:&quot;datagrid&quot;,&quot;input&quot;:true,&quot;tableView&quot;:false,&quot;components&quot;:[{&quot;label&quot;:&quot;RxNumber&quot;,&quot;tableView&quot;:true,&quot;key&quot;:&quot;RxNumber&quot;,&quot;type&quot;:&quot;textfield&quot;,&quot;input&quot;:true},{&quot;label&quot;:&quot;Date Of Service&quot;,&quot;tableView&quot;:true,&quot;key&quot;:&quot;DateOfService&quot;,&quot;type&quot;:&quot;textfield&quot;,&quot;input&quot;:true},{&quot;label&quot;:&quot;Amount&quot;,&quot;tableView&quot;:true,&quot;key&quot;:&quot;Amount&quot;,&quot;type&quot;:&quot;textfield&quot;,&quot;input&quot;:true}]},{&quot;label&quot;:&quot;Data from Flexman&quot;,&quot;disableAddingRemovingRows&quot;:true,&quot;reorder&quot;:false,&quot;addAnotherPosition&quot;:&quot;bottom&quot;,&quot;layoutFixed&quot;:false,&quot;enableRowGroups&quot;:false,&quot;initEmpty&quot;:false,&quot;key&quot;:&quot;FlexmanTable&quot;,&quot;type&quot;:&quot;datagrid&quot;,&quot;input&quot;:true,&quot;tableView&quot;:false,&quot;components&quot;:[{&quot;label&quot;:&quot;line Item&quot;,&quot;disabled&quot;:true,&quot;tableView&quot;:true,&quot;key&quot;:&quot;LineItem&quot;,&quot;type&quot;:&quot;textfield&quot;,&quot;input&quot;:true},{&quot;label&quot;:&quot;Amount&quot;,&quot;disabled&quot;:true,&quot;tableView&quot;:true,&quot;key&quot;:&quot;Amount&quot;,&quot;type&quot;:&quot;textfield&quot;,&quot;input&quot;:true},{&quot;label&quot;:&quot;Date Of Service&quot;,&quot;disabled&quot;:true,&quot;tableView&quot;:true,&quot;key&quot;:&quot;Date&quot;,&quot;type&quot;:&quot;textfield&quot;,&quot;input&quot;:true},{&quot;label&quot;:&quot;Plan Dates&quot;,&quot;disabled&quot;:true,&quot;tableView&quot;:true,&quot;key&quot;:&quot;PlanDates&quot;,&quot;type&quot;:&quot;textfield&quot;,&quot;input&quot;:true,&quot;attributes&quot;:{&quot;style&quot;:&quot;width:170px&quot;},&quot;keyModified&quot;:true},{&quot;label&quot;:&quot;Eligibility Date&quot;,&quot;disabled&quot;:true,&quot;tableView&quot;:true,&quot;key&quot;:&quot;EligibilityDate&quot;,&quot;type&quot;:&quot;textfield&quot;,&quot;input&quot;:true},{&quot;label&quot;:&quot;Termination Date&quot;,&quot;disabled&quot;:true,&quot;tableView&quot;:true,&quot;key&quot;:&quot;TerminationDate&quot;,&quot;type&quot;:&quot;textfield&quot;,&quot;input&quot;:true},{&quot;label&quot;:&quot;Reason Of Denial&quot;,&quot;tableView&quot;:true,&quot;multiple&quot;:true,&quot;data&quot;:{&quot;values&quot;:[{&quot;label&quot;:&quot;Missing Type of Service&quot;,&quot;value&quot;:&quot;Missing Type of Service&quot;},{&quot;label&quot;:&quot;Missing Date of Service&quot;,&quot;value&quot;:&quot;Missing Date of Service&quot;},{&quot;label&quot;:&quot;Service dates outside of plan year&quot;,&quot;value&quot;:&quot;Service dates outside of plan year&quot;},{&quot;label&quot;:&quot;Service date before eligibility date&quot;,&quot;value&quot;:&quot;Service date before eligibility date&quot;},{&quot;label&quot;:&quot;Missing Cost Incurred&quot;,&quot;value&quot;:&quot;Missing Cost Incurred&quot;},{&quot;label&quot;:&quot;Duplicate claim&quot;,&quot;value&quot;:&quot;Duplicate claim&quot;},{&quot;label&quot;:&quot;Service date after termination date&quot;,&quot;value&quot;:&quot;Service date after termination date&quot;}]},&quot;validate&quot;:{&quot;onlyAvailableItems&quot;:false},&quot;key&quot;:&quot;ReasonsOfDenial&quot;,&quot;logic&quot;:[{&quot;name&quot;:&quot;DenyLogic&quot;,&quot;trigger&quot;:{&quot;type&quot;:&quot;simple&quot;,&quot;simple&quot;:{&quot;show&quot;:true,&quot;when&quot;:&quot;FlexmanTable.Result&quot;,&quot;eq&quot;:&quot;Deny&quot;}},&quot;actions&quot;:[{&quot;name&quot;:&quot;ReasonRequired&quot;,&quot;type&quot;:&quot;property&quot;,&quot;property&quot;:{&quot;label&quot;:&quot;Required&quot;,&quot;value&quot;:&quot;validate.required&quot;,&quot;type&quot;:&quot;boolean&quot;},&quot;state&quot;:true}]}],&quot;type&quot;:&quot;select&quot;,&quot;indexeddb&quot;:{&quot;filter&quot;:{}},&quot;input&quot;:true,&quot;clearOnRefresh&quot;:true},{&quot;label&quot;:&quot;Approve/Deny&quot;,&quot;uniqueOptions&quot;:true,&quot;tableView&quot;:true,&quot;data&quot;:{&quot;values&quot;:[{&quot;label&quot;:&quot;Approve&quot;,&quot;value&quot;:&quot;Approve&quot;},{&quot;label&quot;:&quot;Deny&quot;,&quot;value&quot;:&quot;Deny&quot;}]},&quot;validate&quot;:{&quot;required&quot;:true,&quot;onlyAvailableItems&quot;:false},&quot;key&quot;:&quot;Result&quot;,&quot;type&quot;:&quot;select&quot;,&quot;indexeddb&quot;:{&quot;filter&quot;:{}},&quot;input&quot;:true}]},{&quot;label&quot;:&quot;Submit&quot;,&quot;disableOnInvalid&quot;:true,&quot;tableView&quot;:false,&quot;key&quot;:&quot;submit&quot;,&quot;custom&quot;:&quot;instance.emit('executeDoBlock', instance.component);&quot;,&quot;type&quot;:&quot;button&quot;,&quot;input&quot;:true,&quot;isResetData&quot;:false}]},{&quot;label&quot;:&quot;PDF Image&quot;,&quot;key&quot;:&quot;pdfImage&quot;,&quot;components&quot;:[{&quot;label&quot;:&quot;Receipt Image&quot;,&quot;hidden&quot;:true,&quot;disabled&quot;:true,&quot;tableView&quot;:true,&quot;key&quot;:&quot;receiptImage&quot;,&quot;type&quot;:&quot;textfield&quot;,&quot;input&quot;:true},{&quot;label&quot;:&quot;HTML&quot;,&quot;attrs&quot;:[{&quot;attr&quot;:&quot;&quot;,&quot;value&quot;:&quot;&quot;}],&quot;content&quot;:&quot;&lt;embed src={{data.pdf_storage}} width=\&quot;1000px\&quot; height=\&quot;600px\&quot;&gt; &lt;/embed&gt;&quot;,&quot;refreshOnChange&quot;:true,&quot;key&quot;:&quot;html&quot;,&quot;type&quot;:&quot;htmlelement&quot;,&quot;input&quot;:false,&quot;tableView&quot;:false}]}],&quot;key&quot;:&quot;tabs&quot;,&quot;type&quot;:&quot;tabs&quot;,&quot;input&quot;:false,&quot;tableView&quot;:false,&quot;label&quot;:&quot;Tabs&quot;}]" FormLayoutGuid="e3133185-6fae-4f07-9f2c-c4ca3e72d356" GenerateInputFields="False" sap:VirtualizedContainerService.HintSize="338,371" sap2010:WorkflowViewState.IdRef="CreateFormTask_7" TaskCatalog="[In_Config(&quot;DataValidationActionCatalog&quot;).ToString]" TaskOutput="[task]" TaskPriority="[TaskPriority.Medium]" TaskTitle="[&quot;Pharmacy Claims for Batch ID &quot;+filename]">
-      <upaf:CreateFormTask.FormData>
-        <InArgument x:TypeArguments="x:String" x:Key="pdf_storage">[filename]</InArgument>
-        <InArgument x:TypeArguments="sd:DataTable" x:Key="mainTable">[out_newDatatable]</InArgument>
-        <InOutArgument x:TypeArguments="sd:DataTable" x:Key="FlexmanTable">[flexman]</InOutArgument>
-      </upaf:CreateFormTask.FormData>
-    </upaf:CreateFormTask>
-    <Assign sap:VirtualizedContainerService.HintSize="338,61" sap2010:WorkflowViewState.IdRef="Assign_12">
-      <Assign.To>
-        <OutArgument x:TypeArguments="upaf:FormTaskData">[out_TaskData]</OutArgument>
-      </Assign.To>
-      <Assign.Value>
-        <InArgument x:TypeArguments="upaf:FormTaskData">[task]</InArgument>
-      </Assign.Value>
-    </Assign>
-    <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="338,52" sap2010:WorkflowViewState.IdRef="CommentOut_1">
-      <ui:CommentOut.Body>
-        <Sequence DisplayName="Ignored Activities" sap:VirtualizedContainerService.HintSize="400,316" sap2010:WorkflowViewState.IdRef="Sequence_2">
+      <If Condition="[CBool(in_TransactionItem.SpecificContent(&quot;QCFlexWin&quot;))]" sap:VirtualizedContainerService.HintSize="790,2267" sap2010:WorkflowViewState.IdRef="If_2">
+        <If.Then>
+          <Sequence sap:VirtualizedContainerService.HintSize="400,304" sap2010:WorkflowViewState.IdRef="Sequence_8">
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+            <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="338,92" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Info" Message="[&quot;The Batch File &quot;+in_TransactionItem.SpecificContent(&quot;BatchID&quot;).ToString+&quot; is forced to Action Center for Quality Control Check&quot;]" />
+            <Assign sap:VirtualizedContainerService.HintSize="338,61" sap2010:WorkflowViewState.IdRef="Assign_17">
+              <Assign.To>
+                <OutArgument x:TypeArguments="x:Boolean">[out_bool_CreateForm]</OutArgument>
+              </Assign.To>
+              <Assign.Value>
+                <InArgument x:TypeArguments="x:Boolean">True</InArgument>
+              </Assign.Value>
+            </Assign>
+          </Sequence>
+        </If.Then>
+        <If.Else>
+          <If Condition="[CBool(in_Config(&quot;CreateFormForAllCases&quot;))]" sap:VirtualizedContainerService.HintSize="712,1787" sap2010:WorkflowViewState.IdRef="If_3">
+            <If.Then>
+              <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="400,81" sap2010:WorkflowViewState.IdRef="Sequence_11">
+                <sap:WorkflowViewStateService.ViewState>
+                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                    <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                    <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                  </scg:Dictionary>
+                </sap:WorkflowViewStateService.ViewState>
+                <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="338,88" sap2010:WorkflowViewState.IdRef="LogMessage_2" Level="Info" Message="[&quot;The Batch File &quot;+in_TransactionItem.SpecificContent(&quot;BatchID&quot;).ToString+&quot; is forced to Action Center based on Config settings.&quot;]" />
+                <Assign sap:VirtualizedContainerService.HintSize="338,61" sap2010:WorkflowViewState.IdRef="Assign_20">
+                  <Assign.To>
+                    <OutArgument x:TypeArguments="x:Boolean">[out_bool_CreateForm]</OutArgument>
+                  </Assign.To>
+                  <Assign.Value>
+                    <InArgument x:TypeArguments="x:Boolean">True</InArgument>
+                  </Assign.Value>
+                </Assign>
+              </Sequence>
+            </If.Then>
+            <If.Else>
+              <If Condition="[bool_HasDenyInDt And Cbool(in_Config(&quot;CreateFormForDeny&quot;))]" sap:VirtualizedContainerService.HintSize="634,1511" sap2010:WorkflowViewState.IdRef="If_4">
+                <If.Then>
+                  <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="400,304" sap2010:WorkflowViewState.IdRef="Sequence_12">
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                        <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                    <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="338,92" sap2010:WorkflowViewState.IdRef="LogMessage_3" Level="Info" Message="[&quot;The Batch File &quot;+in_TransactionItem.SpecificContent(&quot;BatchID&quot;).ToString+&quot; is forced to Action Center as,the current Batch has line item which will be denied.&quot;]" />
+                    <Assign sap:VirtualizedContainerService.HintSize="338,61" sap2010:WorkflowViewState.IdRef="Assign_21">
+                      <Assign.To>
+                        <OutArgument x:TypeArguments="x:Boolean">[out_bool_CreateForm]</OutArgument>
+                      </Assign.To>
+                      <Assign.Value>
+                        <InArgument x:TypeArguments="x:Boolean">True</InArgument>
+                      </Assign.Value>
+                    </Assign>
+                  </Sequence>
+                </If.Then>
+                <If.Else>
+                  <If Condition="[bool_HasApproveOnly And Cbool(in_Config(&quot;CreateFormForApprove&quot;))]" sap:VirtualizedContainerService.HintSize="556,1031" sap2010:WorkflowViewState.IdRef="If_5">
+                    <If.Then>
+                      <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="400,304" sap2010:WorkflowViewState.IdRef="Sequence_13">
+                        <sap:WorkflowViewStateService.ViewState>
+                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                          </scg:Dictionary>
+                        </sap:WorkflowViewStateService.ViewState>
+                        <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="338,92" sap2010:WorkflowViewState.IdRef="LogMessage_4" Level="Info" Message="[&quot;The Batch File &quot;+in_TransactionItem.SpecificContent(&quot;BatchID&quot;).ToString+&quot; is forced to Action Center as, we are forcing all Approved Line Items.&quot;]" />
+                        <Assign sap:VirtualizedContainerService.HintSize="338,61" sap2010:WorkflowViewState.IdRef="Assign_22">
+                          <Assign.To>
+                            <OutArgument x:TypeArguments="x:Boolean">[out_bool_CreateForm]</OutArgument>
+                          </Assign.To>
+                          <Assign.Value>
+                            <InArgument x:TypeArguments="x:Boolean">True</InArgument>
+                          </Assign.Value>
+                        </Assign>
+                      </Sequence>
+                    </If.Then>
+                    <If.Else>
+                      <If Condition="[bool_HasExtraLineItems]" sap:VirtualizedContainerService.HintSize="478,551" sap2010:WorkflowViewState.IdRef="If_6">
+                        <If.Then>
+                          <Sequence sap:VirtualizedContainerService.HintSize="400,172" sap2010:WorkflowViewState.IdRef="Sequence_25">
+                            <sap:WorkflowViewStateService.ViewState>
+                              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                              </scg:Dictionary>
+                            </sap:WorkflowViewStateService.ViewState>
+                            <Assign sap:VirtualizedContainerService.HintSize="338,61" sap2010:WorkflowViewState.IdRef="Assign_24">
+                              <Assign.To>
+                                <OutArgument x:TypeArguments="x:Boolean">[out_bool_CreateForm]</OutArgument>
+                              </Assign.To>
+                              <Assign.Value>
+                                <InArgument x:TypeArguments="x:Boolean">True</InArgument>
+                              </Assign.Value>
+                            </Assign>
+                          </Sequence>
+                        </If.Then>
+                        <If.Else>
+                          <Sequence sap:VirtualizedContainerService.HintSize="400,203" sap2010:WorkflowViewState.IdRef="Sequence_26">
+                            <sap:WorkflowViewStateService.ViewState>
+                              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                              </scg:Dictionary>
+                            </sap:WorkflowViewStateService.ViewState>
+                            <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="338,92" sap2010:WorkflowViewState.IdRef="LogMessage_5" Level="Info" Message="[&quot;Bot will be Processing the batch &quot;+in_TransactionItem.SpecificContent(&quot;BatchID&quot;).ToString]" />
+                          </Sequence>
+                        </If.Else>
+                      </If>
+                    </If.Else>
+                  </If>
+                </If.Else>
+              </If>
+            </If.Else>
+          </If>
+        </If.Else>
+      </If>
+    </Sequence>
+    <If Condition="[out_bool_CreateForm]" sap:VirtualizedContainerService.HintSize="852,1596" sap2010:WorkflowViewState.IdRef="If_1">
+      <If.Then>
+        <Sequence DisplayName="FormCreation" sap:VirtualizedContainerService.HintSize="400,1320" sap2010:WorkflowViewState.IdRef="Sequence_2">
+          <Sequence.Variables>
+            <Variable x:TypeArguments="sd:DataTable" Name="dt_LineItemsToBeAdded" />
+            <Variable x:TypeArguments="x:String" Name="decision" />
+          </Sequence.Variables>
           <sap:WorkflowViewStateService.ViewState>
             <scg:Dictionary x:TypeArguments="x:String, x:Object">
               <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              <x:Boolean x:Key="IsPinned">False</x:Boolean>
             </scg:Dictionary>
           </sap:WorkflowViewStateService.ViewState>
-          <upaf:CreateFormTask BucketFolderPath="{x:Null}" BulkFormLayout="{x:Null}" DynamicFormPath="{x:Null}" ExternalTag="{x:Null}" Labels="{x:Null}" TimeoutMs="{x:Null}" BucketName="[storageBucket]" BulkFormLayoutGuid="87719dce-1c3e-4775-8d26-89811e626029" DisplayName="Create Form Task" EnableBulkEdit="False" EnableDynamicForms="False" FormLayout="%[{&quot;label&quot;:&quot;Extracted Data from the Receipt&quot;,&quot;disableAddingRemovingRows&quot;:true,&quot;reorder&quot;:false,&quot;addAnotherPosition&quot;:&quot;bottom&quot;,&quot;layoutFixed&quot;:true,&quot;enableRowGroups&quot;:false,&quot;initEmpty&quot;:false,&quot;disabled&quot;:true,&quot;key&quot;:&quot;table&quot;,&quot;type&quot;:&quot;datagrid&quot;,&quot;input&quot;:true,&quot;tableView&quot;:false,&quot;components&quot;:[{&quot;label&quot;:&quot;RxNumber&quot;,&quot;tableView&quot;:true,&quot;key&quot;:&quot;RxNumber&quot;,&quot;type&quot;:&quot;textfield&quot;,&quot;input&quot;:true},{&quot;label&quot;:&quot;DateOfService&quot;,&quot;tableView&quot;:true,&quot;key&quot;:&quot;DateOfService&quot;,&quot;type&quot;:&quot;textfield&quot;,&quot;input&quot;:true},{&quot;label&quot;:&quot;Amount&quot;,&quot;tableView&quot;:true,&quot;key&quot;:&quot;Amount&quot;,&quot;type&quot;:&quot;textfield&quot;,&quot;input&quot;:true}]},{&quot;label&quot;:&quot;Data from FlexMan&quot;,&quot;disableAddingRemovingRows&quot;:true,&quot;reorder&quot;:false,&quot;addAnotherPosition&quot;:&quot;bottom&quot;,&quot;layoutFixed&quot;:false,&quot;enableRowGroups&quot;:false,&quot;initEmpty&quot;:false,&quot;disabled&quot;:true,&quot;key&quot;:&quot;flexmanTable&quot;,&quot;type&quot;:&quot;datagrid&quot;,&quot;input&quot;:true,&quot;tableView&quot;:false,&quot;components&quot;:[{&quot;label&quot;:&quot;Line Item&quot;,&quot;tableView&quot;:true,&quot;key&quot;:&quot;LineItem&quot;,&quot;type&quot;:&quot;textfield&quot;,&quot;input&quot;:true},{&quot;label&quot;:&quot;Date Of Service&quot;,&quot;tableView&quot;:true,&quot;key&quot;:&quot;Date&quot;,&quot;type&quot;:&quot;textfield&quot;,&quot;input&quot;:true},{&quot;label&quot;:&quot;Approved Amount&quot;,&quot;tableView&quot;:true,&quot;key&quot;:&quot;ApprovedAmount&quot;,&quot;type&quot;:&quot;textfield&quot;,&quot;input&quot;:true},{&quot;label&quot;:&quot;Denial Amount&quot;,&quot;tableView&quot;:true,&quot;key&quot;:&quot;DenialAmount&quot;,&quot;type&quot;:&quot;textfield&quot;,&quot;input&quot;:true},{&quot;label&quot;:&quot;Eligibility Date&quot;,&quot;tableView&quot;:true,&quot;key&quot;:&quot;EligibilityDate&quot;,&quot;type&quot;:&quot;textfield&quot;,&quot;input&quot;:true},{&quot;label&quot;:&quot;Plan Dates&quot;,&quot;tableView&quot;:true,&quot;key&quot;:&quot;PlanDates&quot;,&quot;type&quot;:&quot;textfield&quot;,&quot;input&quot;:true},{&quot;label&quot;:&quot;Term Date&quot;,&quot;tableView&quot;:true,&quot;key&quot;:&quot;TerminationDate&quot;,&quot;type&quot;:&quot;textfield&quot;,&quot;input&quot;:true},{&quot;label&quot;:&quot;RX Denial&quot;,&quot;tableView&quot;:true,&quot;key&quot;:&quot;RXDenial&quot;,&quot;type&quot;:&quot;textfield&quot;,&quot;input&quot;:true},{&quot;label&quot;:&quot;Date Of Service Denial&quot;,&quot;tableView&quot;:true,&quot;key&quot;:&quot;DOSDenial&quot;,&quot;type&quot;:&quot;textfield&quot;,&quot;input&quot;:true},{&quot;label&quot;:&quot;Amount Denial&quot;,&quot;tableView&quot;:true,&quot;key&quot;:&quot;AmountDenial&quot;,&quot;type&quot;:&quot;textfield&quot;,&quot;input&quot;:true},{&quot;label&quot;:&quot;Duplicate Denial&quot;,&quot;tableView&quot;:true,&quot;key&quot;:&quot;DuplicateDenial&quot;,&quot;type&quot;:&quot;textfield&quot;,&quot;input&quot;:true},{&quot;label&quot;:&quot;Approve/Deny&quot;,&quot;tableView&quot;:true,&quot;key&quot;:&quot;Result&quot;,&quot;type&quot;:&quot;textfield&quot;,&quot;input&quot;:true}]},{&quot;label&quot;:&quot;UserInput Datatable&quot;,&quot;reorder&quot;:false,&quot;addAnotherPosition&quot;:&quot;bottom&quot;,&quot;layoutFixed&quot;:true,&quot;enableRowGroups&quot;:false,&quot;initEmpty&quot;:false,&quot;key&quot;:&quot;UserTable&quot;,&quot;type&quot;:&quot;datagrid&quot;,&quot;input&quot;:true,&quot;tableView&quot;:false,&quot;components&quot;:[{&quot;label&quot;:&quot;Line Item&quot;,&quot;tableView&quot;:true,&quot;key&quot;:&quot;LineItem&quot;,&quot;type&quot;:&quot;textfield&quot;,&quot;input&quot;:true},{&quot;label&quot;:&quot;Date Of Service&quot;,&quot;tableView&quot;:true,&quot;key&quot;:&quot;Date&quot;,&quot;type&quot;:&quot;textfield&quot;,&quot;input&quot;:true},{&quot;label&quot;:&quot;Approved Amount&quot;,&quot;tableView&quot;:true,&quot;key&quot;:&quot;ApprovedAmount&quot;,&quot;type&quot;:&quot;textfield&quot;,&quot;input&quot;:true},{&quot;label&quot;:&quot;Denial Amount&quot;,&quot;tableView&quot;:true,&quot;key&quot;:&quot;DenialAmount&quot;,&quot;type&quot;:&quot;textfield&quot;,&quot;input&quot;:true},{&quot;label&quot;:&quot;Eligibility Date&quot;,&quot;tableView&quot;:true,&quot;key&quot;:&quot;EligibilityDate&quot;,&quot;type&quot;:&quot;textfield&quot;,&quot;input&quot;:true},{&quot;label&quot;:&quot;Plan Dates&quot;,&quot;tableView&quot;:true,&quot;key&quot;:&quot;PlanDates&quot;,&quot;type&quot;:&quot;textfield&quot;,&quot;input&quot;:true},{&quot;label&quot;:&quot;Term Date&quot;,&quot;tableView&quot;:true,&quot;key&quot;:&quot;TerminationDate&quot;,&quot;type&quot;:&quot;textfield&quot;,&quot;input&quot;:true},{&quot;label&quot;:&quot;RX Denial&quot;,&quot;tableView&quot;:true,&quot;data&quot;:{&quot;values&quot;:[{&quot;label&quot;:&quot;Missing Type of Service&quot;,&quot;value&quot;:&quot;Missing Type of Service&quot;}]},&quot;validate&quot;:{&quot;onlyAvailableItems&quot;:false},&quot;key&quot;:&quot;RxDenial&quot;,&quot;type&quot;:&quot;select&quot;,&quot;indexeddb&quot;:{&quot;filter&quot;:{}},&quot;input&quot;:true},{&quot;label&quot;:&quot;Date Of Service Denial&quot;,&quot;tableView&quot;:true,&quot;data&quot;:{&quot;values&quot;:[{&quot;label&quot;:&quot;Missing Date of Service&quot;,&quot;value&quot;:&quot;Missing Date of Service&quot;},{&quot;label&quot;:&quot;Service dates outside of plan year&quot;,&quot;value&quot;:&quot;Service dates outside of plan year&quot;},{&quot;label&quot;:&quot;Service date before eligibility date&quot;,&quot;value&quot;:&quot;Service date before eligibility date&quot;}]},&quot;validate&quot;:{&quot;onlyAvailableItems&quot;:false},&quot;key&quot;:&quot;DateOfServiceDenial&quot;,&quot;type&quot;:&quot;select&quot;,&quot;indexeddb&quot;:{&quot;filter&quot;:{}},&quot;input&quot;:true},{&quot;label&quot;:&quot;Amount Denial&quot;,&quot;tableView&quot;:true,&quot;data&quot;:{&quot;values&quot;:[{&quot;label&quot;:&quot;Missing Cost Incurred&quot;,&quot;value&quot;:&quot;Missing Cost Incurred&quot;}]},&quot;validate&quot;:{&quot;onlyAvailableItems&quot;:false},&quot;key&quot;:&quot;AmountDenial&quot;,&quot;type&quot;:&quot;select&quot;,&quot;indexeddb&quot;:{&quot;filter&quot;:{}},&quot;input&quot;:true},{&quot;label&quot;:&quot;Duplicate Denial&quot;,&quot;tableView&quot;:true,&quot;data&quot;:{&quot;values&quot;:[{&quot;label&quot;:&quot;Duplicate claim&quot;,&quot;value&quot;:&quot;Duplicate Claim&quot;}]},&quot;validate&quot;:{&quot;onlyAvailableItems&quot;:false},&quot;key&quot;:&quot;DuplicateDenial&quot;,&quot;type&quot;:&quot;select&quot;,&quot;indexeddb&quot;:{&quot;filter&quot;:{}},&quot;input&quot;:true},{&quot;label&quot;:&quot;Approve/Deny&quot;,&quot;tableView&quot;:true,&quot;data&quot;:{&quot;values&quot;:[{&quot;label&quot;:&quot;Approve&quot;,&quot;value&quot;:&quot;Approve&quot;},{&quot;label&quot;:&quot;Deny&quot;,&quot;value&quot;:&quot;Deny&quot;}]},&quot;validate&quot;:{&quot;required&quot;:true,&quot;onlyAvailableItems&quot;:false},&quot;key&quot;:&quot;ApproveDeny&quot;,&quot;type&quot;:&quot;select&quot;,&quot;indexeddb&quot;:{&quot;filter&quot;:{}},&quot;input&quot;:true}],&quot;attributes&quot;:{&quot;style&quot;:&quot;width:100px;text-align:right;&quot;},&quot;keyModified&quot;:true},{&quot;html&quot;:&quot;&lt;p&gt;&lt;strong&gt;Below is the RxClaim Receipt&lt;/strong&gt;&amp;nbsp;&lt;/p&gt;&quot;,&quot;label&quot;:&quot;Content&quot;,&quot;refreshOnChange&quot;:false,&quot;key&quot;:&quot;content&quot;,&quot;type&quot;:&quot;content&quot;,&quot;input&quot;:false,&quot;tableView&quot;:false},{&quot;label&quot;:&quot;HTML&quot;,&quot;attrs&quot;:[{&quot;attr&quot;:&quot;&quot;,&quot;value&quot;:&quot;&quot;}],&quot;content&quot;:&quot;&lt;embed src={{data.pdf_storage}} width=\&quot;1000px\&quot; height=\&quot;600px\&quot;&gt;  &lt;/embed&gt;&quot;,&quot;refreshOnChange&quot;:true,&quot;key&quot;:&quot;html&quot;,&quot;type&quot;:&quot;htmlelement&quot;,&quot;input&quot;:false,&quot;tableView&quot;:false},{&quot;label&quot;:&quot;Batch Submit&quot;,&quot;tableView&quot;:false,&quot;key&quot;:&quot;batchSubmit&quot;,&quot;custom&quot;:&quot;instance.emit('executeDoBlock', instance.component);&quot;,&quot;input&quot;:true,&quot;type&quot;:&quot;button&quot;,&quot;isResetData&quot;:false}]" FormLayoutGuid="159dc79f-09e1-4615-9e35-6a2883be05a2" GenerateInputFields="False" sap:VirtualizedContainerService.HintSize="338,52" sap2010:WorkflowViewState.IdRef="CreateFormTask_5" TaskCatalog="[In_Config(&quot;DataValidationActionCatalog&quot;).ToString]" TaskOutput="[task]" TaskPriority="[TaskPriority.Medium]" TaskTitle="[&quot;Pharmacy Claims for Batch ID &quot;+filename]">
-            <upaf:CreateFormTask.FormData>
-              <InArgument x:TypeArguments="x:String" x:Key="pdf_storage">[filename]</InArgument>
-              <InArgument x:TypeArguments="sd:DataTable" x:Key="table">[out_newDatatable]</InArgument>
-              <InArgument x:TypeArguments="sd:DataTable" x:Key="flexmanTable">[flexman]</InArgument>
-              <InOutArgument x:TypeArguments="sd:DataTable" x:Key="UserTable">[flexman]</InOutArgument>
-            </upaf:CreateFormTask.FormData>
+          <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Workflows\Split_DataTable.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="338,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_1" UnSafe="False" WorkflowFileName="Workflows\Split_DataTable.xaml">
+            <ui:InvokeWorkflowFile.Arguments>
+              <OutArgument x:TypeArguments="sd:DataTable" x:Key="out_Dt_Flexman">[flexman]</OutArgument>
+              <InArgument x:TypeArguments="sd:DataTable" x:Key="in_Dt_FlexmanAndReceipt">[flexman]</InArgument>
+              <OutArgument x:TypeArguments="sd:DataTable" x:Key="out_Dt_Receipt">[dt_LineItemsToBeAdded]</OutArgument>
+              <OutArgument x:TypeArguments="x:String" x:Key="out_Str_Decision">[decision]</OutArgument>
+            </ui:InvokeWorkflowFile.Arguments>
+          </ui:InvokeWorkflowFile>
+          <Assign sap:VirtualizedContainerService.HintSize="338,61" sap2010:WorkflowViewState.IdRef="Assign_3">
+            <Assign.To>
+              <OutArgument x:TypeArguments="x:String">[storageBucket]</OutArgument>
+            </Assign.To>
+            <Assign.Value>
+              <InArgument x:TypeArguments="x:String">[In_Config("StorageBucketName").ToString]</InArgument>
+            </Assign.Value>
+          </Assign>
+          <Assign sap:VirtualizedContainerService.HintSize="338,61" sap2010:WorkflowViewState.IdRef="Assign_1">
+            <Assign.To>
+              <OutArgument x:TypeArguments="x:String">[filePath]</OutArgument>
+            </Assign.To>
+            <Assign.Value>
+              <InArgument x:TypeArguments="x:String">[in_TransactionItem.SpecificContent("FilePath").ToString]</InArgument>
+            </Assign.Value>
+          </Assign>
+          <Assign sap:VirtualizedContainerService.HintSize="338,61" sap2010:WorkflowViewState.IdRef="Assign_2">
+            <Assign.To>
+              <OutArgument x:TypeArguments="x:String">[filename]</OutArgument>
+            </Assign.To>
+            <Assign.Value>
+              <InArgument x:TypeArguments="x:String">[path.GetFileName(filePath)]</InArgument>
+            </Assign.Value>
+          </Assign>
+          <ucas:UploadStorageFile FileResource="{x:Null}" TimeoutMS="{x:Null}" ContinueOnError="False" Destination="[filename]" DisplayName="Upload Storage File" sap:VirtualizedContainerService.HintSize="338,239" sap2010:WorkflowViewState.IdRef="UploadStorageFile_1" Path="[filePath]" StorageBucketName="[storageBucket]">
             <sap:WorkflowViewStateService.ViewState>
               <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                 <x:Boolean x:Key="IsPinned">False</x:Boolean>
               </scg:Dictionary>
             </sap:WorkflowViewStateService.ViewState>
+          </ucas:UploadStorageFile>
+          <upaf:CreateFormTask BucketFolderPath="{x:Null}" BulkFormLayout="{x:Null}" DynamicFormPath="{x:Null}" ExternalTag="{x:Null}" Labels="{x:Null}" TimeoutMs="{x:Null}" BucketName="[storageBucket]" BulkFormLayoutGuid="c28f0577-6f92-42af-a082-85af2916f1dc" DisplayName="Create Form Task" EnableBulkEdit="False" EnableDynamicForms="False" FormLayout="%[{&quot;components&quot;:[{&quot;label&quot;:&quot;Data Comparison&quot;,&quot;key&quot;:&quot;dataComparison&quot;,&quot;components&quot;:[{&quot;title&quot;:&quot;Receipt Data&quot;,&quot;collapsible&quot;:true,&quot;key&quot;:&quot;receiptData&quot;,&quot;type&quot;:&quot;panel&quot;,&quot;label&quot;:&quot;Panel&quot;,&quot;input&quot;:false,&quot;tableView&quot;:false,&quot;components&quot;:[{&quot;label&quot;:&quot;Extracted Data from Receipt&quot;,&quot;disableAddingRemovingRows&quot;:true,&quot;reorder&quot;:false,&quot;addAnotherPosition&quot;:&quot;bottom&quot;,&quot;layoutFixed&quot;:true,&quot;enableRowGroups&quot;:false,&quot;initEmpty&quot;:false,&quot;disabled&quot;:true,&quot;key&quot;:&quot;mainTable&quot;,&quot;type&quot;:&quot;datagrid&quot;,&quot;input&quot;:true,&quot;tableView&quot;:false,&quot;components&quot;:[{&quot;label&quot;:&quot;RxNumber&quot;,&quot;tableView&quot;:true,&quot;key&quot;:&quot;RxNumber&quot;,&quot;type&quot;:&quot;textfield&quot;,&quot;input&quot;:true},{&quot;label&quot;:&quot;Date Of Service&quot;,&quot;tableView&quot;:true,&quot;key&quot;:&quot;DateOfService&quot;,&quot;type&quot;:&quot;textfield&quot;,&quot;input&quot;:true},{&quot;label&quot;:&quot;Amount&quot;,&quot;tableView&quot;:true,&quot;key&quot;:&quot;Amount&quot;,&quot;type&quot;:&quot;textfield&quot;,&quot;input&quot;:true}]}],&quot;collapsed&quot;:false},{&quot;title&quot;:&quot;Flexman Data&quot;,&quot;collapsible&quot;:true,&quot;key&quot;:&quot;flexmanData&quot;,&quot;type&quot;:&quot;panel&quot;,&quot;label&quot;:&quot;Flexman Data&quot;,&quot;input&quot;:false,&quot;tableView&quot;:false,&quot;components&quot;:[{&quot;label&quot;:&quot;Data from Flexman&quot;,&quot;disableAddingRemovingRows&quot;:true,&quot;reorder&quot;:false,&quot;addAnotherPosition&quot;:&quot;bottom&quot;,&quot;layoutFixed&quot;:false,&quot;enableRowGroups&quot;:false,&quot;initEmpty&quot;:false,&quot;key&quot;:&quot;FlexmanTable&quot;,&quot;type&quot;:&quot;datagrid&quot;,&quot;input&quot;:true,&quot;tableView&quot;:false,&quot;components&quot;:[{&quot;label&quot;:&quot;Line Item&quot;,&quot;disabled&quot;:true,&quot;tableView&quot;:true,&quot;key&quot;:&quot;LineItem&quot;,&quot;type&quot;:&quot;textfield&quot;,&quot;input&quot;:true},{&quot;label&quot;:&quot;Amount&quot;,&quot;disabled&quot;:true,&quot;tableView&quot;:true,&quot;key&quot;:&quot;Amount&quot;,&quot;type&quot;:&quot;textfield&quot;,&quot;input&quot;:true},{&quot;label&quot;:&quot;Date Of Service&quot;,&quot;disabled&quot;:true,&quot;tableView&quot;:true,&quot;key&quot;:&quot;DateOfService&quot;,&quot;type&quot;:&quot;textfield&quot;,&quot;input&quot;:true,&quot;attributes&quot;:{&quot;style&quot;:&quot;width:110px&quot;}},{&quot;label&quot;:&quot;Plan Dates&quot;,&quot;disabled&quot;:true,&quot;tableView&quot;:true,&quot;key&quot;:&quot;PlanDates&quot;,&quot;type&quot;:&quot;textfield&quot;,&quot;input&quot;:true,&quot;attributes&quot;:{&quot;style&quot;:&quot;width:170px&quot;},&quot;keyModified&quot;:true},{&quot;label&quot;:&quot;Eligibility Date&quot;,&quot;disabled&quot;:true,&quot;tableView&quot;:true,&quot;key&quot;:&quot;EligibilityDate&quot;,&quot;type&quot;:&quot;textfield&quot;,&quot;input&quot;:true},{&quot;label&quot;:&quot;Termination Date&quot;,&quot;disabled&quot;:true,&quot;tableView&quot;:true,&quot;key&quot;:&quot;TerminationDate&quot;,&quot;type&quot;:&quot;textfield&quot;,&quot;input&quot;:true},{&quot;label&quot;:&quot;Reason Of Denial&quot;,&quot;tableView&quot;:true,&quot;multiple&quot;:true,&quot;data&quot;:{&quot;values&quot;:[{&quot;label&quot;:&quot;Missing Type of Service&quot;,&quot;value&quot;:&quot;Missing Type of Service&quot;},{&quot;label&quot;:&quot;Missing Date of Service&quot;,&quot;value&quot;:&quot;Missing Date of Service&quot;},{&quot;label&quot;:&quot;Service dates outside of plan year&quot;,&quot;value&quot;:&quot;Service dates outside of plan year&quot;},{&quot;label&quot;:&quot;Service date before eligibility date&quot;,&quot;value&quot;:&quot;Service date before eligibility date&quot;},{&quot;label&quot;:&quot;Missing Cost Incurred&quot;,&quot;value&quot;:&quot;Missing Cost Incurred&quot;},{&quot;label&quot;:&quot;Duplicate claim&quot;,&quot;value&quot;:&quot;Duplicate claim&quot;},{&quot;label&quot;:&quot;Service date after termination date&quot;,&quot;value&quot;:&quot;Service date after termination date&quot;}]},&quot;validate&quot;:{&quot;onlyAvailableItems&quot;:false},&quot;key&quot;:&quot;ReasonsOfDenial&quot;,&quot;logic&quot;:[{&quot;name&quot;:&quot;DenyLogic&quot;,&quot;trigger&quot;:{&quot;type&quot;:&quot;simple&quot;,&quot;simple&quot;:{&quot;show&quot;:true,&quot;when&quot;:&quot;FlexmanTable.Result&quot;,&quot;eq&quot;:&quot;Deny&quot;}},&quot;actions&quot;:[{&quot;name&quot;:&quot;ReasonRequired&quot;,&quot;type&quot;:&quot;property&quot;,&quot;property&quot;:{&quot;label&quot;:&quot;Required&quot;,&quot;value&quot;:&quot;validate.required&quot;,&quot;type&quot;:&quot;boolean&quot;},&quot;state&quot;:true}]}],&quot;type&quot;:&quot;select&quot;,&quot;indexeddb&quot;:{&quot;filter&quot;:{}},&quot;input&quot;:true,&quot;clearOnRefresh&quot;:true},{&quot;label&quot;:&quot;Approve/Deny&quot;,&quot;uniqueOptions&quot;:true,&quot;tableView&quot;:true,&quot;data&quot;:{&quot;values&quot;:[{&quot;label&quot;:&quot;Approve&quot;,&quot;value&quot;:&quot;Approve&quot;},{&quot;label&quot;:&quot;Deny&quot;,&quot;value&quot;:&quot;Deny&quot;},{&quot;label&quot;:&quot;Edit&quot;,&quot;value&quot;:&quot;Edit&quot;}]},&quot;validate&quot;:{&quot;required&quot;:true,&quot;onlyAvailableItems&quot;:false},&quot;key&quot;:&quot;Result&quot;,&quot;type&quot;:&quot;select&quot;,&quot;indexeddb&quot;:{&quot;filter&quot;:{}},&quot;input&quot;:true}]}],&quot;collapsed&quot;:false},{&quot;label&quot;:&quot;Decision Regarding Adding LineItems&quot;,&quot;hidden&quot;:true,&quot;tableView&quot;:true,&quot;key&quot;:&quot;decision&quot;,&quot;type&quot;:&quot;textfield&quot;,&quot;input&quot;:true},{&quot;title&quot;:&quot;LineItems to be Added&quot;,&quot;collapsible&quot;:true,&quot;key&quot;:&quot;lineItemsToBeAdded&quot;,&quot;logic&quot;:[{&quot;name&quot;:&quot;Hide Panel Logic&quot;,&quot;trigger&quot;:{&quot;type&quot;:&quot;simple&quot;,&quot;simple&quot;:{&quot;show&quot;:true,&quot;when&quot;:&quot;decision&quot;,&quot;eq&quot;:&quot;Add LineItems&quot;}},&quot;actions&quot;:[{&quot;name&quot;:&quot;Hide Property&quot;,&quot;type&quot;:&quot;property&quot;,&quot;property&quot;:{&quot;label&quot;:&quot;Hidden&quot;,&quot;value&quot;:&quot;hidden&quot;,&quot;type&quot;:&quot;boolean&quot;},&quot;state&quot;:true}]}],&quot;type&quot;:&quot;panel&quot;,&quot;label&quot;:&quot;LineItems to be Added&quot;,&quot;input&quot;:false,&quot;tableView&quot;:false,&quot;components&quot;:[{&quot;label&quot;:&quot;Line Items to be Added/Denied in Flexman&quot;,&quot;reorder&quot;:false,&quot;addAnotherPosition&quot;:&quot;bottom&quot;,&quot;layoutFixed&quot;:false,&quot;enableRowGroups&quot;:false,&quot;initEmpty&quot;:false,&quot;key&quot;:&quot;RowToBeAdded&quot;,&quot;logic&quot;:[{&quot;name&quot;:&quot;hide&quot;,&quot;trigger&quot;:{&quot;type&quot;:&quot;simple&quot;,&quot;simple&quot;:{&quot;show&quot;:true,&quot;when&quot;:&quot;decision&quot;,&quot;eq&quot;:&quot;Add LineItems&quot;}},&quot;actions&quot;:[{&quot;name&quot;:&quot;hide&quot;,&quot;type&quot;:&quot;property&quot;,&quot;property&quot;:{&quot;label&quot;:&quot;Hidden&quot;,&quot;value&quot;:&quot;hidden&quot;,&quot;type&quot;:&quot;boolean&quot;},&quot;state&quot;:true}]}],&quot;type&quot;:&quot;datagrid&quot;,&quot;input&quot;:true,&quot;tableView&quot;:false,&quot;components&quot;:[{&quot;label&quot;:&quot;Amount&quot;,&quot;tableView&quot;:true,&quot;key&quot;:&quot;Amount&quot;,&quot;type&quot;:&quot;textfield&quot;,&quot;input&quot;:true},{&quot;label&quot;:&quot;Date Of Service&quot;,&quot;tableView&quot;:true,&quot;key&quot;:&quot;DateOfService&quot;,&quot;type&quot;:&quot;textfield&quot;,&quot;input&quot;:true,&quot;attributes&quot;:{&quot;style&quot;:&quot;width:110px&quot;}},{&quot;label&quot;:&quot;Reason Of Denial&quot;,&quot;tableView&quot;:true,&quot;multiple&quot;:true,&quot;data&quot;:{&quot;values&quot;:[{&quot;label&quot;:&quot;Missing Type of Service&quot;,&quot;value&quot;:&quot;Missing Type of Service&quot;},{&quot;label&quot;:&quot;Missing Date of Service&quot;,&quot;value&quot;:&quot;Missing Date of Service&quot;},{&quot;label&quot;:&quot;Service dates outside of plan year&quot;,&quot;value&quot;:&quot;Service dates outside of plan year&quot;},{&quot;label&quot;:&quot;Service date before eligibility date&quot;,&quot;value&quot;:&quot;Service date before eligibility date&quot;},{&quot;label&quot;:&quot;Missing Cost Incurred&quot;,&quot;value&quot;:&quot;Missing Cost Incurred&quot;},{&quot;label&quot;:&quot;Duplicate claim&quot;,&quot;value&quot;:&quot;Duplicate claim&quot;},{&quot;label&quot;:&quot;Service date after termination date&quot;,&quot;value&quot;:&quot;Service date after termination date&quot;}]},&quot;validate&quot;:{&quot;onlyAvailableItems&quot;:false},&quot;key&quot;:&quot;ReasonsOfDenial&quot;,&quot;logic&quot;:[{&quot;name&quot;:&quot;DenyLogic&quot;,&quot;trigger&quot;:{&quot;type&quot;:&quot;simple&quot;,&quot;simple&quot;:{&quot;show&quot;:true,&quot;when&quot;:&quot;RowToBeAdded.Result&quot;,&quot;eq&quot;:&quot;Deny&quot;}},&quot;actions&quot;:[{&quot;name&quot;:&quot;ReasonRequired&quot;,&quot;type&quot;:&quot;property&quot;,&quot;property&quot;:{&quot;label&quot;:&quot;Required&quot;,&quot;value&quot;:&quot;validate.required&quot;,&quot;type&quot;:&quot;boolean&quot;},&quot;state&quot;:true}]}],&quot;type&quot;:&quot;select&quot;,&quot;indexeddb&quot;:{&quot;filter&quot;:{}},&quot;input&quot;:true,&quot;clearOnRefresh&quot;:true},{&quot;label&quot;:&quot;Approve/Deny&quot;,&quot;tableView&quot;:true,&quot;data&quot;:{&quot;values&quot;:[{&quot;label&quot;:&quot;Approve&quot;,&quot;value&quot;:&quot;Approve&quot;},{&quot;label&quot;:&quot;Deny&quot;,&quot;value&quot;:&quot;Deny&quot;}]},&quot;validate&quot;:{&quot;onlyAvailableItems&quot;:true},&quot;key&quot;:&quot;Result&quot;,&quot;type&quot;:&quot;select&quot;,&quot;indexeddb&quot;:{&quot;filter&quot;:{}},&quot;input&quot;:true},{&quot;label&quot;:&quot;Add Line Item&quot;,&quot;tableView&quot;:false,&quot;defaultValue&quot;:false,&quot;key&quot;:&quot;selectLineItem&quot;,&quot;type&quot;:&quot;checkbox&quot;,&quot;input&quot;:true}]}],&quot;collapsed&quot;:false},{&quot;label&quot;:&quot;Customer's Claim Amount:&quot;,&quot;disabled&quot;:true,&quot;tableView&quot;:true,&quot;key&quot;:&quot;customersClaimAmount&quot;,&quot;type&quot;:&quot;textfield&quot;,&quot;input&quot;:true},{&quot;label&quot;:&quot;Total Approved Amount (from Flexman &amp; LineItems to be add sections):&quot;,&quot;tableView&quot;:true,&quot;key&quot;:&quot;totalApprovedAmountFromFlexmanLineItemsToBeAddSections&quot;,&quot;logic&quot;:[{&quot;name&quot;:&quot;Total Approved Amount Logic&quot;,&quot;trigger&quot;:{&quot;type&quot;:&quot;javascript&quot;,&quot;javascript&quot;:&quot;result=true;&quot;},&quot;actions&quot;:[{&quot;name&quot;:&quot;Total Approved Amount Action&quot;,&quot;type&quot;:&quot;value&quot;,&quot;value&quot;:&quot;var result = 0;\nfor (var i = 0; i &lt; data.RowToBeAdded.length; i++) {\n  if(data.RowToBeAdded[i].selectLineItem){\n    if(data.RowToBeAdded[i].Result==\&quot;Approve\&quot;){\n  result += +(data.RowToBeAdded[i].Amount);\n    }\n}\n}\nfor (var j = 0; j &lt; data.FlexmanTable.length; j++) {\n  if(data.FlexmanTable[j].Result==\&quot;Approve\&quot;){\n  result += +(data.FlexmanTable[j].Amount);\n    }\n\n \n\n}\nreturn result.toFixed(2);&quot;}]}],&quot;type&quot;:&quot;textfield&quot;,&quot;input&quot;:true},{&quot;label&quot;:&quot;Submit&quot;,&quot;disableOnInvalid&quot;:true,&quot;tableView&quot;:false,&quot;key&quot;:&quot;submit&quot;,&quot;customConditional&quot;:&quot;show= (data.exceptionMessage===\&quot;\&quot;)&quot;,&quot;custom&quot;:&quot;instance.emit('executeDoBlock', instance.component);&quot;,&quot;type&quot;:&quot;button&quot;,&quot;input&quot;:true,&quot;isResetData&quot;:false},{&quot;label&quot;:&quot;Exception Message&quot;,&quot;tableView&quot;:true,&quot;key&quot;:&quot;exceptionMessage&quot;,&quot;type&quot;:&quot;textarea&quot;,&quot;input&quot;:true},{&quot;label&quot;:&quot;Exception&quot;,&quot;theme&quot;:&quot;danger&quot;,&quot;tableView&quot;:false,&quot;key&quot;:&quot;discardFromQueue&quot;,&quot;custom&quot;:&quot;instance.emit('executeDoBlock', instance.component);&quot;,&quot;input&quot;:true,&quot;type&quot;:&quot;button&quot;,&quot;isResetData&quot;:false}]},{&quot;label&quot;:&quot;PDF Image&quot;,&quot;key&quot;:&quot;pdfImage&quot;,&quot;components&quot;:[{&quot;label&quot;:&quot;Receipt Image&quot;,&quot;hidden&quot;:true,&quot;disabled&quot;:true,&quot;tableView&quot;:true,&quot;key&quot;:&quot;receiptImage&quot;,&quot;type&quot;:&quot;textfield&quot;,&quot;input&quot;:true},{&quot;label&quot;:&quot;HTML&quot;,&quot;attrs&quot;:[{&quot;attr&quot;:&quot;&quot;,&quot;value&quot;:&quot;&quot;}],&quot;content&quot;:&quot;&lt;embed src={{data.pdf_storage}} width=\&quot;1000px\&quot; height=\&quot;600px\&quot;&gt; &lt;/embed&gt;&quot;,&quot;refreshOnChange&quot;:true,&quot;key&quot;:&quot;html&quot;,&quot;type&quot;:&quot;htmlelement&quot;,&quot;input&quot;:false,&quot;tableView&quot;:false}]}],&quot;key&quot;:&quot;tabs&quot;,&quot;type&quot;:&quot;tabs&quot;,&quot;input&quot;:false,&quot;tableView&quot;:false,&quot;label&quot;:&quot;Tabs&quot;}]" FormLayoutGuid="af172d5e-9b50-42a3-a941-8fe08a73e1a5" GenerateInputFields="False" sap:VirtualizedContainerService.HintSize="338,373" sap2010:WorkflowViewState.IdRef="CreateFormTask_8" TaskCatalog="[in_Config(&quot;DataValidationActionCatalog&quot;).ToString]" TaskOutput="[task]" TaskPriority="[TaskPriority.Medium]" TaskTitle="[&quot;Validation - &quot;+filename]">
+            <upaf:CreateFormTask.FormData>
+              <InArgument x:TypeArguments="x:String" x:Key="pdf_storage">[filename]</InArgument>
+              <InArgument x:TypeArguments="sd:DataTable" x:Key="mainTable">[out_newDatatable]</InArgument>
+              <InOutArgument x:TypeArguments="sd:DataTable" x:Key="FlexmanTable">[flexman]</InOutArgument>
+              <InOutArgument x:TypeArguments="sd:DataTable" x:Key="RowToBeAdded">[dt_LineItemsToBeAdded]</InOutArgument>
+              <InArgument x:TypeArguments="x:String" x:Key="decision">[decision]</InArgument>
+              <InArgument x:TypeArguments="x:String" x:Key="customersClaimAmount">[in_ClaimTotal]</InArgument>
+            </upaf:CreateFormTask.FormData>
           </upaf:CreateFormTask>
-          <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Framework\KillAllProcesses.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="338,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_1" UnSafe="False" WorkflowFileName="Framework\KillAllProcesses.xaml">
-            <ui:InvokeWorkflowFile.Arguments>
-              <scg:Dictionary x:TypeArguments="x:String, Argument" />
-            </ui:InvokeWorkflowFile.Arguments>
-          </ui:InvokeWorkflowFile>
+          <Assign sap:VirtualizedContainerService.HintSize="338,61" sap2010:WorkflowViewState.IdRef="Assign_12">
+            <Assign.To>
+              <OutArgument x:TypeArguments="upaf:FormTaskData">[out_TaskData]</OutArgument>
+            </Assign.To>
+            <Assign.Value>
+              <InArgument x:TypeArguments="upaf:FormTaskData">[task]</InArgument>
+            </Assign.Value>
+          </Assign>
         </Sequence>
-      </ui:CommentOut.Body>
-      <sap:WorkflowViewStateService.ViewState>
-        <scg:Dictionary x:TypeArguments="x:String, x:Object">
-          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
-          <x:Boolean x:Key="IsPinned">False</x:Boolean>
-        </scg:Dictionary>
-      </sap:WorkflowViewStateService.ViewState>
-    </ui:CommentOut>
+      </If.Then>
+    </If>
   </Sequence>
 </Activity>

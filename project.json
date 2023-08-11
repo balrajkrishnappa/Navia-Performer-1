@@ -1,11 +1,12 @@
 {
-  "name": "Navia-Performer-1",
-  "description": "Blank Process",
+  "name": "RxClaims_Data_ExtractionValidation_Performer",
+  "description": "Extracting Data from Flexman and Queue. Now based on Business rules, we will arrive at a decision to approve/deny a line item.",
   "main": "Main.xaml",
   "dependencies": {
     "UiPath.Excel.Activities": "[2.16.2]",
     "UiPath.Form.Activities": "[2.0.3]",
     "UiPath.Mail.Activities": "[1.18.2]",
+    "UiPath.MicrosoftOffice365.Activities": "[2.0.3]",
     "UiPath.Persistence.Activities": "[1.4.3]",
     "UiPath.System.Activities": "[22.10.4]",
     "UiPath.Testing.Activities": "[22.10.3]",
@@ -16,13 +17,13 @@
   "entitiesStores": [],
   "schemaVersion": "4.0",
   "studioVersion": "22.10.5.0",
-  "projectVersion": "1.0.11",
+  "projectVersion": "1.0.87",
   "runtimeOptions": {
     "autoDispose": false,
     "netFrameworkLazyLoading": false,
     "isPausable": true,
     "isAttended": false,
-    "requiresUserInteraction": false,
+    "requiresUserInteraction": true,
     "supportsPersistence": true,
     "excludedLoggedData": [
       "Private:*",
